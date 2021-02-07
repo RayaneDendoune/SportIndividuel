@@ -2,13 +2,13 @@ package model;
 
 public class Amis {
     private String id_amis;
-    private String id;
+    private String id_individu;
 
     public Amis() {}
 
-    public Amis(String id_amis, String id) {
+    public Amis(String id_amis, String id_individu) {
         this.id_amis = id_amis;
-        this.id = id;
+        this.id_individu = id_individu;
     }
 
     public String getId_amis() {
@@ -20,10 +20,10 @@ public class Amis {
     }
 
     public String getId() {
-        return id;
+        return id_individu;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id_individu) {
+        this.id_individu = id_individu;
     }
 }

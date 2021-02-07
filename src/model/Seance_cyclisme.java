@@ -8,18 +8,18 @@ public class Seance_cyclisme {
     private String objectif_seance;
     private float depense_energetique;
     private int besoin_proteine;
-    private String id;
+    private String id_cycliste;
 
     public Seance_cyclisme() {}
 
-    public Seance_cyclisme(String id_seance_cyclisme, float niveau_activite_physique, float poids, String objectif_seance, float depense_energetique, int besoin_proteine, String id) {
+    public Seance_cyclisme(String id_seance_cyclisme, float niveau_activite_physique, float poids, String objectif_seance, float depense_energetique, int besoin_proteine, String id_cycliste) {
         this.id_seance_cyclisme = id_seance_cyclisme;
         this.niveau_activite_physique = niveau_activite_physique;
         this.poids = poids;
         this.objectif_seance = objectif_seance;
         this.depense_energetique = depense_energetique;
         this.besoin_proteine = besoin_proteine;
-        this.id = id;
+        this.id_cycliste = id_cycliste;
     }
 
     public String getId_seance_cyclisme() {
@@ -70,11 +70,11 @@ public class Seance_cyclisme {
         this.besoin_proteine = besoin_proteine;
     }
 
-    public String getId() {
-        return id;
+    public String getId_cycliste() {
+        return id_cycliste;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_cycliste(String id_cycliste) {
+        this.id_cycliste = id_cycliste;
     }
 }

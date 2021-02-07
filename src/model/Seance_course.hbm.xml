@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.Seance_course" table="Seance_course">
+        <id name="id_seance_course" column="id_seance_course">
+            <!-- <generator class="increment"></generator> -->
+        </id>
+
+        <property name="distance" column="distance"></property>
+        <property name="temps" column="temps"></property>
+        <property name="vitesse_moy" column="vitesse_moy"></property>
+        <property name="nb_pas" column="nb_pas"></property>
+        <property name="date" column="date"></property>
+        <property name="id" column="id"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
+    </class>
+</hibernate-mapping>

@@ -10,18 +10,18 @@ public class Partie_echec {
     private int niveau_competence_mentale;
     private char issue_partie;
     private int niveau_concentration;
-    private String id;
+    private String id_joueur;
 
     public Partie_echec() {}
 
-    public Partie_echec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, String id) {
+    public Partie_echec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, String id_joueur) {
         this.id_partie_echec = id_partie_echec;
         this.elo_adversaire = elo_adversaire;
         this.duree = duree;
         this.niveau_competence_mentale = niveau_competence_mentale;
         this.issue_partie = issue_partie;
         this.niveau_concentration = niveau_concentration;
-        this.id = id;
+        this.id_joueur = id_joueur;
     }
 
     public String getId_partie_echec() {
@@ -72,11 +72,11 @@ public class Partie_echec {
         this.niveau_concentration = niveau_concentration;
     }
 
-    public String getId() {
-        return id;
+    public String getId_joueur() {
+        return id_joueur;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_joueur(String id_joueur) {
+        this.id_joueur = id_joueur;
     }
 }

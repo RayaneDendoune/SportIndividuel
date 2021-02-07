@@ -2,13 +2,13 @@ package model;
 
 public class Demande {
     private String id_destinataire;
-    private String id;
+    private String id_expediteur;
 
     public Demande() { }
 
-    public Demande(String id_destinataire, String id) {
+    public Demande(String id_destinataire, String id_expediteur) {
         this.id_destinataire = id_destinataire;
-        this.id = id;
+        this.id_expediteur = id_expediteur;
     }
 
     public String getId_destinataire() {
@@ -20,10 +20,10 @@ public class Demande {
     }
 
     public String getId() {
-        return id;
+        return id_expediteur;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id_expediteur) {
+        this.id_expediteur = id_expediteur;
     }
 }

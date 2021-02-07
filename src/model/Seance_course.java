@@ -10,18 +10,18 @@ public class Seance_course {
     private float vitesse_moy;
     private int nb_pas;
     private Date date;
-    private String id;
+    private String id_coureur;
 
     public Seance_course() {}
 
-    public Seance_course(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, String id) {
+    public Seance_course(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, String id_coureur) {
         this.id_seance_course = id_seance_course;
         this.distance = distance;
         this.temps = temps;
         this.vitesse_moy = vitesse_moy;
         this.nb_pas = nb_pas;
         this.date = date;
-        this.id = id;
+        this.id_coureur = id_coureur;
     }
 
     public String getId_seance_course() {
@@ -72,11 +72,11 @@ public class Seance_course {
         this.date = date;
     }
 
-    public String getId() {
-        return id;
+    public String getId_coureur() {
+        return id_coureur;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_coureur(String id_coureur) {
+        this.id_coureur = id_coureur;
     }
 }

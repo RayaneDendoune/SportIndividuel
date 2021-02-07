@@ -15,6 +15,7 @@ public class Individu {
     public Individu() {}
 
     public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
+        super();
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -24,6 +25,32 @@ public class Individu {
         this.poids = poids;
         this.taille = taille;
         this.elo = elo;
+        this.frequence_jeu = frequence_jeu;
+    }
+
+    public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.sexe = sexe;
+        this.age = age;
+        this.poids = poids;
+        this.taille = taille;
+        this.elo = elo;
+    }
+
+    public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, String frequence_jeu) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.sexe = sexe;
+        this.age = age;
+        this.poids = poids;
+        this.taille = taille;
         this.frequence_jeu = frequence_jeu;
     }
 
