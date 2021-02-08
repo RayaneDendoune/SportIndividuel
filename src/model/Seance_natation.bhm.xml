@@ -13,6 +13,6 @@
         <property name="calorie_perdu" column="calorie_perdu"></property>
         <property name="temps_moy_longueur" column="temps_moy_longueur"></property>
         <property name="date" column="date"></property>
-        <property name="id" column="id"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
+        <property name="id_nageur" column="id_nageur"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
     </class>
 </hibernate-mapping>

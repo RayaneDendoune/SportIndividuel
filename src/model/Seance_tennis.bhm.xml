@@ -13,6 +13,6 @@
         <property name="nb_set" column="nb_set"></property>
         <property name="issue_match" column="issue_match"></property>
         <property name="vitesse_moy_service" column="vitesse_moy_service"></property>
-        <property name="id" column="id"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
+        <property name="id_tennisman" column="id_tennisman"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
     </class>
 </hibernate-mapping>

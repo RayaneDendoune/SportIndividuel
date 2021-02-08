@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
     <class name="model.Seance_cyclisme" table="Seance_cyclisme">
@@ -12,6 +13,6 @@
         <property name="objectif_seance" column="objectif_seance"></property>
         <property name="depense_energetique" column="depense_energetique"></property>
         <property name="besoin_proteine" column="besoin_proteine"></property>
-        <property name="id" column="id"></property> <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
+        <property name="id_cycliste" column="id_cycliste"></property> <!--Je sais pas comment dire que c'est une clé étrangère !!! -->
     </class>
 </hibernate-mapping>
