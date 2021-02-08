@@ -1,6 +1,10 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Individu {
+    @Id
     private String id;
     private String nom;
     private String prenom;
@@ -11,6 +15,7 @@ public class Individu {
     private float taille;
     private int elo;
     private String frequence_jeu;
+    private Amis amis;
 
     public Individu() {}
 
@@ -52,6 +57,14 @@ public class Individu {
         this.poids = poids;
         this.taille = taille;
         this.frequence_jeu = frequence_jeu;
+    }
+
+    public Amis getAmis() {
+        return amis;
+    }
+
+    public void setAmis(Amis amis) {
+        this.amis = amis;
     }
 
     public String getId() {

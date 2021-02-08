@@ -7,6 +7,8 @@
             <!-- <generator class="increment"></generator> -->
         </id>
 
-        <property name="id" column="id"></property>  <!-- Je sais pas comment dire que c'est une clé étrangère !!! -->
+        <!--<many-to-one name="Individu" class="model.Individu"
+                     column="id_individu" cascade="all" unique="true" />-->
+        <many-to-one name="Individu" column="id_individu" cascade="insert,update"/>
     </class>
 </hibernate-mapping>

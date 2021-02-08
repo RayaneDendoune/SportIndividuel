@@ -4,7 +4,6 @@
 <hibernate-mapping>
     <class name="model.Individu" table="Individu">
         <id name="id" column="id">
-        <!-- <generator class="increment"></generator> -->
         </id>
 
         <property name="nom" column="nom"></property>

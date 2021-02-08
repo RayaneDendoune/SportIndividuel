@@ -20,14 +20,14 @@
 
         <property name="show_sql">true</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <mapping resource="model/Individu.hbm.xml"/>
-        <mapping resource="model/Demande.hbm.xml"/>
         <mapping resource="model/Amis.hbm.xml"/>
-        <mapping resource="model/Partie_echec.hbm.xml"/>
+        <!--<mapping resource="model/Partie_echec.hbm.xml"/>
+        <mapping resource="model/Demande.hbm.xml"/>
         <mapping resource="model/Seance_course.hbm.xml"/>
-        <!--<mapping resource="model/Seance_cyclisme.hbm.xml"/>
+        <mapping resource="model/Seance_cyclisme.hbm.xml"/>
         <mapping resource="model/Seance_natation.hbm.xml"/>
         <mapping resource="model/Seance_tennis.hbm.xml"/>-->
 
