@@ -1,25 +1,33 @@
 package model;
 
-public class Seance_cyclisme {
+import javax.persistence.*;
 
+@Entity
+public class Seance_cyclisme {
+    @Id
     private String id_seance_cyclisme;
+
     private float niveau_activite_physique;
     private float poids;
     private String objectif_seance;
     private float depense_energetique;
     private int besoin_proteine;
-    private String id_cycliste;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
+    private Individu individu;
+
+    /*private String id_cycliste; */
 
     public Seance_cyclisme() {}
 
-    public Seance_cyclisme(String id_seance_cyclisme, float niveau_activite_physique, float poids, String objectif_seance, float depense_energetique, int besoin_proteine, String id_cycliste) {
+    public Seance_cyclisme(String id_seance_cyclisme, float niveau_activite_physique, float poids, String objectif_seance, float depense_energetique, int besoin_proteine, Individu individu) {
         this.id_seance_cyclisme = id_seance_cyclisme;
         this.niveau_activite_physique = niveau_activite_physique;
         this.poids = poids;
         this.objectif_seance = objectif_seance;
         this.depense_energetique = depense_energetique;
         this.besoin_proteine = besoin_proteine;
-        this.id_cycliste = id_cycliste;
+        this.individu = individu;
     }
 
     public String getId_seance_cyclisme() {
@@ -70,11 +78,11 @@ public class Seance_cyclisme {
         this.besoin_proteine = besoin_proteine;
     }
 
-    public String getId_cycliste() {
-        return id_cycliste;
+    public Individu getIndividu() {
+        return individu;
     }
 
-    public void setId_cycliste(String id_cycliste) {
-        this.id_cycliste = id_cycliste;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 }

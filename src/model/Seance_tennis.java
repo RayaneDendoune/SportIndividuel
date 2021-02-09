@@ -1,7 +1,11 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
 public class Seance_tennis {
 
+    @Id
     private String id_seance_tennis;
     private float premier_service;
     private float deuxieme_service;
@@ -9,11 +13,13 @@ public class Seance_tennis {
     private int nb_set;
     private char issue_match;
     private float vitesse_moy_service;
-    private String id_tennisman;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
+    private Individu individu;
 
     public Seance_tennis() {}
 
-    public Seance_tennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, String id_tennisman) {
+    public Seance_tennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu) {
         this.id_seance_tennis = id_seance_tennis;
         this.premier_service = premier_service;
         this.deuxieme_service = deuxieme_service;
@@ -21,7 +27,7 @@ public class Seance_tennis {
         this.nb_set = nb_set;
         this.issue_match = issue_match;
         this.vitesse_moy_service = vitesse_moy_service;
-        this.id_tennisman = id_tennisman;
+        this.individu = individu;
     }
 
     public String getId_seance_tennis() {
@@ -80,11 +86,11 @@ public class Seance_tennis {
         this.vitesse_moy_service = vitesse_moy_service;
     }
 
-    public String getId_tennisman() {
-        return id_tennisman;
+    public Individu getIndividu() {
+        return individu;
     }
 
-    public void setId_tennisman(String id_tennisman) {
-        this.id_tennisman = id_tennisman;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 }

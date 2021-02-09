@@ -1,5 +1,10 @@
 package gui;
 
+import manager.IndividuManager;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,8 +23,10 @@ import javax.swing.JTextField;
 public class Formulaire extends JFrame implements ActionListener {
 	
 	private JPanel pan  = new JPanel();
-	
-	private JLabel titre = new JLabel("Bienvenue à ...");
+
+	private int eloC;
+
+	private JLabel titre = new JLabel("Bienvenue Ã  ...");
 	private JLabel sousTitre = new JLabel("Veuillez remplir ce formulaire");
 	
 	private JLabel nom = new JLabel("Nom ");
@@ -43,10 +50,10 @@ public class Formulaire extends JFrame implements ActionListener {
 	private JLabel poids = new JLabel("Poids (en kg)");
 	JComboBox weight = new JComboBox();
 	
-	private JLabel taille = new JLabel("Taille (en mètre) ");
+	private JLabel taille = new JLabel("Taille (en mÃ¨tre) ");
 	JComboBox tall = new JComboBox();
 	
-	private JLabel joueurechec = new JLabel("Pour les joueurs d'échecs");
+	private JLabel joueurechec = new JLabel("Pour les joueurs d'Ã©checs");
 	private JLabel classement = new JLabel("Classement ELO ");
 	private JTextField elo = new JTextField(5);
 
@@ -55,48 +62,48 @@ public class Formulaire extends JFrame implements ActionListener {
 	
 	private JButton retour = new JButton("Retour");
 	private JButton enregistrer = new JButton("Enregistrer");
-	
-	
+
+	private JLabel error = new JLabel("L'un des attributs n'a pas Ã©tÃ© rempli.");
 	
 	public Formulaire() {
 		build();
 	}
 	
 	public void build() {
-		this.setTitle("Formulaire d'inscription"); //Création de la fenetre
+		this.setTitle("Formulaire d'inscription"); //CrÃ©ation de la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
-		this.setSize(600, 400); //Taille de la fenêtre
+		this.setSize(600, 400); //Taille de la fenÃªtre
 		setResizable(false); //Taille non changeable
 		setLocationRelativeTo(null);
 		
 		retour.addActionListener(this);
 		enregistrer.addActionListener(this);
 		
-		gender.addItem("Homme");
-		gender.addItem("Femme");
+		gender.addItem('M');
+		gender.addItem('F');
 		
 		for(int i=18; i<=100; i++) {
 			old.addItem(i);
 		}
 		
-		for(int i=40; i<140; i++) {
+		for(float i=40f; i<140f; i++) {
 			weight.addItem(i);
 		}
 		
-		for(double i = 1.40; i<2.2; i+=0.01) {
-			Double d = (double) Math.round(i * 100) / 100;
+		for(float i = 1.40f; i<2.2f; i+=0.01f) {
+			float d = (float) Math.round(i * 100) / 100;
 			tall.addItem(d);
 		}
 		
-		frequency.addItem("Débutant");
+		frequency.addItem("DÃ©butant");
 		frequency.addItem("Joueur occasionnel");
 		frequency.addItem("Bon joueur de club");
-		frequency.addItem("Très bon joueur de club");
+		frequency.addItem("TrÃ¨s bon joueur de club");
 		frequency.addItem("Niveau national");
-		frequency.addItem("Candidat maître");
-		frequency.addItem("maître de la Fédération internationale des échecs");
-		frequency.addItem("Maître international");
-		frequency.addItem("Grand maître international");
+		frequency.addItem("Candidat maÃ®tre");
+		frequency.addItem("MaÃ®tre de la FÃ©dÃ©ration internationale des Ã©checs");
+		frequency.addItem("MaÃ®tre international");
+		frequency.addItem("Grand maÃ®tre international");
 		
 		pan.setLayout(new BorderLayout());
 		
@@ -123,23 +130,45 @@ public class Formulaire extends JFrame implements ActionListener {
 		}
 		
 		if(Button == enregistrer) {
-			System.out.println("Nom : " + lastName.getText());
-			System.out.println("Prenom : " + firstName.getText());
-			System.out.println("Identifiant : " + identifiant.getText());
-			System.out.println("Mot de passe : " + password.getText());
-			System.out.println("Sexe : " + gender.getSelectedItem());
-			System.out.println("Age : " + (int)old.getSelectedItem());
-			System.out.println("Poids : " + (int)weight.getSelectedItem());
-			System.out.println("Taille : " + (double)tall.getSelectedItem());
-			
-			if(elo.getText().isBlank()) {
-				System.out.println("Classement ELO : Aucun");
+
+			if(!lastName.getText().isBlank() && !firstName.getText().isBlank() && !identifiant.getText().isBlank() && !password.getText().isBlank()) {
+
+				if (elo.getText().isBlank()) {
+					eloC = 0;
+				} else {
+					eloC = Integer.parseInt(elo.getText());
+				}
+
+				Session session = HibernateUtil.getSession();
+				Transaction persistTransaction = session.beginTransaction();
+
+				IndividuManager im = new IndividuManager();
+				im.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char)gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String)frequency.getSelectedItem());
+
+				persistTransaction.commit();
+
+				session.close();
+
+				/*System.out.println("Nom : " + lastName.getText());
+				System.out.println("Prenom : " + firstName.getText());
+				System.out.println("Identifiant : " + identifiant.getText());
+				System.out.println("Mot de passe : " + password.getText());
+				System.out.println("Sexe : " + gender.getSelectedItem());
+				System.out.println("Age : " + (int) old.getSelectedItem());
+				System.out.println("Poids : " + (int) weight.getSelectedItem());
+				System.out.println("Taille : " + (double) tall.getSelectedItem());*/
+
+				if (elo.getText().isBlank()) {
+					System.out.println("Classement ELO : 0");
+				} else {
+					System.out.println("Classement ELO : " + elo.getText());
+				}
+
+				System.out.println("Frequence de jeu : " + frequency.getSelectedItem());
 			}
 			else {
-				System.out.println("Classement ELO : " + elo.getText());
+				erreur();
 			}
-			
-			System.out.println("Frequence de jeu : " + frequency.getSelectedItem());
 		}
 	}
 	
@@ -154,14 +183,14 @@ public class Formulaire extends JFrame implements ActionListener {
 		c.gridy = 0;
 		grid.add(nom, c);
 		
-		c.ipadx = 80; //Taille de l'endroit ou on peut réécrire
+		c.ipadx = 80; //Taille de l'endroit ou on peut rï¿½ï¿½crire
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 0;
 		grid.add(lastName, c);
 		
-		c.ipadx = 0; //Remettre a 0 parce sinon ça décale tout (si pas compris, met en commentaire cette ligne tu verras)
+		c.ipadx = 0; //Remettre a 0 parce sinon ï¿½a dï¿½cale tout (si pas compris, met en commentaire cette ligne tu verras)
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -370,5 +399,19 @@ public class Formulaire extends JFrame implements ActionListener {
 		return complete;
 	}
 
+	void erreur() {
+		JFrame jf = new JFrame();
+
+		JPanel container = new JPanel();
+		container.add(error);
+
+		jf.add(container);
+		jf.setSize(400, 80) ;
+		jf.setVisible(true);
+		jf.setResizable(false);
+		jf.setLocationRelativeTo(null);
+		jf.setLocationRelativeTo(null);
+
+	}
 
 }

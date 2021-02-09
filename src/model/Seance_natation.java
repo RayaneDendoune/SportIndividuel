@@ -1,10 +1,13 @@
 package model;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
+@Entity
 public class Seance_natation {
 
+    @Id
     private String id_seance_natation;
     private int nb_longueur;
     private Time temps_total;
@@ -12,11 +15,13 @@ public class Seance_natation {
     private int calorie_perdu;
     private Time temps_moy_longueur;
     private Date date;
-    private String id_nageur;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
+    private Individu individu;
 
     public Seance_natation() {}
 
-    public Seance_natation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, String id_nageur) {
+    public Seance_natation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu) {
         this.id_seance_natation = id_seance_natation;
         this.nb_longueur = nb_longueur;
         this.temps_total = temps_total;
@@ -24,7 +29,7 @@ public class Seance_natation {
         this.calorie_perdu = calorie_perdu;
         this.temps_moy_longueur = temps_moy_longueur;
         this.date = date;
-        this.id_nageur = id_nageur;
+        this.individu = individu;
     }
 
     public String getId_seance_natation() {
@@ -83,11 +88,11 @@ public class Seance_natation {
         this.date = date;
     }
 
-    public String getId_nageur() {
-        return id_nageur;
+    public Individu getIndividu() {
+        return individu;
     }
 
-    public void setId_nageur(String id_nageur) {
-        this.id_nageur = id_nageur;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 }

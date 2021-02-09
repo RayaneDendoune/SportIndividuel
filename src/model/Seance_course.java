@@ -1,27 +1,35 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
+@Entity
 public class Seance_course {
+
+    @Id
     private String id_seance_course;
     private float distance;
     private Time temps;
     private float vitesse_moy;
     private int nb_pas;
     private Date date;
-    private String id_coureur;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
+    private Individu individu;
+    //private String id_coureur;
 
     public Seance_course() {}
 
-    public Seance_course(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, String id_coureur) {
+    public Seance_course(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu) {
         this.id_seance_course = id_seance_course;
         this.distance = distance;
         this.temps = temps;
         this.vitesse_moy = vitesse_moy;
         this.nb_pas = nb_pas;
         this.date = date;
-        this.id_coureur = id_coureur;
+        this.individu = individu;
     }
 
     public String getId_seance_course() {
@@ -72,11 +80,11 @@ public class Seance_course {
         this.date = date;
     }
 
-    public String getId_coureur() {
-        return id_coureur;
+    public Individu getIndividu() {
+        return individu;
     }
 
-    public void setId_coureur(String id_coureur) {
-        this.id_coureur = id_coureur;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 }

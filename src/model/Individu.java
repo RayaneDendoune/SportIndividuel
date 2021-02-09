@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Individu {
     @Id
-    private String id;
+    private String id_individu;
+
     private String nom;
     private String prenom;
     private String mdp;
@@ -15,13 +16,13 @@ public class Individu {
     private float taille;
     private int elo;
     private String frequence_jeu;
-    private Amis amis;
+
 
     public Individu() {}
 
-    public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
+    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
         super();
-        this.id = id;
+        this.id_individu = id_individu;
         this.nom = nom;
         this.prenom = prenom;
         this.mdp = mdp;
@@ -33,9 +34,9 @@ public class Individu {
         this.frequence_jeu = frequence_jeu;
     }
 
-    public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
+    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
         super();
-        this.id = id;
+        this.id_individu = id_individu;
         this.nom = nom;
         this.prenom = prenom;
         this.mdp = mdp;
@@ -46,9 +47,9 @@ public class Individu {
         this.elo = elo;
     }
 
-    public Individu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, String frequence_jeu) {
+    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, String frequence_jeu) {
         super();
-        this.id = id;
+        this.id_individu = id_individu;
         this.nom = nom;
         this.prenom = prenom;
         this.mdp = mdp;
@@ -59,16 +60,8 @@ public class Individu {
         this.frequence_jeu = frequence_jeu;
     }
 
-    public Amis getAmis() {
-        return amis;
-    }
-
-    public void setAmis(Amis amis) {
-        this.amis = amis;
-    }
-
-    public String getId() {
-        return id;
+    public String getId_individu() {
+        return id_individu;
     }
 
     public String getNom() {
@@ -107,8 +100,8 @@ public class Individu {
         return frequence_jeu;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_individu(String id_individu) {
+        this.id_individu = id_individu;
     }
 
     public void setNom(String nom) {

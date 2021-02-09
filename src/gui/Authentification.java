@@ -32,7 +32,7 @@ public class Authentification extends JFrame implements ActionListener{
 	
 	private JButton valider = new JButton("Valider");
 	
-	private JLabel inscription = new JLabel("Vous n'êtes pas encore inscrit ? Inscrivez vous");
+	private JLabel inscription = new JLabel("Vous n'Ãªtes pas encore inscrit ? Inscrivez vous");
 	private JButton sinscrire = new JButton("S'inscrire");
 	
 	private JLabel error = new JLabel("Votre identifiant ou votre mot de passe est faux.");
@@ -44,9 +44,9 @@ public class Authentification extends JFrame implements ActionListener{
 	}
 	
 	public void build() {
-		this.setTitle("Authentification"); //Création de la fenetre
+		this.setTitle("Authentification"); //Crï¿½ation de la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
-		this.setSize(350, 350); //Taille de la fenêtre
+		this.setSize(350, 350); //Taille de la fenï¿½tre
 		setResizable(false); //Taille non changeable
 		setLocationRelativeTo(null);
 		
@@ -64,7 +64,7 @@ public class Authentification extends JFrame implements ActionListener{
 		
 		JPanel grid = grid();
 		
-		JPanel p= new JPanel(); //Sans ça, le bouton prend toute la taille dans le gridlayout
+		JPanel p= new JPanel(); //Sans ï¿½a, le bouton prend toute la taille dans le gridlayout
 		p.add(valider);
 		
 		JPanel grid2 = grid2(grid, p);
@@ -105,14 +105,14 @@ public class Authentification extends JFrame implements ActionListener{
 		c.gridy = 0;
 		grid.add(id, c);
 		
-		c.ipadx = 80; //Taille de l'endroit ou on peut réécrire
+		c.ipadx = 80; //Taille de l'endroit ou on peut rï¿½ï¿½crire
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 0;
 		grid.add(identifiant, c);
 		
-		c.ipadx = 0; //Remettre a 0 parce sinon ça décale tout (si pas compris, met en commentaire cette ligne tu verras)
+		c.ipadx = 0; //Remettre a 0 parce sinon ï¿½a dï¿½cale tout (si pas compris, met en commentaire cette ligne tu verras)
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
 		c.gridx = 0;

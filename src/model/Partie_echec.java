@@ -1,27 +1,32 @@
 package model;
 
+import javax.persistence.*;
 import java.sql.Time;
 
+@Entity
 public class Partie_echec {
 
+    @Id
     private String id_partie_echec;
     private int elo_adversaire;
     private Time duree;
     private int niveau_competence_mentale;
     private char issue_partie;
     private int niveau_concentration;
-    private String id_joueur;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
+    private Individu individu;
 
     public Partie_echec() {}
 
-    public Partie_echec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, String id_joueur) {
+    public Partie_echec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         this.id_partie_echec = id_partie_echec;
         this.elo_adversaire = elo_adversaire;
         this.duree = duree;
         this.niveau_competence_mentale = niveau_competence_mentale;
         this.issue_partie = issue_partie;
         this.niveau_concentration = niveau_concentration;
-        this.id_joueur = id_joueur;
+        this.individu = individu;
     }
 
     public String getId_partie_echec() {
@@ -72,11 +77,11 @@ public class Partie_echec {
         this.niveau_concentration = niveau_concentration;
     }
 
-    public String getId_joueur() {
-        return id_joueur;
+    public Individu getIndividu() {
+        return individu;
     }
 
-    public void setId_joueur(String id_joueur) {
-        this.id_joueur = id_joueur;
+    public void setIndividu(Individu individu) {
+        this.individu = individu;
     }
 }

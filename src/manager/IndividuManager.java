@@ -6,15 +6,14 @@ import util.HibernateUtil;
 
 public class IndividuManager {
 
-    public IndividuManager() {
-    }
+    public IndividuManager() { }
 
-    public void ajouterIndividu(String id, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
+    public void ajouterIndividu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Individu i = new Individu();
-        i.setId(id);
+        i.setId_individu(id_individu);
         i.setNom(nom);
         i.setPrenom(prenom);
         i.setMdp(mdp);
@@ -28,10 +27,10 @@ public class IndividuManager {
         session.getTransaction().commit();
     }
 
-    public void supprimerIndividu(String id) {
+    public void supprimerIndividu(String id_individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Individu i = (Individu) session.load(Individu.class,id);
+        Individu i = (Individu) session.load(Individu.class,id_individu);
         session.delete(i);
         session.getTransaction().commit();
     }
