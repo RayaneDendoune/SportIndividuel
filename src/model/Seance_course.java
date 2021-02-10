@@ -87,4 +87,10 @@ public class Seance_course {
     public void setIndividu(Individu individu) {
         this.individu = individu;
     }
+
+    public String toString() {
+        String text ="";
+        text += "L'id de la course est " + getId_seance_course();
+        return text;
+    }
 }

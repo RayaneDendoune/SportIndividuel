@@ -4,8 +4,10 @@ import manager.AuthentificationManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Accueil extends JFrame {
+public class Accueil extends JFrame implements ActionListener {
 
 	private JPanel pan  = new JPanel();
 
@@ -46,6 +48,13 @@ public class Accueil extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false); //Taille non changeable
+
+		imgCourse.addActionListener(this);
+		imgNatation.addActionListener(this);
+		imgCyclisme.addActionListener(this);
+		imgTennis.addActionListener(this);
+		imgEchecs.addActionListener(this);
+		imgRs.addActionListener(this);
 
 		JPanel grid = imgButtons(); //Partie avec les boutons
 
@@ -124,5 +133,14 @@ public class Accueil extends JFrame {
 	
 	public static void main(String[] args) {
 		new Accueil();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object Button = e.getSource();
+		if(Button==imgCourse){
+			new Course();
+			dispose();
+		}
 	}
 }

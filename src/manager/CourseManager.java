@@ -32,27 +32,41 @@ public class CourseManager {
     }
 
 
-    public static boolean existSeanceCourse(Session session, String id_individu) {
+
+    public static boolean existSeanceCourse(Session session, String id_seance_course) {
         Boolean present = false;
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery("from Seance_course sc where sc.id_individu=:id_individu");
-        readQuery.setString("id_individu", id_individu);
+        Query readQuery = session.createQuery("from Seance_course sc where sc.id_seance_course=:id_seance_course");
+        readQuery.setString("id_seance_course", id_seance_course);
 
         List result = readQuery.list();
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_course sc = (Seance_course) iterator.next();
-            //System.out.println(individu.toString());
+            System.out.println(sc.toString());
+            present = true;
         }
 
-        /*if(!present) {
-            System.out.println("L'individu n'existe pas");
-        }*/
+        if(!present) {
+            System.out.println("L'individu n'a jamais pratiqué ce sport");
+        }
         readTransaction.commit();
 
         return present;
     }
+    public static int nbSeanceCourse(Session session, Individu individu){
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery(" from Seance_course sc where sc.id=:id");
+        readQuery.setString("id", individu.getId_individu());
+
+        return 0;
+    }
+
+
+
+
 
     public void recupDonneesCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -78,9 +92,13 @@ public class CourseManager {
         //Seance_course sc = new Seance_course();
         //System.out.println("id seance course :" + sc.getId_seance_course() + "\ndistance :" + sc.getDistance() + "\ntemps :" + sc.getTemps() + "\nnb_pas :" + sc.getNb_pas() + "\ndate :" + sc.getDate());
         Session session = HibernateUtil.getSession();
-        existSeanceCourse(session, "Le R");
+
+
+        existSeanceCourse(session, "atarina_5");
         session.close();
     }
+
+
 
 
 

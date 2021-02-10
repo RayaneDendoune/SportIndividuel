@@ -2,8 +2,10 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Course extends JFrame{
+public class Course extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();
 
@@ -27,6 +29,9 @@ public class Course extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false); //Taille non changeable
+
+        retour.addActionListener(this);
+        enregistrer.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
         JPanel grid = donnee();
@@ -123,5 +128,14 @@ public class Course extends JFrame{
 
     public static void main(String[] args) {
         new Course();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object Button = e.getSource();
+        if (Button == retour) {
+            new Accueil();
+            dispose();
+        }
     }
 }
