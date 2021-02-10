@@ -55,7 +55,6 @@ public class Accueil extends JFrame {
 		pan.add(panel, BorderLayout.CENTER);
 		this.setContentPane(pan);
 
-		//this.add(graphic);
 		this.setVisible(true);
 	}
 
