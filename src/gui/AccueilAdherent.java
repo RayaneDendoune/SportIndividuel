@@ -10,7 +10,11 @@ public class AccueilAdherent extends JFrame {
 
     private JLabel titre = new JLabel("Bienvenue Avishka !");
     private JLabel titre2 = new JLabel("Sélectionner l'activité voulue : ");
-    private JLabel imgCourse = new JLabel(new ImageIcon("src/images/course.jpg"));
+    //private JLabel imgCourse = new JLabel(new ImageIcon("src/images/course.jpg"));
+    Icon icon = new ImageIcon("src/images/course.jpg");
+    JButton imprimer = new JButton(icon);
+
+
     private JLabel imgNatation = new JLabel(new ImageIcon("src/images/natation.jpg"));
     private JLabel imgCyclisme = new JLabel(new ImageIcon("src/images/cyclisme.jpg"));
     private JLabel imgEchecs = new JLabel(new ImageIcon("src/images/echecs.png"));
@@ -36,7 +40,7 @@ public class AccueilAdherent extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(600, 400);
         this.setVisible(true);
-        setResizable(false);
+        //setResizable(false);
         setLocationRelativeTo(null);
         pan.setLayout(new BorderLayout());
 
@@ -82,7 +86,8 @@ public class AccueilAdherent extends JFrame {
         c.weightx = 5;
         c.gridx = 0;
         c.gridy = 0;
-        gridSport.add(imgCourse, c);
+        imprimer.setMaximumSize(new Dimension(80, 27));
+        gridSport.add(imprimer, c);
 
         c.weightx = 5;
         c.gridx = 0;
