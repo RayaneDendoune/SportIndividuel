@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Accueil extends JFrame {
-	
-	//GraphicsDemo graphic = new GraphicsDemo();
 
 	private JPanel pan  = new JPanel();
 

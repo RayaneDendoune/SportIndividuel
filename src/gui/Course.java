@@ -22,7 +22,7 @@ public class Course extends JFrame{
         build();
     }
 
-    public void build() {
+    public void build() { //Création de la grille
         this.setSize(550, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
