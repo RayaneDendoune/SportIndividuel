@@ -1,5 +1,7 @@
 package gui;
 
+import manager.AuthentificationManager;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -88,6 +90,16 @@ public class Authentification extends JFrame implements ActionListener{
 			if(!identifiant.getText().isEmpty() && !motdepasse.getText().isBlank()) {
 				System.out.println("id : " + identifiant.getText());
 				System.out.println("mdp : " + motdepasse.getText());
+
+				if(motdepasse.getText().equals(AuthentificationManager.existPassword(identifiant.getText()))) {
+					//System.out.println("!!!!!!!!!!!!!!!!!!!!!!! L'identifiant et le mot de passe correspondent !!!!!!!!!!!!!!!!!!!!!!!!");
+					new Accueil();
+					dispose();
+				}
+				else {
+					erreur();
+				}
+
 			}
 			else {
 				erreur();

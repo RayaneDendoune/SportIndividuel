@@ -25,6 +25,7 @@ public class IndividuManager {
         i.setFrequence_jeu(frequence_jeu);
         session.save(i);
         session.getTransaction().commit();
+        session.close();
     }
 
     public void supprimerIndividu(String id_individu) {
@@ -33,5 +34,6 @@ public class IndividuManager {
         Individu i = (Individu) session.load(Individu.class,id_individu);
         session.delete(i);
         session.getTransaction().commit();
+        session.close();
     }
 }

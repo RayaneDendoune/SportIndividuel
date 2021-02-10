@@ -1,9 +1,6 @@
 package gui;
 
 import manager.IndividuManager;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import util.HibernateUtil;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -139,24 +136,8 @@ public class Formulaire extends JFrame implements ActionListener {
 					eloC = Integer.parseInt(elo.getText());
 				}
 
-				Session session = HibernateUtil.getSession();
-				Transaction persistTransaction = session.beginTransaction();
-
-				IndividuManager im = new IndividuManager();
-				im.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char)gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String)frequency.getSelectedItem());
-
-				persistTransaction.commit();
-
-				session.close();
-
-				/*System.out.println("Nom : " + lastName.getText());
-				System.out.println("Prenom : " + firstName.getText());
-				System.out.println("Identifiant : " + identifiant.getText());
-				System.out.println("Mot de passe : " + password.getText());
-				System.out.println("Sexe : " + gender.getSelectedItem());
-				System.out.println("Age : " + (int) old.getSelectedItem());
-				System.out.println("Poids : " + (int) weight.getSelectedItem());
-				System.out.println("Taille : " + (double) tall.getSelectedItem());*/
+				IndividuManager fm = new IndividuManager();
+				fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char)gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String)frequency.getSelectedItem());
 
 				if (elo.getText().isBlank()) {
 					System.out.println("Classement ELO : 0");

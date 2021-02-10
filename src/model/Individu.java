@@ -139,4 +139,11 @@ public class Individu {
     public void setFrequence_jeu(String frequence_jeu) {
         this.frequence_jeu = frequence_jeu;
     }
+
+    public String toString() {
+        String text="";
+        //text+="L'id est " + getId_individu();
+        text+="Le mdp est " + getMdp();
+        return text;
+    }
 }
