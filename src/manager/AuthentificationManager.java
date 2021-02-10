@@ -17,6 +17,9 @@ public class AuthentificationManager {
         session.close();
     }*/
 
+    public static String nom;
+    public static String prenom;
+
     public static boolean existIndividu(Session session, String id_individu) {
         Boolean present = false;
         Transaction readTransaction = session.beginTransaction();
@@ -56,6 +59,8 @@ public class AuthentificationManager {
                 Individu individu = (Individu) iterator.next();
                 //System.out.println("Le mot de passe est " + individu.getMdp());
                 present = true;
+                prenom = individu.getPrenom();
+                nom = individu.getNom();
                 return individu.getMdp();
             }
 

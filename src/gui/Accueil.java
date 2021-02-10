@@ -1,5 +1,7 @@
 package gui;
 
+import manager.AuthentificationManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,7 @@ public class Accueil extends JFrame {
 
 	private JPanel pan  = new JPanel();
 
-	private JLabel bienvenue = new JLabel("Bienvenue !");
+	private JLabel bienvenue = new JLabel("Bienvenue " + AuthentificationManager.nom + " " + AuthentificationManager.prenom + " !");
 	private JLabel titre = new JLabel("Sélectionner l'activité voulue : ");
 
 	private ImageIcon iconCourse = new ImageIcon("src/images/course.png");
