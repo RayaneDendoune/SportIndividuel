@@ -25,7 +25,7 @@ public class IndividuManager {
         i.setFrequence_jeu(frequence_jeu);
         session.save(i);
         session.getTransaction().commit();
-        session.close();
+       // session.close();
     }
 
     public void supprimerIndividu(String id_individu) {

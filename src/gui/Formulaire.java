@@ -1,6 +1,9 @@
 package gui;
 
+import manager.AuthentificationManager;
 import manager.IndividuManager;
+import org.hibernate.Session;
+import util.HibernateUtil;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -60,7 +63,8 @@ public class Formulaire extends JFrame implements ActionListener {
 	private JButton retour = new JButton("Retour");
 	private JButton enregistrer = new JButton("Enregistrer");
 
-	private JLabel error = new JLabel("L'un des attributs n'a pas été rempli.");
+	private JLabel errorChamps = new JLabel("L'un des attributs n'a pas été rempli.");
+	private JLabel errorId  = new JLabel("L'identifiant est déjà utiliser veuillez en selectionner un nouveau.");
 	
 	public Formulaire() {
 		build();
@@ -125,9 +129,9 @@ public class Formulaire extends JFrame implements ActionListener {
 			new Authentification();
 			dispose();
 		}
-		
-		if(Button == enregistrer) {
 
+		if(Button == enregistrer) {
+			Session session = HibernateUtil.getSession();
 			if(!lastName.getText().isBlank() && !firstName.getText().isBlank() && !identifiant.getText().isBlank() && !password.getText().isBlank()) {
 
 				if (elo.getText().isBlank()) {
@@ -135,21 +139,27 @@ public class Formulaire extends JFrame implements ActionListener {
 				} else {
 					eloC = Integer.parseInt(elo.getText());
 				}
-
-				IndividuManager fm = new IndividuManager();
-				fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char)gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String)frequency.getSelectedItem());
-
-				if (elo.getText().isBlank()) {
-					System.out.println("Classement ELO : 0");
-				} else {
-					System.out.println("Classement ELO : " + elo.getText());
+				if(AuthentificationManager.existIndividu(session,identifiant.getText())) {
+					erreurIdentifiant();
+				}
+				if(!AuthentificationManager.existIndividu(session,identifiant.getText())) {
+					IndividuManager fm = new IndividuManager();
+					fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String) frequency.getSelectedItem());
 				}
 
-				System.out.println("Frequence de jeu : " + frequency.getSelectedItem());
+				if (elo.getText().isBlank()) {
+					//System.out.println("Classement ELO : 0");
+				} else {
+					//System.out.println("Classement ELO : " + elo.getText());
+				}
+
+				//System.out.println("Frequence de jeu : " + frequency.getSelectedItem());
 			}
 			else {
-				erreur();
+				erreurAttributs();
 			}
+
+
 		}
 	}
 	
@@ -380,11 +390,27 @@ public class Formulaire extends JFrame implements ActionListener {
 		return complete;
 	}
 
-	void erreur() {
+	void erreurAttributs() {
 		JFrame jf = new JFrame();
 
 		JPanel container = new JPanel();
-		container.add(error);
+
+		container.add(errorChamps);
+
+		jf.add(container);
+		jf.setSize(400, 80) ;
+		jf.setVisible(true);
+		jf.setResizable(false);
+		jf.setLocationRelativeTo(null);
+		jf.setLocationRelativeTo(null);
+
+	}
+	void erreurIdentifiant() {
+		JFrame jf = new JFrame();
+
+		JPanel container = new JPanel();
+
+		container.add(errorId);
 
 		jf.add(container);
 		jf.setSize(400, 80) ;
