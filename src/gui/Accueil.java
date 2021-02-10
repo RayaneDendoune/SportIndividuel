@@ -42,10 +42,10 @@ public class Accueil extends JFrame {
 	}
 	
 	public void build() {
-		this.setSize(520, 400);
+		this.setSize(550, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		//setResizable(false); //Taille non changeable
+		setResizable(false); //Taille non changeable
 
 		JPanel grid = imgButtons(); //Partie avec les boutons
 
