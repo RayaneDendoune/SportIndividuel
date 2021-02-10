@@ -93,7 +93,7 @@ public class Authentification extends JFrame implements ActionListener{
 
 				if(motdepasse.getText().equals(AuthentificationManager.existPassword(identifiant.getText()))) {
 					//System.out.println("!!!!!!!!!!!!!!!!!!!!!!! L'identifiant et le mot de passe correspondent !!!!!!!!!!!!!!!!!!!!!!!!");
-					new AccueilAdherent();
+					new Accueil();
 					dispose();
 				}
 				else {
