@@ -2,6 +2,7 @@ package gui;
 
 import manager.AuthentificationManager;
 import manager.CourseManager;
+import manager.NatationManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,7 @@ public class Natation extends JFrame implements ActionListener {
         setResizable(false); //Taille non changeable
 
         nage.addItem("Crawl");
-        nage.addItem("Dos-Crawl");
+        nage.addItem("Dos-Crawlé");
         nage.addItem("Brasse");
         nage.addItem("Papillon");
 
@@ -163,9 +164,29 @@ public class Natation extends JFrame implements ActionListener {
         }
 
         if(Button == enregistrer) {
-            System.out.println(longueur.getText());
+            /*System.out.println(longueur.getText());
             System.out.println(time.getText());
-            System.out.println(nage.getSelectedItem());
+            System.out.println(nage.getSelectedItem());*/
+
+            final java.sql.Date dateSQL = new java.sql.Date(new Date().getTime()) ;
+
+            int hour = Integer.parseInt(time.getText())/60;
+            int min = Integer.parseInt(time.getText())%60;
+
+            final Time timeTotal = new Time(hour, min,00);
+
+            int calorie = (int)NatationManager.calories(AuthentificationManager.personne, (String)nage.getSelectedItem(), Integer.parseInt(time.getText()));
+
+            float tempsMoy = NatationManager.tempsMoyLongueur(Integer.parseInt(longueur.getText()), Integer.parseInt(time.getText()));
+            int heure = (int)tempsMoy/3600;
+            int tempsT = (int)tempsMoy - (heure*3600);
+
+            int minutes = tempsT/60;
+            int secondes = tempsT%60;
+
+            final Time tempsLongueur = new Time(heure, minutes, secondes);
+
+            NatationManager.ajouterNatation(NatationManager.idSeance(AuthentificationManager.personne), Integer.parseInt(longueur.getText()), timeTotal, (String)nage.getSelectedItem(), calorie, tempsLongueur, dateSQL, AuthentificationManager.personne);
         }
     }
 

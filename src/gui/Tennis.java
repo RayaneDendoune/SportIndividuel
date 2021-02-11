@@ -1,5 +1,8 @@
 package gui;
 
+import manager.AuthentificationManager;
+import manager.TennisManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -189,11 +192,14 @@ public class Tennis extends JFrame implements ActionListener {
         }
 
         if(Button == enregistrer) {
-            System.out.println(PS.getText());
+           /* System.out.println(PS.getText());
             System.out.println(DS.getText());
             System.out.println(TS.getText());
             System.out.println(set.getText());
-            System.out.println(issue.getSelectedItem());
+            System.out.println(issue.getSelectedItem());*/
+            float vitesse = TennisManager.vitesseService(Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()));
+
+            TennisManager.ajouterTennis(TennisManager.idSeance(AuthentificationManager.personne), Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()), Integer.parseInt(set.getText()), TennisManager.issueMatch((String)issue.getSelectedItem()), vitesse, AuthentificationManager.personne);
         }
     }
 
