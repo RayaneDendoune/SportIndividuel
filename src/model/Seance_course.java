@@ -31,7 +31,6 @@ public class Seance_course {
         this.date = date;
         this.individu = individu;
     }
-
     public String getId_seance_course() {
         return id_seance_course;
     }
