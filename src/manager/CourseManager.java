@@ -55,10 +55,11 @@ public class CourseManager {
 
         return present;
     }
+
     public static int nbSeanceCourse(Session session, Individu individu){
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery(" from Seance_course sc where sc.id=:id");
+        Query readQuery = session.createQuery(" SELECT COUNT(*) from Seance_course sc where sc.id=:id");
         readQuery.setString("id", individu.getId_individu());
 
         return 0;
@@ -95,6 +96,7 @@ public class CourseManager {
 
 
         existSeanceCourse(session, "atarina_5");
+        nbSeanceCourse(session,AuthentificationManager.personne);
         session.close();
     }
 
