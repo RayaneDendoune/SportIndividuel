@@ -142,5 +142,25 @@ public class Accueil extends JFrame implements ActionListener {
 			new Course();
 			dispose();
 		}
+
+		if(Button==imgNatation) {
+			new Natation();
+			dispose();
+		}
+
+		if(Button==imgCyclisme) {
+			new Cyclisme();
+			dispose();
+		}
+
+		if(Button==imgTennis) {
+			new Tennis();
+			dispose();
+		}
+
+		if(Button==imgEchecs) {
+			new Echecs();
+			dispose();
+		}
 	}
 }
