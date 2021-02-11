@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CourseManager {
 
-    public void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
+    public static void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -67,6 +67,27 @@ public class CourseManager {
 
         readTransaction.commit();
         return count;
+    }
+
+    public static String idSeance(Individu individu) {
+        int nbOcc = ((int)nbSeanceCourse(individu)) + 1;
+        String id = individu.getId_individu();
+
+        String seance = id + "_" + nbOcc;
+        return seance;
+    }
+
+    public static float vitesseMoyenne(float distanceKM, int min) {
+        float distanceM = distanceKM*1000;
+        int sec = min/60;
+        float vitesse = distanceKM/sec;
+
+        return vitesse;
+    }
+
+    public static int nbPas(float distance){
+        int nombrePas = (int)((distance*100000)/65);
+        return nombrePas;
     }
 
 

@@ -2,6 +2,7 @@ package gui;
 
 import manager.AuthentificationManager;
 import manager.CourseManager;
+import model.Individu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -146,12 +147,16 @@ public class Course extends JFrame implements ActionListener {
 
         if(Button == enregistrer) {
             final java.sql.Date dateSQL = new java.sql.Date(new Date().getTime()) ;
-            final Time timeSQL = new Time(2,56,03);
+
+            int heure = Integer.parseInt(time.getText())/60;
+            int min = Integer.parseInt(time.getText())%60;
+
+            final Time timeSQL = new Time(heure, min,00);
             //System.out.println(dateSQL);
 
-            System.out.println("Nb occ : " + CourseManager.nbSeanceCourse(AuthentificationManager.personne));
+            //System.out.println("Nb occ : " + CourseManager.nbSeanceCourse(AuthentificationManager.personne));
 
-            //CourseManager.ajouterCourse("Le S_2", 4509.0f, timeSQL, 7.9f, 23398, dateSQL, AuthentificationManager.personne);
+            CourseManager.ajouterCourse(CourseManager.idSeance(AuthentificationManager.personne), Float.parseFloat(dist.getText()), timeSQL, CourseManager.vitesseMoyenne(Float.parseFloat(dist.getText()), Integer.parseInt(time.getText())), CourseManager.nbPas(Float.parseFloat(dist.getText())), dateSQL, AuthentificationManager.personne);
         }
     }
 }
