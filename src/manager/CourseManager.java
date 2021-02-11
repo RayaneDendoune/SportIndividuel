@@ -56,37 +56,20 @@ public class CourseManager {
         return present;
     }
 
-    public static int nbSeanceCourse(Session session, Individu individu){
+    public static long nbSeanceCourse(Individu individu){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery(" SELECT COUNT(*) from Seance_course sc where sc.id=:id");
-        readQuery.setString("id", individu.getId_individu());
+       Query query = session.createQuery("select count(*) from Seance_course sc where sc.individu=:individu");
+        query.setString("individu", individu.getId_individu());
+        Long count = (Long)query.uniqueResult();
 
-        return 0;
+        readTransaction.commit();
+        return count;
     }
 
 
-
-
-
-    public void recupDonneesCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
-        Seance_course sc = new Seance_course();
-        sc.getId_seance_course();
-        sc.getDistance();
-        sc.getTemps();
-        sc.getVitesse_moy();
-        sc.getNb_pas();
-        sc.getDate();
-        sc.getIndividu();
-
-        session.getTransaction().commit();
-
-        //System.out.println("id seance course :" + sc.getId_seance_course() + "\ndistance :" + sc.getDistance() + "\ntemps :" + sc.getTemps() + "\nnb_pas :" + sc.getNb_pas() + "\ndate :" + sc.getDate());
-
-    }
 
     public static void main (String []args){
 
@@ -96,7 +79,7 @@ public class CourseManager {
 
 
         existSeanceCourse(session, "atarina_5");
-        nbSeanceCourse(session,AuthentificationManager.personne);
+        nbSeanceCourse(AuthentificationManager.personne);
         session.close();
     }
 

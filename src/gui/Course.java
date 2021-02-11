@@ -1,9 +1,15 @@
 package gui;
 
+import manager.AuthentificationManager;
+import manager.CourseManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Course extends JFrame implements ActionListener {
 
@@ -136,6 +142,16 @@ public class Course extends JFrame implements ActionListener {
         if (Button == retour) {
             new Accueil();
             dispose();
+        }
+
+        if(Button == enregistrer) {
+            final java.sql.Date dateSQL = new java.sql.Date(new Date().getTime()) ;
+            final Time timeSQL = new Time(2,56,03);
+            //System.out.println(dateSQL);
+
+            System.out.println("Nb occ : " + CourseManager.nbSeanceCourse(AuthentificationManager.personne));
+
+            //CourseManager.ajouterCourse("Le S_2", 4509.0f, timeSQL, 7.9f, 23398, dateSQL, AuthentificationManager.personne);
         }
     }
 }
