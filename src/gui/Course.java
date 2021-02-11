@@ -22,7 +22,7 @@ public class Course extends JFrame implements ActionListener {
     private JTextField dist = new JTextField(5);
 
     private JLabel temps = new JLabel("Temps (en minutes) ");
-    private JTextField time = new JPasswordField(5);
+    private JTextField time = new JTextField(5);
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
