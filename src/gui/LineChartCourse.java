@@ -7,6 +7,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -23,7 +25,7 @@ public class LineChartCourse extends ApplicationFrame {
 
         public LineChartCourse(String title, ArrayList<Float> vitesse) {
             super(title);
-            XYDataset dataset = createDataset(vitesse);
+            XYDataset dataset = createLineDataset(vitesse);
             JFreeChart chart = createChart(dataset);
             ChartPanel chartPanel = new ChartPanel(chart);
             chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
@@ -31,16 +33,28 @@ public class LineChartCourse extends ApplicationFrame {
 
         }
 
-        private XYDataset createDataset(ArrayList<Float> vitesse) {
+        private XYDataset createLineDataset(ArrayList<Float> vitesse) {
             XYSeries series1 = new XYSeries("Vitesse Moyenne");
             for(int i=0; i<vitesse.size(); i++) {
-                series1.add(i, vitesse.get(i));
+                series1.add((i+1), vitesse.get(i));
             }
             XYSeriesCollection dataset = new XYSeriesCollection();
             dataset.addSeries(series1);
 
             return dataset;
+        }
 
+        private CategoryDataset createBarDataset(ArrayList<Integer> nbPas) {
+            String series1 = "Nombre de pas";
+
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            for(int i = 0; i<nbPas.size(); i++) {
+                String category1 = "" + (i+1);
+                dataset.addValue(nbPas.get(i), series1, category1);
+            }
+
+            return dataset;
         }
 
         private JFreeChart createChart(XYDataset dataset) {

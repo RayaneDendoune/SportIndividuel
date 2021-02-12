@@ -29,6 +29,9 @@ public class Course extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
+    private JButton vitesse = new JButton("Vitesse moyenne");
+    private JButton nbPas = new JButton("Nombre de pas");
+
     public Course() {
         build();
     }
@@ -41,13 +44,15 @@ public class Course extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        vitesse.addActionListener(this);
+        nbPas.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
         JPanel grid = donnee();
         JPanel panel = buttons();
-        //JPanel graphique = graphiques();
+        JPanel graphique = graphiques();
 
-        JPanel complete = complete(grid, panel/*, graphique*/);
+        JPanel complete = complete(grid, panel, graphique);
 
         pan.add(complete, BorderLayout.CENTER);
 
@@ -113,27 +118,28 @@ public class Course extends JFrame implements ActionListener {
         return grid;
     }
 
-    /*public JPanel graphiques() {
+    public JPanel graphiques() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
-        ArrayList<Float> vitesse = CourseManager.VitesseMoy(AuthentificationManager.personne);
-        LineChartCourse lcl = new LineChartCourse("Vitesse Moyenne en fonction du nbre de Seance", vitesse);
-        lcl.pack();
-        RefineryUtilities.centerFrameOnScreen(lcl);
-        lcl.setVisible(true);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 0;
-        grid.add(lcl, c);
+        grid.add(vitesse, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        grid.add(nbPas, c);
 
         return grid;
-    }*/
+    }
 
-    public JPanel complete(JPanel grid, JPanel panel/*, JPanel graphique*/) {
+    public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -152,10 +158,10 @@ public class Course extends JFrame implements ActionListener {
         c.gridy = 2;
         complete.add(panel, c);
 
-        /*c.insets = new Insets(20,0,0,0);
+        c.insets = new Insets(50,0,0,0);
         c.gridx = 0;
         c.gridy = 3;
-        complete.add(graphique, c);*/
+        complete.add(graphique, c);
 
         return complete;
     }
@@ -183,11 +189,14 @@ public class Course extends JFrame implements ActionListener {
 
             CourseManager.ajouterCourse(CourseManager.idSeance(AuthentificationManager.personne), Float.parseFloat(dist.getText()), timeSQL, CourseManager.vitesseMoyenne(Float.parseFloat(dist.getText()), Integer.parseInt(time.getText())), CourseManager.nbPas(Float.parseFloat(dist.getText())), dateSQL, AuthentificationManager.personne);
 
-            /*ArrayList<Float> vitesse = CourseManager.VitesseMoy(AuthentificationManager.personne);
+        }
+
+        if(Button == vitesse) {
+            ArrayList<Float> vitesse = CourseManager.VitesseMoy(AuthentificationManager.personne);
             LineChartCourse lcl = new LineChartCourse("Vitesse Moyenne en fonction du nbre de Seance", vitesse);
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
-            lcl.setVisible(true);*/
+            lcl.setVisible(true);
         }
     }
 }

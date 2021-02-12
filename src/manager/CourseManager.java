@@ -125,6 +125,25 @@ public class CourseManager {
         return vitesse;
     }
 
+    public static ArrayList<Integer> nombrePas(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Integer> nbPas = new ArrayList<Integer>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_course sc where sc.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_course sc = (Seance_course) iterator.next();
+            //System.out.println(sc.toString());
+            nbPas.add(sc.getNb_pas());
+        }
+        readTransaction.commit();
+        return nbPas;
+    }
+
 
 
 
