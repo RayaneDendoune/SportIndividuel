@@ -3,6 +3,7 @@ package gui;
 import manager.AuthentificationManager;
 import manager.CourseManager;
 import manager.NatationManager;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLOutput;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Natation extends JFrame implements ActionListener {
@@ -30,6 +32,9 @@ public class Natation extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
+    private JButton calorie = new JButton("Calories brulées");
+    private JButton tempsMoy = new JButton("Temps Moyen/Longueur");
+
 
     public Natation() {
         build();
@@ -48,12 +53,16 @@ public class Natation extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        calorie.addActionListener(this);
+        tempsMoy.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
 
         JPanel grid = donnee();
         JPanel buttons = buttons();
-        JPanel complete = complete(grid, buttons);
+        JPanel graphique = graphiques();
+
+        JPanel complete = complete(grid, buttons, graphique);
 
         pan.add(complete, BorderLayout.CENTER);
 
@@ -133,7 +142,28 @@ public class Natation extends JFrame implements ActionListener {
         return grid;
     }
 
-    public JPanel complete(JPanel grid, JPanel panel) {
+    public JPanel graphiques() {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(calorie, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        grid.add(tempsMoy, c);
+
+        return grid;
+    }
+
+    public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -151,6 +181,11 @@ public class Natation extends JFrame implements ActionListener {
         c.gridx = 0;
         c.gridy = 2;
         complete.add(panel, c);
+
+        c.insets = new Insets(50,0,0,0);
+        c.gridx = 0;
+        c.gridy = 3;
+        complete.add(graphique, c);
 
         return complete;
     }
@@ -187,6 +222,20 @@ public class Natation extends JFrame implements ActionListener {
             final Time tempsLongueur = new Time(heure, minutes, secondes);
 
             NatationManager.ajouterNatation(NatationManager.idSeance(AuthentificationManager.personne), Integer.parseInt(longueur.getText()), timeTotal, (String)nage.getSelectedItem(), calorie, tempsLongueur, dateSQL, AuthentificationManager.personne);
+        }
+        if(Button == tempsMoy){
+            ArrayList<Time> tpsMoy = NatationManager.tpsMoyLongueur(AuthentificationManager.personne);
+            LineChart lcl = new LineChart(tpsMoy, "Temps moyen par longueur en fonction de la séance", "Temps moyen", "Numéro de la seance", "Temps moyen (en secondes)");
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
+        }
+        if(Button == calorie) {
+            ArrayList<Integer> calorie = NatationManager.nbCaloriesPerdues(AuthentificationManager.personne);
+            BarChart bc = new BarChart("Nombre de calories perdues par séances", calorie, "Calories perdues", "Numéro séance", "Nombre de calories perdues (en kcal)");
+            bc.pack();
+            RefineryUtilities.centerFrameOnScreen(bc);
+            bc.setVisible(true);
         }
     }
 

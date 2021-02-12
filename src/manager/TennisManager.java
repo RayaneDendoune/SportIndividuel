@@ -1,11 +1,16 @@
 package manager;
 
 import model.Individu;
+import model.Seance_course;
 import model.Seance_tennis;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TennisManager {
     //Je pense que nbset ne sert a rien du tout, on peut l'enlever de la table.
@@ -29,7 +34,7 @@ public class TennisManager {
 
     }
 
-    public static long nbSeanceCourse(Individu individu){
+    public static long nbSeanceTennis(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         Transaction readTransaction = session.beginTransaction();
@@ -43,10 +48,16 @@ public class TennisManager {
     }
 
     public static String idSeance(Individu individu) {
-        int nbOcc = ((int)nbSeanceCourse(individu)) + 1;
+        int nbOcc = ((int)nbSeanceTennis(individu)) + 1;
         String id = individu.getId_individu();
+        String seance ="";
+        if(nbOcc<10) {
+            seance = id + "_0" + nbOcc;
+        }
+        else {
+            seance = id + "_" + nbOcc;
+        }
 
-        String seance = id + "_" + nbOcc;
         return seance;
     }
 
@@ -64,6 +75,25 @@ public class TennisManager {
             return 'D';
         }
         return ' ';
+    }
+
+    public static ArrayList<Float> VitesseMoy(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Float> vitesse = new ArrayList<Float>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_tennis st where st.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_tennis st = (Seance_tennis) iterator.next();
+            //System.out.println(sc.toString());
+            vitesse.add(st.getVitesse_moy_service());
+        }
+        readTransaction.commit();
+        return vitesse;
     }
 
 }

@@ -1,5 +1,9 @@
 package gui;
 
+import manager.AuthentificationManager;
+import manager.CyclismeManager;
+import model.Seance_cyclisme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +28,8 @@ public class Cyclisme extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
+    private JButton vitesse = new JButton("Vitesse moyenne");
+
     public Cyclisme() {
         build();
     }
@@ -39,9 +45,9 @@ public class Cyclisme extends JFrame implements ActionListener {
         objectif.addItem("Inventer"); //Inventez des niveaux !!!!!!!!
         objectif.addItem("Jsp");
 
-        niveau.addItem("Niveau 1"); //Il faut savoir ce que c'est qu'un niveau
-        niveau.addItem("Niveau 3");
-        niveau.addItem("Niveau 2");
+        niveau.addItem("Sédentaire"); //Il faut savoir ce que c'est qu'un niveau
+        niveau.addItem("Actif");
+        niveau.addItem("Sportif");
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
@@ -161,9 +167,12 @@ public class Cyclisme extends JFrame implements ActionListener {
         }
 
         if(Button == enregistrer) {
-            System.out.println(niveau.getSelectedItem());
+            /*System.out.println(niveau.getSelectedItem());
             System.out.println(weight.getText());
-            System.out.println(objectif.getSelectedItem());
+            System.out.println(objectif.getSelectedItem());*/
+            int nrj = CyclismeManager.depenseNRJ(AuthentificationManager.personne, (String)niveau.getSelectedItem());
+
+            CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String)niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String)objectif.getSelectedItem(), nrj, 270, AuthentificationManager.personne);
         }
     }
 

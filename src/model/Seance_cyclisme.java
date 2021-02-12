@@ -7,10 +7,10 @@ public class Seance_cyclisme {
     @Id
     private String id_seance_cyclisme;
 
-    private float niveau_activite_physique;
+    private String niveau_activite_physique;
     private float poids;
     private String objectif_seance;
-    private float depense_energetique;
+    private int depense_energetique;
     private int besoin_proteine;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Individu.class)
@@ -20,7 +20,7 @@ public class Seance_cyclisme {
 
     public Seance_cyclisme() {}
 
-    public Seance_cyclisme(String id_seance_cyclisme, float niveau_activite_physique, float poids, String objectif_seance, float depense_energetique, int besoin_proteine, Individu individu) {
+    public Seance_cyclisme(String id_seance_cyclisme, String niveau_activite_physique, float poids, String objectif_seance, int depense_energetique, int besoin_proteine, Individu individu) {
         this.id_seance_cyclisme = id_seance_cyclisme;
         this.niveau_activite_physique = niveau_activite_physique;
         this.poids = poids;
@@ -38,11 +38,11 @@ public class Seance_cyclisme {
         this.id_seance_cyclisme = id_seance_cyclisme;
     }
 
-    public float getNiveau_activite_physique() {
+    public String getNiveau_activite_physique() {
         return niveau_activite_physique;
     }
 
-    public void setNiveau_activite_physique(float niveau_activite_physique) {
+    public void setNiveau_activite_physique(String niveau_activite_physique) {
         this.niveau_activite_physique = niveau_activite_physique;
     }
 
@@ -62,11 +62,11 @@ public class Seance_cyclisme {
         this.objectif_seance = objectif_seance;
     }
 
-    public float getDepense_energetique() {
+    public int getDepense_energetique() {
         return depense_energetique;
     }
 
-    public void setDepense_energetique(float depense_energetique) {
+    public void setDepense_energetique(int depense_energetique) {
         this.depense_energetique = depense_energetique;
     }
 

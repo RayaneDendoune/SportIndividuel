@@ -1,12 +1,15 @@
 package gui;
 
 import manager.AuthentificationManager;
+import manager.CourseManager;
 import manager.TennisManager;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Tennis extends JFrame implements ActionListener {
 
@@ -32,6 +35,9 @@ public class Tennis extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
+    private JButton vitesse = new JButton("Vitesse moyenne");
+    private JButton pourcentageReussite = new JButton("Pourcentage de réussite");
+
     public Tennis() {
         build();
     }
@@ -47,12 +53,15 @@ public class Tennis extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        vitesse.addActionListener(this);
+        pourcentageReussite.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
 
         JPanel grid = donnee();
         JPanel buttons = buttons();
-        JPanel complete = complete(grid, buttons);
+        JPanel graphique = graphiques();
+        JPanel complete = complete(grid, buttons,graphique);
 
         pan.add(complete, BorderLayout.CENTER);
 
@@ -160,8 +169,28 @@ public class Tennis extends JFrame implements ActionListener {
 
         return grid;
     }
+    public JPanel graphiques() {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-    public JPanel complete(JPanel grid, JPanel panel) {
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(vitesse, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        grid.add(pourcentageReussite, c);
+
+        return grid;
+    }
+
+    public JPanel complete(JPanel grid, JPanel panel,JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -179,6 +208,11 @@ public class Tennis extends JFrame implements ActionListener {
         c.gridx = 0;
         c.gridy = 2;
         complete.add(panel, c);
+
+        c.insets = new Insets(50,0,0,0);
+        c.gridx = 0;
+        c.gridy = 3;
+        complete.add(graphique, c);
 
         return complete;
     }
@@ -200,6 +234,13 @@ public class Tennis extends JFrame implements ActionListener {
             float vitesse = TennisManager.vitesseService(Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()));
 
             TennisManager.ajouterTennis(TennisManager.idSeance(AuthentificationManager.personne), Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()), Integer.parseInt(set.getText()), TennisManager.issueMatch((String)issue.getSelectedItem()), vitesse, AuthentificationManager.personne);
+        }
+        if(Button==vitesse){
+            ArrayList<Float> vitesse = TennisManager.VitesseMoy(AuthentificationManager.personne);
+            LineChart lcl = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
         }
     }
 

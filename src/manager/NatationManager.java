@@ -1,6 +1,7 @@
 package manager;
 
 import model.Individu;
+import model.Seance_course;
 import model.Seance_natation;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,6 +10,9 @@ import util.HibernateUtil;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class NatationManager {
 
@@ -46,8 +50,14 @@ public class NatationManager {
     public static String idSeance(Individu individu) {
         int nbOcc = ((int)nbSeanceCourse(individu)) + 1;
         String id = individu.getId_individu();
+        String seance ="";
+        if(nbOcc<10) {
+            seance = id + "_0" + nbOcc;
+        }
+        else {
+            seance = id + "_" + nbOcc;
+        }
 
-        String seance = id + "_" + nbOcc;
         return seance;
     }
 
@@ -81,5 +91,43 @@ public class NatationManager {
 
         float totalCalories = calorie * temps;
         return totalCalories; //Résultat en Kcal et pas en calorie + TypeNage ne sert a riiien
+    }
+
+    public static ArrayList<Integer> nbCaloriesPerdues(Individu individu){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Integer> nbCalorie = new ArrayList<Integer>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_natation sn where sn.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_natation sn = (Seance_natation) iterator.next();
+            //System.out.println(sc.toString());
+            nbCalorie.add(sn.getCalorie_perdu());
+        }
+        readTransaction.commit();
+        return nbCalorie;
+    }
+
+    public static ArrayList<Time> tpsMoyLongueur(Individu individu){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Time> tempsMoyenLong = new ArrayList<Time>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_natation sn where sn.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_natation sn = (Seance_natation) iterator.next();
+            //System.out.println(sc.toString());
+            tempsMoyenLong.add(sn.getTemps_moy_longueur());
+        }
+        readTransaction.commit();
+        return tempsMoyenLong;
     }
 }
