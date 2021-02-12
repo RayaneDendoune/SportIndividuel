@@ -1,8 +1,4 @@
 package gui;
-import manager.AuthentificationManager;
-import model.Individu;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -12,29 +8,28 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
-import util.HibernateUtil;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
-public class LineChartCourse extends ApplicationFrame {
+public class LineChart extends JFrame {
 
 
         private static final long serialVersionUID = 1L;
 
-        public LineChartCourse(String title, ArrayList<Float> vitesse) {
+        public LineChart(String title, ArrayList<Float> al, String key, String xAxis, String yAxis) {
             super(title);
-            XYDataset dataset = createLineDataset(vitesse);
-            JFreeChart chart = createChart(dataset);
+            XYDataset dataset = createLineDataset(al, key);
+            JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
             ChartPanel chartPanel = new ChartPanel(chart);
             chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
             setContentPane(chartPanel);
 
         }
 
-        private XYDataset createLineDataset(ArrayList<Float> vitesse) {
-            XYSeries series1 = new XYSeries("Vitesse Moyenne");
+        private XYDataset createLineDataset(ArrayList<Float> vitesse, String key) {
+            XYSeries series1 = new XYSeries(key);
             for(int i=0; i<vitesse.size(); i++) {
                 series1.add((i+1), vitesse.get(i));
             }
@@ -57,8 +52,8 @@ public class LineChartCourse extends ApplicationFrame {
             return dataset;
         }
 
-        private JFreeChart createChart(XYDataset dataset) {
-            return ChartFactory.createXYLineChart("Vitesse Moyenne en fonction du nbre de Seance", "NbSeance", "VitesseMoyenne", dataset, PlotOrientation.VERTICAL, true, true, false);
+        private JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis) {
+            return ChartFactory.createXYLineChart(title, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, true, true, false);
         }
 
         public static void main(String[] args) {
@@ -70,7 +65,7 @@ public class LineChartCourse extends ApplicationFrame {
             vitesse.add(22.6f);
             vitesse.add(11.3f);
 
-            LineChartCourse demo = new LineChartCourse("Vitesse Moyenne en fonction du nbre de Seance", vitesse);
+            LineChart demo = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
             demo.pack();
             RefineryUtilities.centerFrameOnScreen(demo);
             demo.setVisible(true);

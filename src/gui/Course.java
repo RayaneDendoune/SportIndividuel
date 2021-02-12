@@ -2,7 +2,6 @@ package gui;
 
 import manager.AuthentificationManager;
 import manager.CourseManager;
-import model.Individu;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
@@ -12,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class Course extends JFrame implements ActionListener {
 
@@ -193,10 +191,18 @@ public class Course extends JFrame implements ActionListener {
 
         if(Button == vitesse) {
             ArrayList<Float> vitesse = CourseManager.VitesseMoy(AuthentificationManager.personne);
-            LineChartCourse lcl = new LineChartCourse("Vitesse Moyenne en fonction du nbre de Seance", vitesse);
+            LineChart lcl = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);
+        }
+
+        if(Button == nbPas) {
+            ArrayList<Integer> nombrePas = CourseManager.nombrePas(AuthentificationManager.personne);
+            BarChart bc = new BarChart("Nombre de pas moyen", nombrePas, "Nombre de pas", "Numéro de la séance", "Nb pas");
+            bc.pack();
+            RefineryUtilities.centerFrameOnScreen(bc);
+            bc.setVisible(true);
         }
     }
 }
