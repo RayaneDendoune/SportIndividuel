@@ -72,9 +72,9 @@ public class PieChart extends JFrame {
         issue.add('V');
         issue.add('D');
 
-        PieChart demo = new PieChart("Coucou", issue, "Nb victoire");
+        /*PieChart demo = new PieChart("Test", issue, "Nb victoire");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        demo.setVisible(true);*/
     }
 }
