@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class PieChart extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    public PieChart(String title, ArrayList<Character> issue) {
-        super(title);
-        setContentPane(createDemoPanel(issue));
+    public PieChart(String titleFrame, ArrayList<Character> issue, String titleGraph) {
+        super(titleFrame);
+        setContentPane(createDemoPanel(issue, titleGraph));
     }
 
     /*private PieDataset createDataset() {
@@ -50,12 +50,12 @@ public class PieChart extends JFrame {
         return dataset;
     }
 
-    private JFreeChart createChart(PieDataset dataset) {
-        return ChartFactory.createPieChart("Pie Chart Demo 1", dataset, true, true, false);
+    private JFreeChart createChart(PieDataset dataset, String title) {
+        return ChartFactory.createPieChart(title, dataset, true, true, false);
     }
 
-    public JPanel createDemoPanel(ArrayList<Character> issue) {
-        JFreeChart chart = createChart(createIssueDataset(issue));
+    public JPanel createDemoPanel(ArrayList<Character> issue, String title) {
+        JFreeChart chart = createChart(createIssueDataset(issue), title);
         return new ChartPanel(chart);
     }
 
@@ -72,7 +72,7 @@ public class PieChart extends JFrame {
         issue.add('V');
         issue.add('D');
 
-        PieChart demo = new PieChart("Pie Chart Demo", issue);
+        PieChart demo = new PieChart("Coucou", issue, "Nb victoire");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
