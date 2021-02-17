@@ -30,8 +30,8 @@ public class Cyclisme extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
-    private JButton proteine = new JButton("Besoin en protéïne");
-    //private JButton energie = new JButton("Dépense énergétique");
+    private JButton proteine = new JButton("Besoin en proteine");
+    private JButton energie = new JButton("Dépense énergétique");
 
     public Cyclisme() {
         build();
@@ -55,7 +55,7 @@ public class Cyclisme extends JFrame implements ActionListener {
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
         proteine.addActionListener(this);
-        //energie.addActionListener(this);
+        energie.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
 
@@ -153,12 +153,12 @@ public class Cyclisme extends JFrame implements ActionListener {
         c.gridy = 0;
         grid.add(proteine, c);
 
-        /*c.insets = new Insets(0,20,0,0);
+        c.insets = new Insets(0,20,0,0);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 0;
-        grid.add(energie, c);*/
+        grid.add(energie, c);
 
         return grid;
     }
@@ -209,17 +209,21 @@ public class Cyclisme extends JFrame implements ActionListener {
 
         if(Button == proteine) {
             ArrayList<Integer> proteine = CyclismeManager.proteine(AuthentificationManager.personne);
-            ArrayList<Integer> energie = CyclismeManager.energie(AuthentificationManager.personne);
 
-            LineChart lcl = new LineChart(proteine, energie, "Temps moyen par longueur en fonction de la séance", "Besoin en proteine", "Dépense énergétique" , "Numéro de la seance", "Temps moyen (en secondes)");
+            LineChart lcl = new LineChart(proteine, "Temps moyen par longueur en fonction de la séance", "Besoin en proteine", "Dépense énergétique" , "Numéro de la seance", "Temps moyen (en secondes)");
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);
         }
 
-        /*if(Button == energie) {
+        if(Button == energie) {
+            ArrayList<Integer> energie = CyclismeManager.energie(AuthentificationManager.personne);
 
-        }*/
+            LineChart lcl = new LineChart(energie, "Temps moyen par longueur en fonction de la séance", "Besoin en proteine", "Dépense énergétique" , "Numéro de la seance", "Temps moyen (en secondes)");
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
+        }
     }
 
     /*public static void main(String[] args) {

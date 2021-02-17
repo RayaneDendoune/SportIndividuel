@@ -38,29 +38,23 @@ public class LineChart extends JFrame {
         setContentPane(chartPanel);
     }
 
-    public LineChart(ArrayList<Integer> proteine, ArrayList<Integer> energie, String title, String key1, String key2, String xAxis, String yAxis) {
+    public LineChart(ArrayList<Integer> array, String title, String key1, String key2, String xAxis, String yAxis) {
         super(title);
-        XYDataset dataset = createLineIntegerDataset(proteine, energie, key1, key2);
+        XYDataset dataset = createLineIntegerDataset(array, key1, key2);
         JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
     }
 
-    private XYDataset createLineIntegerDataset(ArrayList<Integer> proteine, ArrayList<Integer> energie, String key1, String key2) {
+    private XYDataset createLineIntegerDataset(ArrayList<Integer> array, String key1, String key2) {
         XYSeries series1 = new XYSeries(key1);
-        for(int i=0; i<proteine.size(); i++) {
-            series1.add((i+1), proteine.get(i));
-        }
-
-        XYSeries series2 = new XYSeries(key2);
-        for(int i=0; i<energie.size(); i++) {
-            series2.add((i+1), energie.get(i));
+        for(int i=0; i<array.size(); i++) {
+            series1.add((i+1), array.get(i));
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series1);
-        dataset.addSeries(series2);
 
         return dataset;
     }
