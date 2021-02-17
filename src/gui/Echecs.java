@@ -1,9 +1,13 @@
 package gui;
 
+import manager.AuthentificationManager;
+import manager.EchecManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 
 public class Echecs extends JFrame implements ActionListener {
 
@@ -23,6 +27,9 @@ public class Echecs extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
+    private JButton elo = new JButton("Classement ELO");
+    private JButton nvConcentration = new JButton("Niveau de concentration");
+
     public Echecs() {
         build();
     }
@@ -34,16 +41,20 @@ public class Echecs extends JFrame implements ActionListener {
         setResizable(false); //Taille non changeable
 
         issue.addItem("Victoire");
+        issue.addItem("Nul");
         issue.addItem("Défaite");
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        elo.addActionListener(this);
+        nvConcentration.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
 
         JPanel grid = donnee();
         JPanel buttons = buttons();
-        JPanel complete = complete(grid, buttons);
+        JPanel graphique = graphiques();
+        JPanel complete = complete(grid, buttons, graphique);
 
         pan.add(complete, BorderLayout.CENTER);
 
@@ -123,7 +134,29 @@ public class Echecs extends JFrame implements ActionListener {
         return grid;
     }
 
-    public JPanel complete(JPanel grid, JPanel panel) {
+    public JPanel graphiques() {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(elo, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        grid.add(nvConcentration, c);
+
+        return grid;
+    }
+
+
+    public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -142,6 +175,11 @@ public class Echecs extends JFrame implements ActionListener {
         c.gridy = 2;
         complete.add(panel, c);
 
+        c.insets = new Insets(20,0,0,0);
+        c.gridx = 0;
+        c.gridy = 3;
+        complete.add(graphique, c);
+
         return complete;
     }
 
@@ -154,9 +192,25 @@ public class Echecs extends JFrame implements ActionListener {
         }
 
         if(Button == enregistrer) {
-            System.out.println(adversaire.getText());
+            /*System.out.println(adversaire.getText());
             System.out.println(time.getText());
-            System.out.println(issue.getSelectedItem());
+            System.out.println(issue.getSelectedItem());*/
+
+            int heure = Integer.parseInt(time.getText())/60;
+            int min = Integer.parseInt(time.getText())%60;
+
+            final Time timeSQL = new Time(heure, min,00);
+
+            char issuePartie = EchecManager.issue((String)issue.getSelectedItem());
+            //EchecManager.updateValue(AuthentificationManager.personne, 1204);
+            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), timeSQL, 234, issuePartie, 589, AuthentificationManager.personne);
+            //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
+            int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem());
+            EchecManager.updateValue(AuthentificationManager.personne, newElo);
+        }
+
+        if(Button == elo){
+
         }
     }
 

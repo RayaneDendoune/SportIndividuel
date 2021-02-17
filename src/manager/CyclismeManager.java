@@ -108,4 +108,23 @@ public class CyclismeManager {
         readTransaction.commit();
         return nrj;
     }
+
+    public static ArrayList<Integer> proteine(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Integer> proteine = new ArrayList<Integer>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_cyclisme sc where sc.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_cyclisme sc = (Seance_cyclisme) iterator.next();
+            //System.out.println(sc.toString());
+            proteine.add(sc.getBesoin_proteine());
+        }
+        readTransaction.commit();
+        return proteine;
+    }
 }

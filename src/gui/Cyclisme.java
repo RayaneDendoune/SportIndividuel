@@ -3,12 +3,14 @@ package gui;
 import manager.AuthentificationManager;
 import manager.CyclismeManager;
 import model.Seance_cyclisme;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 public class Cyclisme extends JFrame implements ActionListener {
 
@@ -28,7 +30,8 @@ public class Cyclisme extends JFrame implements ActionListener {
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
 
-    private JButton vitesse = new JButton("Vitesse moyenne");
+    private JButton proteine = new JButton("Besoin en protéïne");
+    //private JButton energie = new JButton("Dépense énergétique");
 
     public Cyclisme() {
         build();
@@ -45,18 +48,21 @@ public class Cyclisme extends JFrame implements ActionListener {
         objectif.addItem("Inventer"); //Inventez des niveaux !!!!!!!!
         objectif.addItem("Jsp");
 
-        niveau.addItem("Sédentaire"); //Il faut savoir ce que c'est qu'un niveau
+        niveau.addItem("Sédentaire");
         niveau.addItem("Actif");
         niveau.addItem("Sportif");
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        proteine.addActionListener(this);
+        //energie.addActionListener(this);
 
         pan.setLayout(new BorderLayout());
 
         JPanel grid = donnee();
         JPanel buttons = buttons();
-        JPanel complete = complete(grid, buttons);
+        JPanel graphique = graphiques();
+        JPanel complete = complete(grid, buttons, graphique);
 
         pan.add(complete, BorderLayout.CENTER);
 
@@ -136,7 +142,28 @@ public class Cyclisme extends JFrame implements ActionListener {
         return grid;
     }
 
-    public JPanel complete(JPanel grid, JPanel panel) {
+    public JPanel graphiques() {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(proteine, c);
+
+        /*c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        grid.add(energie, c);*/
+
+        return grid;
+    }
+
+    public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -154,6 +181,11 @@ public class Cyclisme extends JFrame implements ActionListener {
         c.gridx = 0;
         c.gridy = 2;
         complete.add(panel, c);
+
+        c.insets = new Insets(20,0,0,0);
+        c.gridx = 0;
+        c.gridy = 3;
+        complete.add(graphique, c);
 
         return complete;
     }
@@ -174,6 +206,20 @@ public class Cyclisme extends JFrame implements ActionListener {
 
             CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String)niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String)objectif.getSelectedItem(), nrj, 270, AuthentificationManager.personne);
         }
+
+        if(Button == proteine) {
+            ArrayList<Integer> proteine = CyclismeManager.proteine(AuthentificationManager.personne);
+            ArrayList<Integer> energie = CyclismeManager.energie(AuthentificationManager.personne);
+
+            LineChart lcl = new LineChart(proteine, energie, "Temps moyen par longueur en fonction de la séance", "Besoin en proteine", "Dépense énergétique" , "Numéro de la seance", "Temps moyen (en secondes)");
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
+        }
+
+        /*if(Button == energie) {
+
+        }*/
     }
 
     /*public static void main(String[] args) {

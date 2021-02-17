@@ -1,5 +1,6 @@
 package manager;
 
+import gui.Tennis;
 import model.Individu;
 import model.Seance_course;
 import model.Seance_tennis;
@@ -95,5 +96,25 @@ public class TennisManager {
         readTransaction.commit();
         return vitesse;
     }
+
+    public static ArrayList<Character> nbVictoire(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Character> issue = new ArrayList<Character>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_tennis st where st.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_tennis st = (Seance_tennis) iterator.next();
+            //System.out.println(sc.toString());
+            issue.add(st.getIssue_match());
+        }
+        readTransaction.commit();
+        return issue;
+    }
+
 
 }

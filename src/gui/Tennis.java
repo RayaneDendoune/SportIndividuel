@@ -242,6 +242,14 @@ public class Tennis extends JFrame implements ActionListener {
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);
         }
+
+        if(Button==pourcentageReussite) {
+            ArrayList<Character> issue = TennisManager.nbVictoire(AuthentificationManager.personne);
+            PieChart pc = new PieChart("Pourcentage de réussite", issue);
+            pc.pack();
+            RefineryUtilities.centerFrameOnScreen(pc);
+            pc.setVisible(true);
+        }
     }
 
     /*public static void main(String[] args) {
