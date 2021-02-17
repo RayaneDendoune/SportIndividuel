@@ -17,12 +17,12 @@ public class BarChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public BarChart(String title, ArrayList<Integer> al, String serie, String xLabel, String yLabel) {
+    public BarChart(String titleFrame, String titleGraph, ArrayList<Integer> al, String serie, String xLabel, String yLabel) {
 
-        super(title);
+        super(titleFrame);
 
         CategoryDataset dataset = createBarDataset(al, serie);
-        JFreeChart chart = createChart(dataset, title, xLabel, yLabel);
+        JFreeChart chart = createChart(dataset, titleGraph, xLabel, yLabel);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(500, 270));
         setContentPane(chartPanel);
@@ -58,10 +58,10 @@ public class BarChart extends JFrame {
         al.add(4374);
         al.add(8970);
 
-        BarChart demo = new BarChart("Nombre de pas moyen", al, "Nombre de pas", "Numéro de la séance", "Nb pas");
+        /*BarChart demo = new BarChart("Nombre de pas moyen", al, "Nombre de pas", "Numéro de la séance", "Nb pas");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        demo.setVisible(true);*/
     }
 
 }

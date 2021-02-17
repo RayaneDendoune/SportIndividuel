@@ -199,7 +199,7 @@ public class Course extends JFrame implements ActionListener {
 
         if(Button == nbPas) {
             ArrayList<Integer> nombrePas = CourseManager.nombrePas(AuthentificationManager.personne);
-            BarChart bc = new BarChart("Course - Nombre de pas moyen", nombrePas, "Nombre de pas", "Numéro de la séance", "Nb pas");
+            BarChart bc = new BarChart("Course - Nombre de pas moyen", "Nombre de pas moyen en fonction de la séance",nombrePas, "Nombre de pas", "Numéro de la séance", "Nb pas");
             bc.pack();
             RefineryUtilities.centerFrameOnScreen(bc);
             bc.setVisible(true);

@@ -245,7 +245,7 @@ public class Tennis extends JFrame implements ActionListener {
 
         if(Button==pourcentageReussite) {
             ArrayList<Character> issue = TennisManager.nbVictoire(AuthentificationManager.personne);
-            PieChart pc = new PieChart("Pourcentage de réussite", issue, "Pourcentage de réussite");
+            PieChart pc = new PieChart("Tennis - Pourcentage de réussite", issue, "Pourcentage de réussite");
             pc.pack();
             RefineryUtilities.centerFrameOnScreen(pc);
             pc.setVisible(true);

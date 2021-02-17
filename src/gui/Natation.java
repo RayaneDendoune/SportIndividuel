@@ -232,7 +232,7 @@ public class Natation extends JFrame implements ActionListener {
         }
         if(Button == calorie) {
             ArrayList<Integer> calorie = NatationManager.nbCaloriesPerdues(AuthentificationManager.personne);
-            BarChart bc = new BarChart("Nombre de calories perdues par séances", calorie, "Calories perdues", "Numéro séance", "Nombre de calories perdues (en kcal)");
+            BarChart bc = new BarChart("Natation - Nombre de calories perdues", "Nombre de calories perdues par séance", calorie, "Calories perdues", "Numéro séance", "Nombre de calories perdues (en kcal)");
             bc.pack();
             RefineryUtilities.centerFrameOnScreen(bc);
             bc.setVisible(true);
