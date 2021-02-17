@@ -38,17 +38,17 @@ public class LineChart extends JFrame {
         setContentPane(chartPanel);
     }
 
-    public LineChart(ArrayList<Integer> array, String title, String key1, String key2, String xAxis, String yAxis) {
+    public LineChart(String title, String key, String xAxis, String yAxis, ArrayList<Integer> array) {
         super(title);
-        XYDataset dataset = createLineIntegerDataset(array, key1, key2);
+        XYDataset dataset = createLineIntegerDataset(array, key);
         JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
     }
 
-    private XYDataset createLineIntegerDataset(ArrayList<Integer> array, String key1, String key2) {
-        XYSeries series1 = new XYSeries(key1);
+    private XYDataset createLineIntegerDataset(ArrayList<Integer> array, String key) {
+        XYSeries series1 = new XYSeries(key);
         for(int i=0; i<array.size(); i++) {
             series1.add((i+1), array.get(i));
         }
