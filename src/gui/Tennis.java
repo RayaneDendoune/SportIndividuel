@@ -237,7 +237,7 @@ public class Tennis extends JFrame implements ActionListener {
         }
         if(Button==vitesse){
             ArrayList<Float> vitesse = TennisManager.VitesseMoy(AuthentificationManager.personne);
-            LineChart lcl = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
+            LineChart lcl = new LineChart("Tennis - Vitesse Moyenne par Service", "Vitesse Moyenne par service en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);

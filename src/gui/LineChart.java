@@ -19,29 +19,29 @@ public class LineChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public LineChart(String title, ArrayList<Float> al, String key, String xAxis, String yAxis) {
-        super(title);
+    public LineChart(String titleFrame, String titleGraph, ArrayList<Float> al, String key, String xAxis, String yAxis) {
+        super(titleFrame);
         XYDataset dataset = createLineFloatDataset(al, key);
-        JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
+        JFreeChart chart = createChart(dataset, titleGraph, xAxis, yAxis);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
 
     }
 
-    public LineChart(ArrayList<Time> tl, String title, String key, String xAxis, String yAxis) {
-        super(title);
+    public LineChart(ArrayList<Time> tl, String titleFrame, String titleGraph, String key, String xAxis, String yAxis) {
+        super(titleFrame);
         XYDataset dataset = createLineTimeDataset(tl, key);
-        JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
+        JFreeChart chart = createChart(dataset, titleGraph, xAxis, yAxis);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
     }
 
-    public LineChart(String title, String key, String xAxis, String yAxis, ArrayList<Integer> array) {
-        super(title);
+    public LineChart(String titleFrame, String titleGraph, String key, String xAxis, String yAxis, ArrayList<Integer> array) {
+        super(titleFrame);
         XYDataset dataset = createLineIntegerDataset(array, key);
-        JFreeChart chart = createChart(dataset, title, xAxis, yAxis);
+        JFreeChart chart = createChart(dataset, titleGraph, xAxis, yAxis);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         setContentPane(chartPanel);
@@ -111,10 +111,10 @@ public class LineChart extends JFrame {
         vitesse.add(22.6f);
         vitesse.add(11.3f);
 
-        LineChart demo = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
+        /*LineChart demo = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+        demo.setVisible(true);*/
     }
 
 }

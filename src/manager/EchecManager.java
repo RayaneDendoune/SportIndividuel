@@ -2,22 +2,27 @@ package manager;
 
 import model.Individu;
 import model.Partie_echec;
+import model.Seance_cyclisme;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class EchecManager {
 
-    public static void ajouterEchec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
+    public static void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Partie_echec partie_echec = new Partie_echec();
         partie_echec.setId_partie_echec(id_partie_echec);
         partie_echec.setElo_adversaire(elo_adversaire);
+        partie_echec.setFutur_elo(futur_elo);
         partie_echec.setDuree(duree);
         partie_echec.setNiveau_competence_mentale(niveau_competence_mentale);
         partie_echec.setIssue_partie(issue_partie);
@@ -107,5 +112,24 @@ public class EchecManager {
             return 'D';
         }
         return ' ';
+    }
+
+    public static ArrayList<Integer> elo(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Integer> elo = new ArrayList<Integer>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Partie_echec pe where pe.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Partie_echec pe = (Partie_echec) iterator.next();
+            //System.out.println(sc.toString());
+            elo.add(pe.getFutur_elo());
+        }
+        readTransaction.commit();
+        return elo;
     }
 }

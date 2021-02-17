@@ -1,13 +1,16 @@
 package gui;
 
 import manager.AuthentificationManager;
+import manager.CyclismeManager;
 import manager.EchecManager;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Echecs extends JFrame implements ActionListener {
 
@@ -202,15 +205,21 @@ public class Echecs extends JFrame implements ActionListener {
             final Time timeSQL = new Time(heure, min,00);
 
             char issuePartie = EchecManager.issue((String)issue.getSelectedItem());
-            //EchecManager.updateValue(AuthentificationManager.personne, 1204);
-            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), timeSQL, 234, issuePartie, 589, AuthentificationManager.personne);
-            //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
             int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem());
+            //EchecManager.updateValue(AuthentificationManager.personne, 1204);
+            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, 234, issuePartie, 589, AuthentificationManager.personne);
+            //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
+
             EchecManager.updateValue(AuthentificationManager.personne, newElo);
         }
 
         if(Button == elo){
+            ArrayList<Integer> eloArray = EchecManager.elo(AuthentificationManager.personne);
 
+            LineChart lcl = new LineChart("Echec - Elo","Evolution de l'elo", "Elo" , "Numéro de la seance", "Elo", eloArray);
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
         }
     }
 

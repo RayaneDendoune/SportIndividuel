@@ -225,7 +225,7 @@ public class Natation extends JFrame implements ActionListener {
         }
         if(Button == tempsMoy){
             ArrayList<Time> tpsMoy = NatationManager.tpsMoyLongueur(AuthentificationManager.personne);
-            LineChart lcl = new LineChart(tpsMoy, "Temps moyen par longueur en fonction de la séance", "Temps moyen", "Numéro de la seance", "Temps moyen (en secondes)");
+            LineChart lcl = new LineChart(tpsMoy, "Natation - Temps moyen par longueur", "Temps moyen par longueur en fonction de la séance" , "Temps moyen", "Numéro de la seance", "Temps moyen (en secondes)");
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);

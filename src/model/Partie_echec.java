@@ -9,6 +9,7 @@ public class Partie_echec {
     @Id
     private String id_partie_echec;
     private int elo_adversaire;
+    private int futur_elo;
     private Time duree;
     private int niveau_competence_mentale;
     private char issue_partie;
@@ -19,9 +20,10 @@ public class Partie_echec {
 
     public Partie_echec() {}
 
-    public Partie_echec(String id_partie_echec, int elo_adversaire, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
+    public Partie_echec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         this.id_partie_echec = id_partie_echec;
         this.elo_adversaire = elo_adversaire;
+        this.futur_elo = futur_elo;
         this.duree = duree;
         this.niveau_competence_mentale = niveau_competence_mentale;
         this.issue_partie = issue_partie;
@@ -43,6 +45,14 @@ public class Partie_echec {
 
     public void setElo_adversaire(int elo_adversaire) {
         this.elo_adversaire = elo_adversaire;
+    }
+
+    public int getFutur_elo() {
+        return futur_elo;
+    }
+
+    public void setFutur_elo(int futur_elo) {
+        this.futur_elo = futur_elo;
     }
 
     public Time getDuree() {

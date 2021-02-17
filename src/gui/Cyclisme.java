@@ -210,7 +210,7 @@ public class Cyclisme extends JFrame implements ActionListener {
         if(Button == proteine) {
             ArrayList<Integer> proteine = CyclismeManager.proteine(AuthentificationManager.personne);
 
-            LineChart lcl = new LineChart("Besoin en proteine", "Besoin en proteine" , "Numéro de la seance", "Temps moyen (en secondes)", proteine);
+            LineChart lcl = new LineChart("Cyclisme - Besoin en proteine", "Besoin en proteine en fonction de la séance" ,  "Besoin en proteine" , "Numéro de la seance", "Besoin en proteine (en g)", proteine);
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);
@@ -219,7 +219,7 @@ public class Cyclisme extends JFrame implements ActionListener {
         if(Button == energie) {
             ArrayList<Integer> energie = CyclismeManager.energie(AuthentificationManager.personne);
 
-            LineChart lcl = new LineChart("Dépense énergétique", "Dépense énergétique" , "Numéro de la seance", "Temps moyen (en secondes)", energie);
+            LineChart lcl = new LineChart("Cyclisme - Dépense énergétique", "Dépense énergétique en fonction de la séance" , "Dépense énergétique" , "Numéro de la seance", "Dépense énergétique (en kcal)", energie);
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);
