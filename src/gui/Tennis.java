@@ -17,13 +17,13 @@ public class Tennis extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Tennis");
 
-    private JLabel premierService = new JLabel("Premier Service ");
+    private JLabel premierService = new JLabel("Premier Service (en km/h)");
     private JTextField PS = new JTextField(5);
 
-    private JLabel deuxiemeService = new JLabel("Deuxieme Service ");
+    private JLabel deuxiemeService = new JLabel("Deuxieme Service (en km/h) ");
     private JTextField DS = new JTextField(5);
 
-    private JLabel troisiemeService = new JLabel("Troisieme Service ");
+    private JLabel troisiemeService = new JLabel("Troisieme Service (en km/h) ");
     private JTextField TS = new JTextField(5);
 
     private JLabel issueMatch = new JLabel("Issue du match ");

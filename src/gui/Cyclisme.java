@@ -21,7 +21,7 @@ public class Cyclisme extends JFrame implements ActionListener {
     private JLabel niveauActivitePhysique = new JLabel("Niveau activité physique ");
     private JComboBox niveau = new JComboBox();
 
-    private JLabel poids = new JLabel("Poids ");
+    private JLabel poids = new JLabel("Poids (en kg) ");
     private JTextField weight = new JTextField(5);
 
     private JLabel objSeance = new JLabel("Objectif de la séance");
@@ -44,9 +44,9 @@ public class Cyclisme extends JFrame implements ActionListener {
         setResizable(false); //Taille non changeable
 
         objectif.addItem("Prise de masse");
-        objectif.addItem("Maigrir");
-        objectif.addItem("Inventer"); //Inventez des niveaux !!!!!!!!
-        objectif.addItem("Jsp");
+        objectif.addItem("Force musculaire");
+        objectif.addItem("Perte de poids"); //Inventez des niveaux !!!!!!!!
+        objectif.addItem("Endurance musculaire");
 
         niveau.addItem("Sédentaire");
         niveau.addItem("Actif");

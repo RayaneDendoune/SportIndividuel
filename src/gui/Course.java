@@ -18,7 +18,7 @@ public class Course extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Course");
 
-    private JLabel distance = new JLabel("Distance ");
+    private JLabel distance = new JLabel("Distance (en km)");
     private JTextField dist = new JTextField(5);
 
     private JLabel temps = new JLabel("Temps (en minutes) ");
