@@ -1,15 +1,14 @@
 package gui;
 
+import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.CyclismeManager;
-import model.Seance_cyclisme;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Cyclisme extends JFrame implements ActionListener {

@@ -1,7 +1,8 @@
 package gui;
 
+import chart.LineChart;
+import chart.PieChart;
 import manager.AuthentificationManager;
-import manager.CourseManager;
 import manager.TennisManager;
 import org.jfree.ui.RefineryUtilities;
 

@@ -1,7 +1,8 @@
 package gui;
 
+import chart.BarChart;
+import chart.LineChart;
 import manager.AuthentificationManager;
-import manager.CourseManager;
 import manager.NatationManager;
 import org.jfree.ui.RefineryUtilities;
 
@@ -9,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;

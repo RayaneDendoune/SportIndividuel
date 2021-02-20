@@ -1,4 +1,4 @@
-package gui;
+package chart;
 
 import model.Individu;
 import org.jfree.chart.ChartFactory;

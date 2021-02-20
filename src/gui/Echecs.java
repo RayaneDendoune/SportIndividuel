@@ -1,7 +1,7 @@
 package gui;
 
+import chart.LineChart;
 import manager.AuthentificationManager;
-import manager.CyclismeManager;
 import manager.EchecManager;
 import org.jfree.ui.RefineryUtilities;
 

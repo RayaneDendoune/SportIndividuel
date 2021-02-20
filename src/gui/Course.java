@@ -1,5 +1,7 @@
 package gui;
 
+import chart.BarChart;
+import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.CourseManager;
 import org.jfree.ui.RefineryUtilities;
