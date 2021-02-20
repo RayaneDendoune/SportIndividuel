@@ -3,7 +3,7 @@ package model;
 import javax.persistence.*;
 
 @Entity
-public class Individu {
+public class Individu implements Comparable{
     @Id
     private String id_individu;
 
@@ -145,5 +145,12 @@ public class Individu {
         //text+="L'id est " + getId_individu();
         text+="Le mdp est " + getMdp();
         return text;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int compareage=((Individu)o).getAge();
+
+        return this.age-compareage;
     }
 }

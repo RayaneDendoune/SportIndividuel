@@ -3,15 +3,14 @@ package manager;
 import gui.Tennis;
 import model.Individu;
 import model.Seance_course;
+import model.Seance_natation;
 import model.Seance_tennis;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class TennisManager {
     //Je pense que nbset ne sert a rien du tout, on peut l'enlever de la table.
@@ -114,6 +113,30 @@ public class TennisManager {
         }
         readTransaction.commit();
         return issue;
+    }
+
+    //Fonction qui renvoie tous les individus dans la table
+    public static ArrayList<Individu> listIndividuTennis() {
+        ArrayList<Individu> individus = new ArrayList<Individu>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_tennis");
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_tennis st = (Seance_tennis) iterator.next();
+            //System.out.println(sc.toString());
+            individus.add(st.getIndividu());
+        }
+
+        Set set = new HashSet() ;
+        set.addAll(individus) ;
+        individus = new ArrayList(set) ;
+
+        readTransaction.commit();
+
+        return individus;
     }
 
 

@@ -10,9 +10,7 @@ import util.HibernateUtil;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class NatationManager {
 
@@ -129,5 +127,29 @@ public class NatationManager {
         }
         readTransaction.commit();
         return tempsMoyenLong;
+    }
+
+    //Fonction qui renvoie tous les individus dans la table
+    public static ArrayList<Individu> listIndividuNatation() {
+        ArrayList<Individu> individus = new ArrayList<Individu>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_natation");
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_natation sn = (Seance_natation) iterator.next();
+            //System.out.println(sc.toString());
+            individus.add(sn.getIndividu());
+        }
+
+        Set set = new HashSet() ;
+        set.addAll(individus) ;
+        individus = new ArrayList(set) ;
+
+        readTransaction.commit();
+
+        return individus;
     }
 }

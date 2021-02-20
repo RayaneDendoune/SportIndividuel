@@ -9,9 +9,7 @@ import util.HibernateUtil;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CourseManager {
     public static Seance_course seanceC;
@@ -144,7 +142,29 @@ public class CourseManager {
         return nbPas;
     }
 
+    //Fonction qui renvoie tous les individus dans la table
+    public static ArrayList<Individu> listIndividuCourse() {
+        ArrayList<Individu> individus = new ArrayList<Individu>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction readTransaction = session.beginTransaction();
 
+        Query readQuery = session.createQuery("from Seance_course");
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_course sc = (Seance_course) iterator.next();
+            //System.out.println(sc.toString());
+            individus.add(sc.getIndividu());
+        }
+
+        Set set = new HashSet() ;
+        set.addAll(individus) ;
+        individus = new ArrayList(set) ;
+
+        readTransaction.commit();
+
+        return individus;
+    }
 
 
     public static void main (String []args){

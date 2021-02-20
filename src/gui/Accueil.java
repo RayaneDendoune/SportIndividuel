@@ -162,5 +162,10 @@ public class Accueil extends JFrame implements ActionListener {
 			new Echecs();
 			dispose();
 		}
+
+		if(Button==imgRs) {
+			new Reseau();
+			dispose();
+		}
 	}
 }

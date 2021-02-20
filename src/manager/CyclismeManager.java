@@ -3,14 +3,13 @@ package manager;
 import model.Individu;
 import model.Seance_course;
 import model.Seance_cyclisme;
+import model.Seance_natation;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class CyclismeManager {
 
@@ -126,5 +125,29 @@ public class CyclismeManager {
         }
         readTransaction.commit();
         return proteine;
+    }
+
+    //Fonction qui renvoie tous les individus dans la table
+    public static ArrayList<Individu> listIndividuCyclisme() {
+        ArrayList<Individu> individus = new ArrayList<Individu>();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_cyclisme");
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_cyclisme sc = (Seance_cyclisme) iterator.next();
+            //System.out.println(sc.toString());
+            individus.add(sc.getIndividu());
+        }
+
+        Set set = new HashSet() ;
+        set.addAll(individus) ;
+        individus = new ArrayList(set) ;
+
+        readTransaction.commit();
+
+        return individus;
     }
 }
