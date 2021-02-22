@@ -26,34 +26,54 @@ public class ReseauManager {
         }
         if(natationOcc != 0) {
             natationArray = NatationManager.listIndividuNatation();
-            finalArray.addAll(natationArray);
+            for (int i =0 ; i<natationArray.size() ;i++){
+                if(!finalArray.contains(natationArray.get(i))){
+                    finalArray.add(individu);
+                }
+            }
+            //finalArray.addAll(natationArray);
             //System.out.println("Fait de la natation");
         }
         if(tennisOcc != 0) {
             tennisArray = TennisManager.listIndividuTennis();
-            finalArray.addAll(tennisArray);
+            for (int i =0 ; i<tennisArray.size() ;i++){
+                if(!finalArray.contains(tennisArray.get(i))){
+                    finalArray.add(individu);
+                }
+            }
+            //finalArray.addAll(tennisArray);
             //System.out.println("Fait du tennis");
         }
         if(cyclismeOcc != 0) {
             cyclismeArray = CyclismeManager.listIndividuCyclisme();
-            finalArray.addAll(cyclismeArray);
+            for (int i =0 ; i<cyclismeArray.size() ;i++){
+                if(!finalArray.contains(cyclismeArray.get(i))){
+                    finalArray.add(individu);
+                }
+            }
+            //finalArray.addAll(cyclismeArray);
             //System.out.println("Fait de la cyclisme");
         }
         if(echecOcc != 0) {
             echecArray = EchecManager.listIndividuEchec();
-            finalArray.addAll(echecArray);
+            for (int i =0 ; i<echecArray.size() ;i++){
+                if(!finalArray.contains(echecArray.get(i))){
+                    finalArray.add(individu);
+                }
+            }
+            //finalArray.addAll(echecArray);
             //System.out.println("Fait des echecs");
         }
-
-        //J'arrive pas a trié les nom et éliminer les doublons
-        //Si j'arrive a faire sa, il faudra que je supprime l'individu qui est connecter
-        Collections.sort(finalArray);
-
-        Set set = new HashSet() ;
+        /*Set set = new HashSet() ;
         set.addAll(finalArray);
-        finalArray = new ArrayList(set) ;
+        finalArray = new ArrayList(set) ;*/
 
+        Collections.sort(finalArray);
+        while(finalArray.contains(AuthentificationManager.personne)){
+            finalArray.remove(AuthentificationManager.personne);
+        }
         return finalArray;
+
     }
 
 }

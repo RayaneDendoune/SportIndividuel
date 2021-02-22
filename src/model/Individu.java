@@ -149,8 +149,8 @@ public class Individu implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        int compareage=((Individu)o).getAge();
+        int comparePoids=(int)((Individu)o).getPoids();
 
-        return this.age-compareage;
+        return (int) (this.poids-comparePoids);
     }
 }
