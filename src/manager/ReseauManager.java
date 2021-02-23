@@ -20,58 +20,62 @@ public class ReseauManager {
         echecOcc = (int)EchecManager.nbPartieEchec(individu);
 
         if(courseOcc != 0) {
-            courseArray = CourseManager.listIndividuCourse();
+            courseArray = CourseManager.listIndividuCourse(AuthentificationManager.personne);
             finalArray.addAll(courseArray);
             //System.out.println("Fait de la course");
         }
         if(natationOcc != 0) {
-            natationArray = NatationManager.listIndividuNatation();
-            for (int i =0 ; i<natationArray.size() ;i++){
+            natationArray = NatationManager.listIndividuNatation(AuthentificationManager.personne);
+            /*for (int i =0 ; i<natationArray.size() ;i++){
                 if(!finalArray.contains(natationArray.get(i))){
-                    finalArray.add(individu);
+                    finalArray.add(natationArray.get(i));
                 }
-            }
-            //finalArray.addAll(natationArray);
+            }*/
+            finalArray.addAll(natationArray);
             //System.out.println("Fait de la natation");
         }
         if(tennisOcc != 0) {
-            tennisArray = TennisManager.listIndividuTennis();
-            for (int i =0 ; i<tennisArray.size() ;i++){
+            tennisArray = TennisManager.listIndividuTennis(AuthentificationManager.personne);
+            /*for (int i =0 ; i<tennisArray.size() ;i++){
                 if(!finalArray.contains(tennisArray.get(i))){
-                    finalArray.add(individu);
+                    finalArray.add(tennisArray.get(i)));
                 }
-            }
-            //finalArray.addAll(tennisArray);
+            }*/
+            finalArray.addAll(tennisArray);
             //System.out.println("Fait du tennis");
         }
         if(cyclismeOcc != 0) {
-            cyclismeArray = CyclismeManager.listIndividuCyclisme();
-            for (int i =0 ; i<cyclismeArray.size() ;i++){
+            cyclismeArray = CyclismeManager.listIndividuCyclisme(AuthentificationManager.personne);
+            /*for (int i =0 ; i<cyclismeArray.size() ;i++){
                 if(!finalArray.contains(cyclismeArray.get(i))){
-                    finalArray.add(individu);
+                    finalArray.add(cyclismeArray.get(i)));
                 }
-            }
-            //finalArray.addAll(cyclismeArray);
+            }*/
+            finalArray.addAll(cyclismeArray);
             //System.out.println("Fait de la cyclisme");
         }
         if(echecOcc != 0) {
-            echecArray = EchecManager.listIndividuEchec();
-            for (int i =0 ; i<echecArray.size() ;i++){
+            echecArray = EchecManager.listIndividuEchec(AuthentificationManager.personne);
+            /*for (int i =0 ; i<echecArray.size() ;i++){
                 if(!finalArray.contains(echecArray.get(i))){
                     finalArray.add(individu);
                 }
-            }
-            //finalArray.addAll(echecArray);
+            }*/
+            finalArray.addAll(echecArray);
             //System.out.println("Fait des echecs");
         }
-        /*Set set = new HashSet() ;
+
+        //On peut mettre ces 3 lignes en commentaires, cela ne change rien
+        Set set = new HashSet() ;
         set.addAll(finalArray);
-        finalArray = new ArrayList(set) ;*/
+        finalArray = new ArrayList(set) ;
 
         Collections.sort(finalArray);
-        while(finalArray.contains(AuthentificationManager.personne)){
+        /*while(finalArray.contains(AuthentificationManager.personne)){
             finalArray.remove(AuthentificationManager.personne);
-        }
+        }*/
+
+
         return finalArray;
 
     }

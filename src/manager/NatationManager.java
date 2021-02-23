@@ -130,12 +130,15 @@ public class NatationManager {
     }
 
     //Fonction qui renvoie tous les individus dans la table
-    public static ArrayList<Individu> listIndividuNatation() {
+    public static ArrayList<Individu> listIndividuNatation(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery("from Seance_natation");
+        //Query readQuery = session.createQuery("from Seance_natation");
+        Query readQuery = session.createQuery("from Seance_natation sn where sn.individu not in (SELECT sn.individu from Seance_natation sn where sn.individu=:individu)");
+        readQuery.setString("individu", individu.getId_individu());
+
         List result = readQuery.list();
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {

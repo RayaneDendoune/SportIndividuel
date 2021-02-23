@@ -116,12 +116,15 @@ public class TennisManager {
     }
 
     //Fonction qui renvoie tous les individus dans la table
-    public static ArrayList<Individu> listIndividuTennis() {
+    public static ArrayList<Individu> listIndividuTennis(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery("from Seance_tennis");
+        //Query readQuery = session.createQuery("from Seance_tennis");
+        Query readQuery = session.createQuery("from Seance_tennis st where st.individu not in (SELECT st.individu from Seance_tennis st where st.individu=:individu)");
+        readQuery.setString("individu", individu.getId_individu());
+
         List result = readQuery.list();
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {

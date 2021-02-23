@@ -133,12 +133,14 @@ public class EchecManager {
     }
 
     //Fonction qui renvoie tous les individus dans la table
-    public static ArrayList<Individu> listIndividuEchec() {
+    public static ArrayList<Individu> listIndividuEchec(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery("from Partie_echec");
+        Query readQuery = session.createQuery("from Partie_echec pe where pe.individu not in (SELECT pe.individu from Partie_echec pe where pe.individu=:individu)");
+        readQuery.setString("individu", individu.getId_individu());
+
         List result = readQuery.list();
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {

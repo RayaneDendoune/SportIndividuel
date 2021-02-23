@@ -128,12 +128,14 @@ public class CyclismeManager {
     }
 
     //Fonction qui renvoie tous les individus dans la table
-    public static ArrayList<Individu> listIndividuCyclisme() {
+    public static ArrayList<Individu> listIndividuCyclisme(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        Query readQuery = session.createQuery("from Seance_cyclisme");
+        Query readQuery = session.createQuery("from Seance_cyclisme sc where sc.individu not in (SELECT sc.individu from Seance_cyclisme sc where sc.individu=:individu)");
+        readQuery.setString("individu", individu.getId_individu());
+
         List result = readQuery.list();
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
