@@ -22,62 +22,55 @@ public class ReseauManager {
         if(courseOcc != 0) {
             courseArray = CourseManager.listIndividuCourse(AuthentificationManager.personne);
             finalArray.addAll(courseArray);
-            //System.out.println("Fait de la course");
         }
         if(natationOcc != 0) {
             natationArray = NatationManager.listIndividuNatation(AuthentificationManager.personne);
-            /*for (int i =0 ; i<natationArray.size() ;i++){
-                if(!finalArray.contains(natationArray.get(i))){
-                    finalArray.add(natationArray.get(i));
-                }
-            }*/
             finalArray.addAll(natationArray);
-            //System.out.println("Fait de la natation");
         }
         if(tennisOcc != 0) {
             tennisArray = TennisManager.listIndividuTennis(AuthentificationManager.personne);
-            /*for (int i =0 ; i<tennisArray.size() ;i++){
-                if(!finalArray.contains(tennisArray.get(i))){
-                    finalArray.add(tennisArray.get(i)));
-                }
-            }*/
             finalArray.addAll(tennisArray);
-            //System.out.println("Fait du tennis");
         }
         if(cyclismeOcc != 0) {
             cyclismeArray = CyclismeManager.listIndividuCyclisme(AuthentificationManager.personne);
-            /*for (int i =0 ; i<cyclismeArray.size() ;i++){
-                if(!finalArray.contains(cyclismeArray.get(i))){
-                    finalArray.add(cyclismeArray.get(i)));
-                }
-            }*/
             finalArray.addAll(cyclismeArray);
-            //System.out.println("Fait de la cyclisme");
         }
         if(echecOcc != 0) {
             echecArray = EchecManager.listIndividuEchec(AuthentificationManager.personne);
-            /*for (int i =0 ; i<echecArray.size() ;i++){
-                if(!finalArray.contains(echecArray.get(i))){
-                    finalArray.add(individu);
-                }
-            }*/
             finalArray.addAll(echecArray);
-            //System.out.println("Fait des echecs");
         }
 
-        //On peut mettre ces 3 lignes en commentaires, cela ne change rien
-        Set set = new HashSet() ;
-        set.addAll(finalArray);
-        finalArray = new ArrayList(set) ;
-
         Collections.sort(finalArray);
-        /*while(finalArray.contains(AuthentificationManager.personne)){
-            finalArray.remove(AuthentificationManager.personne);
-        }*/
-
+        finalArray = suppOcc(finalArray);
 
         return finalArray;
+    }
 
+    public static ArrayList<Individu> suppOcc(ArrayList<Individu> finalArray) {
+
+        int nbOcc= 0;
+        int j = 0;
+
+        for(int i = 0; i<finalArray.size(); i++) {
+            nbOcc = 0;
+            j = 0;
+
+            while(j<finalArray.size()) {
+                if(finalArray.get(i).getId_individu().equals(finalArray.get(j).getId_individu())) {
+                    nbOcc= nbOcc +1;
+                    //System.out.println(finalArray.get(i).getId_individu() + " : " + nbOcc);
+                }
+                j++;
+            }
+
+            int n = 0;
+            while(n<(nbOcc-1)) {
+                finalArray.remove(finalArray.get(i));
+                n++;
+            }
+        }
+
+        return finalArray;
     }
 
 }
