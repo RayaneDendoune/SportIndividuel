@@ -33,8 +33,9 @@ public class Reseau extends JFrame implements ActionListener {
         retour.addActionListener(this);
 
         JPanel buttons = buttons();
+        JPanel complete = complete(buttons);
 
-        pan.add(buttons, BorderLayout.CENTER);
+        pan.add(complete, BorderLayout.CENTER);
 
         this.setContentPane(pan);
         this.setVisible(true);
@@ -57,6 +58,28 @@ public class Reseau extends JFrame implements ActionListener {
         c.gridx = 1;
         c.gridy = 0;
         grid.add(testAmis, c);
+
+        return grid;
+    }
+
+    public JPanel complete(JPanel buttons) {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(reseau, c);
+
+        c.insets = new Insets(20,0,0,0);
+        c.ipadx = 80; //Taille de l'endroit ou on peut r��crire
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 0;
+        c.gridy = 1;
+        grid.add(buttons, c);
 
         return grid;
     }
