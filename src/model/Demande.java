@@ -2,14 +2,14 @@ package model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
+@IdClass(Individu.class)
 @Entity
 public class Demande {
 
-    @Id
-    private String id_destinataire;
-
-    private String id_expediteur;
+    @Id String id_destinataire;
+    @Id String id_expediteur;
 
     public Demande() { }
 

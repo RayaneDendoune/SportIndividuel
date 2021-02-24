@@ -20,10 +20,10 @@ public class SuggestionPanel extends JPanel implements ActionListener {
     private JPanel pan  = new JPanel();
 
     public SuggestionPanel() {
-        build();
+        pan = build();
     }
 
-    public void build() {
+    public JPanel build() {
         for(int i = 0; i<amis.size(); i++) {
             buttons.add(new Button("b" + i));
             buttons.get(i).addActionListener(this);
@@ -37,6 +37,7 @@ public class SuggestionPanel extends JPanel implements ActionListener {
         JPanel grid = disposition();
 
         pan.add(grid);
+        return pan;
     }
 
     public JPanel disposition() {
