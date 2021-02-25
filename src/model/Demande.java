@@ -1,37 +1,36 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 
 @Entity
 public class Demande {
 
     @Id
+    private int no_demande;
+
     private String id_destinataire;
 
-    String id_expediteur;
+    private String id_expediteur;
 
     public Demande() { }
 
-    public Demande(String id_destinataire, String id_expediteur) {
+    public Demande(int no_demande, String id_destinataire, String id_expediteur) {
+        this.no_demande = no_demande;
         this.id_destinataire = id_destinataire;
         this.id_expediteur = id_expediteur;
     }
 
-    public String getId_destinataire() {
-        return id_destinataire;
-    }
+    public int getNo_demande() { return no_demande; }
 
-    public void setId_destinataire(String id_destinataire) {
-        this.id_destinataire = id_destinataire;
-    }
+    public void setNo_demande(int no_demande) { this.no_demande = no_demande; }
 
-    public String getId() {
-        return id_expediteur;
-    }
+    public String getId_destinataire() { return id_destinataire; }
 
-    public void setId(String id_expediteur) {
-        this.id_expediteur = id_expediteur;
-    }
+    public void setId_destinataire(String id_destinataire) { this.id_destinataire = id_destinataire; }
+
+    public String getId_expediteur() { return id_expediteur; }
+
+    public void setId_expediteur(String id_expediteur) { this.id_expediteur = id_expediteur; }
+
+
 }

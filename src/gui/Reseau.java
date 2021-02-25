@@ -1,6 +1,7 @@
 package gui;
 
 import manager.*;
+import model.Demande;
 import model.Individu;
 
 import javax.swing.*;
@@ -160,6 +161,12 @@ public class Reseau extends JFrame implements ActionListener {
                 System.out.println("Vous avez appuyer sur " + suggestion.get(buttons.get(i)));
                 buttons.get(i).setLabel("Demande envoyée");
                 buttons.get(i).setBackground(Color.GREEN);
+
+                if(buttons.get(i).isEnabled()) {
+                    DemandeManager.ajout(suggestion.get(buttons.get(i)), AuthentificationManager.personne.getId_individu());
+                    buttons.get(i).setEnabled(false);
+                }
+
             }
             i++;
         }
