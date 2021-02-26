@@ -240,10 +240,13 @@ public class Reseau extends JFrame implements ActionListener {
 
         if (Button == testAmis) {
             //ReseauManager.sportJouer(AuthentificationManager.personne);
-            ArrayList<Individu> individus = ReseauManager.sportJouer(AuthentificationManager.personne);
+            /*ArrayList<Individu> individus = ReseauManager.sportJouer(AuthentificationManager.personne);
             for(int i = 0; i<individus.size(); i++) {
                 System.out.println(individus.get(i).getPrenom() + " " + individus.get(i).getNom());
-            }
+            }*/
+
+            new Challenge();
+            dispose();
         }
 
         int i = 0;

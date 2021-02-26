@@ -1,8 +1,15 @@
 package manager;
 
+import model.Demande;
 import model.Individu;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class IndividuManager {
 
@@ -35,5 +42,36 @@ public class IndividuManager {
         session.delete(i);
         session.getTransaction().commit();
         session.close();
+    }
+
+    //Retourne dans une arraylist la table complete Demande
+    public static ArrayList<Individu> listIndividu() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Individu> listIndividu = new ArrayList<Individu>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Individu i");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Individu individu = (Individu) iterator.next();
+            //System.out.println(sc.toString());
+            listIndividu.add(individu);
+        }
+        readTransaction.commit();
+        return listIndividu;
+    }
+
+    public static Individu rechercheIndividuParId(String id) {
+        Individu individu = new Individu();
+        ArrayList<Individu> listIndividu = listIndividu();
+        for(int i = 0; i<listIndividu.size(); i++) {
+            if(listIndividu.get(i).getId_individu().equals(id)) {
+                individu = listIndividu.get(i);
+            }
+        }
+        return individu;
     }
 }
