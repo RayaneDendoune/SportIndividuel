@@ -1,6 +1,8 @@
 package gui;
 
+import chart.ComparativeBarChart;
 import chart.ComparativeLineChart;
+import chart.ComparativePieChart;
 import chart.LineChart;
 import manager.*;
 import org.jfree.ui.RefineryUtilities;
@@ -9,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class Challenge extends JFrame implements ActionListener {
@@ -157,10 +160,6 @@ public class Challenge extends JFrame implements ActionListener {
             dispose();
         }
 
-
-
-
-
         int i = 0;
         while(i < selectionAmis.size()) {
             if(Button == selectionAmis.get(i)) {
@@ -182,13 +181,89 @@ public class Challenge extends JFrame implements ActionListener {
                     if((String)sportAmis.get(j).getSelectedItem() == "Tennis") {
                         ArrayList<Float> vitesse1 = TennisManager.VitesseMoy(AuthentificationManager.personne);
                         ArrayList<Float> vitesse2 = TennisManager.VitesseMoy(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
-                        ComparativeLineChart comparativeLineChart = new ComparativeLineChart(vitesse1,vitesse2,"Tennis - Comparaison Vitesse Moyenne par Service", "Comparaison Vitesse Moyenne par service en fonction de la séance", "Vitesse Moyenne "+ AuthentificationManager.personne.getId_individu(), "Vitesse Moyenne " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Vitesse Moyenne");
-                        comparativeLineChart.pack();
-                        RefineryUtilities.positionFrameOnScreen(comparativeLineChart, 50, 50);
-                        //RefineryUtilities.centerFrameOnScreen(comparativeLineChart);
-                        comparativeLineChart.setVisible(true);
+
+                        ArrayList<Character> issue1 = TennisManager.nbVictoire(AuthentificationManager.personne);
+                        ArrayList<Character> issue2 = TennisManager.nbVictoire(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ComparativeLineChart vitesse = new ComparativeLineChart(vitesse1,vitesse2,"Tennis - Comparaison Vitesse Moyenne par Service", "Comparaison Vitesse Moyenne par service en fonction de la séance", "Vitesse Moyenne "+ AuthentificationManager.personne.getId_individu(), "Vitesse Moyenne " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Vitesse Moyenne");
+                        vitesse.pack();
+                        RefineryUtilities.positionFrameOnScreen(vitesse, 0.25, 0.5);
+                        vitesse.setVisible(true);
+
+                        ComparativePieChart issue = new ComparativePieChart(issue1, issue2, "Tennis - Comparaison Pourcentage de réussite", "Pourcentage de réussite " + AuthentificationManager.personne.getId_individu(), "Pourcentage de réussite " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu());
+                        issue.pack();
+                        RefineryUtilities.positionFrameOnScreen(issue, 0.9, 0.5);
+                        issue.setVisible(true);
+                    }
+
+                    if((String)sportAmis.get(j).getSelectedItem() == "Cyclisme") {
+                        ArrayList<Integer> proteine1 = CyclismeManager.proteine(AuthentificationManager.personne);
+                        ArrayList<Integer> proteine2 = CyclismeManager.proteine(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ArrayList<Integer> energie1 = CyclismeManager.energie(AuthentificationManager.personne);
+                        ArrayList<Integer> energie2 = CyclismeManager.energie(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ComparativeLineChart proteine = new ComparativeLineChart("Cyclisme - Comparaison Besoin en proteine", "Besoin en proteine en fonction de la séance", "Besoin en proteine " + AuthentificationManager.personne.getId_individu(), "Besoin en proteine " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Besoin en proteine (en g)", proteine1, proteine2);
+                        proteine.pack();
+                        RefineryUtilities.positionFrameOnScreen(proteine, 0.3, 0.5);
+                        proteine.setVisible(true);
+
+                        ComparativeLineChart energie =  new ComparativeLineChart("Cyclisme - Comparaison Dépense énergétique", "Dépense énergétique en fonction de la séance", "Dépense énergétique " + AuthentificationManager.personne.getId_individu(), "Dépense énergétique " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Dépense énergétique (en kcal)", energie1, energie2);
+                        energie.pack();
+                        RefineryUtilities.positionFrameOnScreen(energie, 0.8, 0.5);
+                        energie.setVisible(true);
 
                     }
+
+
+                    if((String)sportAmis.get(j).getSelectedItem() == "Natation") {
+                        ArrayList<Time> tmpMoyLongueur1 = NatationManager.tpsMoyLongueur(AuthentificationManager.personne);
+                        ArrayList<Time> tmpMoyLongueur2 = NatationManager.tpsMoyLongueur(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ArrayList<Integer> nbCalories1 = NatationManager.nbCaloriesPerdues(AuthentificationManager.personne);
+                        ArrayList<Integer> nbCalories2 = NatationManager.nbCaloriesPerdues(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ComparativeLineChart tmpMoyLongueur = new ComparativeLineChart(tmpMoyLongueur1, "Natation - Comparaison Temps moyen par longueur", "Temps moyen par longueur en fonction de la séance", "Temps Moyen " + AuthentificationManager.personne.getId_individu(), "Temps Moyen " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Temps moyen (en secondes)", tmpMoyLongueur2);
+                        tmpMoyLongueur.pack();
+                        RefineryUtilities.positionFrameOnScreen(tmpMoyLongueur, 0.3, 0.5);
+                        tmpMoyLongueur.setVisible(true);
+
+                        ComparativeBarChart nbCalorie = new ComparativeBarChart(nbCalories1, nbCalories2, "Natation - Comparaison Nombre de calories perdues", "Nombre de calories perdues par séance", "Calories perdues " + AuthentificationManager.personne.getId_individu(), "Calories perdues " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro séance", "Nombre de calories perdues (en kcal)");
+                        nbCalorie.pack();
+                        RefineryUtilities.positionFrameOnScreen(nbCalorie, 0.8, 0.5);
+                        nbCalorie.setVisible(true);
+                    }
+
+                    if((String)sportAmis.get(j).getSelectedItem() == "Echec") {
+                        ArrayList<Integer> elo1 = EchecManager.elo(AuthentificationManager.personne);
+                        ArrayList<Integer> elo2 = EchecManager.elo(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ComparativeLineChart elo = new ComparativeLineChart("Echec - Comparaison Elo","Evolution de l'elo", "Elo " + AuthentificationManager.personne.getId_individu(), "Elo " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Elo", elo1, elo2);
+                        elo.pack();
+                        RefineryUtilities.positionFrameOnScreen(elo, 0.3, 0.5);
+                        elo.setVisible(true);
+
+
+                    }
+
+                    if((String)sportAmis.get(j).getSelectedItem() == "Course") {
+                        ArrayList<Float> vitesseMoy1 = CourseManager.VitesseMoy(AuthentificationManager.personne);
+                        ArrayList<Float> vitesseMoy2 = CourseManager.VitesseMoy(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ArrayList<Integer> nbPas1 = CourseManager.nombrePas(AuthentificationManager.personne);
+                        ArrayList<Integer> nbPas2 = CourseManager.nombrePas(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
+                        ComparativeLineChart vitesseMoy = new ComparativeLineChart(vitesseMoy1, vitesseMoy2, "Course - Comparaison Vitesse Moyenne", "Vitesse Moyenne en fonction de la séance", "Vitesse Moyenne "  + AuthentificationManager.personne.getId_individu(), "Vitesse Moyenne " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Vitesse Moyenne (en m/s)");
+                        vitesseMoy.pack();
+                        RefineryUtilities.positionFrameOnScreen(vitesseMoy, 0.3, 0.5);
+                        vitesseMoy.setVisible(true);
+
+                        ComparativeBarChart nbPas = new ComparativeBarChart(nbPas1, nbPas2, "Course - Comparaison Nombre de pas moyen", "Nombre de pas moyen en fonction de la séance", "Nombre de pas " + AuthentificationManager.personne.getId_individu(), "Nombre de pas " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la séance", "Nb pas");
+                        nbPas.pack();
+                        RefineryUtilities.positionFrameOnScreen(nbPas, 0.8, 0.5);
+                        nbPas.setVisible(true);
+                    }
+
                 }
             }
         }
