@@ -1,9 +1,9 @@
 package gui;
 
-import manager.AmisManager;
-import manager.AuthentificationManager;
-import manager.ChallengeManager;
-import manager.IndividuManager;
+import chart.ComparativeLineChart;
+import chart.LineChart;
+import manager.*;
+import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -178,6 +178,17 @@ public class Challenge extends JFrame implements ActionListener {
             for(int j = 0; j<selectionAmis.size(); j++) {
                 if(selectionAmis.get(j).getBackground() == Color.GREEN) {
                     System.out.println("Vous avez selectionner " + amisAvecIndividu.get(j) + " avec le sport : " + sportAmis.get(j).getSelectedItem());
+
+                    if((String)sportAmis.get(j).getSelectedItem() == "Tennis") {
+                        ArrayList<Float> vitesse1 = TennisManager.VitesseMoy(AuthentificationManager.personne);
+                        ArrayList<Float> vitesse2 = TennisManager.VitesseMoy(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+                        ComparativeLineChart comparativeLineChart = new ComparativeLineChart(vitesse1,vitesse2,"Tennis - Comparaison Vitesse Moyenne par Service", "Comparaison Vitesse Moyenne par service en fonction de la séance", "Vitesse Moyenne "+ AuthentificationManager.personne.getId_individu(), "Vitesse Moyenne " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Vitesse Moyenne");
+                        comparativeLineChart.pack();
+                        RefineryUtilities.positionFrameOnScreen(comparativeLineChart, 50, 50);
+                        //RefineryUtilities.centerFrameOnScreen(comparativeLineChart);
+                        comparativeLineChart.setVisible(true);
+
+                    }
                 }
             }
         }

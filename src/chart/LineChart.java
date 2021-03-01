@@ -19,6 +19,7 @@ public class LineChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
+    //Line Chart avec une arraylist de float
     public LineChart(String titleFrame, String titleGraph, ArrayList<Float> al, String key, String xAxis, String yAxis) {
         super(titleFrame);
         XYDataset dataset = createLineFloatDataset(al, key);
@@ -29,6 +30,7 @@ public class LineChart extends JFrame {
 
     }
 
+    //Line Chart avec une arraylist de time
     public LineChart(ArrayList<Time> tl, String titleFrame, String titleGraph, String key, String xAxis, String yAxis) {
         super(titleFrame);
         XYDataset dataset = createLineTimeDataset(tl, key);
@@ -38,6 +40,7 @@ public class LineChart extends JFrame {
         setContentPane(chartPanel);
     }
 
+    //Line Chart avec une arraylist de integer
     public LineChart(String titleFrame, String titleGraph, String key, String xAxis, String yAxis, ArrayList<Integer> array) {
         super(titleFrame);
         XYDataset dataset = createLineIntegerDataset(array, key);
@@ -47,6 +50,7 @@ public class LineChart extends JFrame {
         setContentPane(chartPanel);
     }
 
+    //Renvoyer les valeur grâce a une arraylist de integer
     private XYDataset createLineIntegerDataset(ArrayList<Integer> array, String key) {
         XYSeries series1 = new XYSeries(key);
         for(int i=0; i<array.size(); i++) {
@@ -59,6 +63,7 @@ public class LineChart extends JFrame {
         return dataset;
     }
 
+    //Renvoyer les valeur grâce a une arraylist de float
     private XYDataset createLineFloatDataset(ArrayList<Float> vitesse, String key) {
         XYSeries series1 = new XYSeries(key);
         for(int i=0; i<vitesse.size(); i++) {
@@ -70,6 +75,7 @@ public class LineChart extends JFrame {
         return dataset;
     }
 
+    //Renvoyer les valeur grâce a une arraylist de time
     private XYDataset createLineTimeDataset(ArrayList<Time> temps, String key) {
         XYSeries series1 = new XYSeries(key);
         for(int i=0; i<temps.size(); i++) {
@@ -85,7 +91,7 @@ public class LineChart extends JFrame {
     }
 
 
-    private CategoryDataset createBarDataset(ArrayList<Integer> nbPas) {
+    /*private CategoryDataset createBarDataset(ArrayList<Integer> nbPas) {
         String series1 = "Nombre de pas";
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -96,25 +102,10 @@ public class LineChart extends JFrame {
         }
 
         return dataset;
-    }
+    }*/
 
     private JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis) {
         return ChartFactory.createXYLineChart(title, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, true, true, false);
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Float> vitesse = new ArrayList<Float>();
-
-        vitesse.add(15f);
-        vitesse.add(6.9f);
-        vitesse.add(56.8f);
-        vitesse.add(22.6f);
-        vitesse.add(11.3f);
-
-        /*LineChart demo = new LineChart("Vitesse Moyenne en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);*/
     }
 
 }
