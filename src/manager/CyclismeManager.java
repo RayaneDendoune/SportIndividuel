@@ -152,4 +152,9 @@ public class CyclismeManager {
 
         return individus;
     }
+
+    public static int besoinProteine(int poids) {
+        int besoin = (int)(poids*1.2);
+        return besoin;
+    }
 }

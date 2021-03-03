@@ -202,8 +202,9 @@ public class Cyclisme extends JFrame implements ActionListener {
             System.out.println(weight.getText());
             System.out.println(objectif.getSelectedItem());*/
             int nrj = CyclismeManager.depenseNRJ(AuthentificationManager.personne, (String)niveau.getSelectedItem());
+            int besoin = CyclismeManager.besoinProteine(Integer.parseInt(weight.getText()));
 
-            CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String)niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String)objectif.getSelectedItem(), nrj, 270, AuthentificationManager.personne);
+            CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String)niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String)objectif.getSelectedItem(), nrj, besoin, AuthentificationManager.personne);
         }
 
         if(Button == proteine) {
