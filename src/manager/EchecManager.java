@@ -14,7 +14,7 @@ import java.util.*;
 
 public class EchecManager {
 
-    public static void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, int niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
+    public static void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, String niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -160,7 +160,7 @@ public class EchecManager {
 
     public static String competenceMentale(Individu individu) {
         int elo = individu.getElo();
-        String text = "Votre Compétence Mental est au niveau ";
+        String text = "";
         if(elo < 1500) {
             text += "novice";
         }
@@ -177,8 +177,20 @@ public class EchecManager {
         return text;
     }
     public static int niveauConcentration(Individu individu, char issue) {
-        int issueMatch = 0;
+        float issueMatch = 0;
         int niveauConcentration = 0;
+
+        if(issue == 'V') {
+            issueMatch = 1;
+        }
+        else if(issue == 'N') {
+            issueMatch = 0.75f;
+        }
+        else if(issue == 'D') {
+            issueMatch = 0.5f;
+        }
+
+        niveauConcentration = (int) ((individu.getElo()/32)*issueMatch);
 
         return niveauConcentration;
     }

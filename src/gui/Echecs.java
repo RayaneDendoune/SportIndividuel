@@ -18,7 +18,8 @@ public class Echecs extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Echecs");
 
-    private JLabel competenceMentale = new JLabel(EchecManager.competenceMentale(AuthentificationManager.personne));
+    private String competence = "Votre Compétence Mental est au niveau " + EchecManager.competenceMentale(AuthentificationManager.personne);
+    private JLabel competenceMentale = new JLabel(competence);
 
     private JLabel eloAdv = new JLabel("Elo de l'adversaire ");
     private JTextField adversaire = new JTextField(5);
@@ -212,9 +213,11 @@ public class Echecs extends JFrame implements ActionListener {
             final Time timeSQL = new Time(heure, min,00);
 
             char issuePartie = EchecManager.issue((String)issue.getSelectedItem());
+            int niveauConcentration = EchecManager.niveauConcentration(AuthentificationManager.personne, issuePartie);
+
             int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem());
             //EchecManager.updateValue(AuthentificationManager.personne, 1204);
-            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, 234, issuePartie, 589, AuthentificationManager.personne);
+            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, EchecManager.competenceMentale(AuthentificationManager.personne), issuePartie, niveauConcentration, AuthentificationManager.personne);
             //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
 
             EchecManager.updateValue(AuthentificationManager.personne, newElo);
