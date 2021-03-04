@@ -18,6 +18,8 @@ public class Echecs extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Echecs");
 
+    private JLabel competenceMentale = new JLabel(EchecManager.competenceMentale(AuthentificationManager.personne));
+
     private JLabel eloAdv = new JLabel("Elo de l'adversaire ");
     private JTextField adversaire = new JTextField(5);
 
@@ -168,19 +170,24 @@ public class Echecs extends JFrame implements ActionListener {
         c.gridy = 0;
         complete.add(sport, c);
 
-        c.insets = new Insets(20,0,0,0);
+        c.insets = new Insets(5,0,0,0);
         c.gridx = 0;
         c.gridy = 1;
-        complete.add(grid, c);
+        complete.add(competenceMentale, c);
 
         c.insets = new Insets(20,0,0,0);
         c.gridx = 0;
         c.gridy = 2;
-        complete.add(panel, c);
+        complete.add(grid, c);
 
         c.insets = new Insets(20,0,0,0);
         c.gridx = 0;
         c.gridy = 3;
+        complete.add(panel, c);
+
+        c.insets = new Insets(20,0,0,0);
+        c.gridx = 0;
+        c.gridy = 4;
         complete.add(graphique, c);
 
         return complete;

@@ -157,4 +157,29 @@ public class EchecManager {
 
         return individus;
     }
+
+    public static String competenceMentale(Individu individu) {
+        int elo = individu.getElo();
+        String text = "Votre Compétence Mental est au niveau ";
+        if(elo < 1500) {
+            text += "novice";
+        }
+        else if(elo>=1500 && elo <2300) {
+            text += "intermédiaire";
+        }
+        else if(elo>=2300 && elo <2600) {
+            text += "confirmé";
+        }
+        else if(elo>=2600 && elo < 3200) {
+            text += "expert";
+        }
+
+        return text;
+    }
+    public static int niveauConcentration(Individu individu, char issue) {
+        int issueMatch = 0;
+        int niveauConcentration = 0;
+
+        return niveauConcentration;
+    }
 }
