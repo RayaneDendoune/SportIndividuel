@@ -74,4 +74,14 @@ public class IndividuManager {
         }
         return individu;
     }
+
+    public static boolean existIndividu(String id) {
+        ArrayList<Individu> individus = listIndividu();
+        for(int i = 0; i<individus.size(); i++) {
+            if(individus.get(i).getId_individu().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

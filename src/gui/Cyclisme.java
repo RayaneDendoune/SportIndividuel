@@ -3,6 +3,7 @@ package gui;
 import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.CyclismeManager;
+import manager.RobustesseManager;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
@@ -201,10 +202,20 @@ public class Cyclisme extends JFrame implements ActionListener {
             /*System.out.println(niveau.getSelectedItem());
             System.out.println(weight.getText());
             System.out.println(objectif.getSelectedItem());*/
-            int nrj = CyclismeManager.depenseNRJ(AuthentificationManager.personne, (String)niveau.getSelectedItem());
-            int besoin = CyclismeManager.besoinProteine(Integer.parseInt(weight.getText()));
+            if(!weight.getText().isBlank()) {
+                if(RobustesseManager.StringToFloat(weight.getText()) == 0) {
+                    int nrj = CyclismeManager.depenseNRJ(AuthentificationManager.personne, (String) niveau.getSelectedItem());
+                    int besoin = CyclismeManager.besoinProteine((int)Float.parseFloat(weight.getText()));
 
-            CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String)niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String)objectif.getSelectedItem(), nrj, besoin, AuthentificationManager.personne);
+                    CyclismeManager.ajouterCyclisme(CyclismeManager.idSeance(AuthentificationManager.personne), (String) niveau.getSelectedItem(), Float.parseFloat(weight.getText()), (String) objectif.getSelectedItem(), nrj, besoin, AuthentificationManager.personne);
+                }
+                else {
+                    if(RobustesseManager.StringToFloat(weight.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(weight.getText()), poids);  }
+                }
+            }
+            else {
+                RobustesseManager.erreur(4, null);
+            }
         }
 
         if(Button == proteine) {

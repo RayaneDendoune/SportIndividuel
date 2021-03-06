@@ -3,6 +3,7 @@ package gui;
 import chart.LineChart;
 import chart.PieChart;
 import manager.AuthentificationManager;
+import manager.RobustesseManager;
 import manager.TennisManager;
 import org.jfree.ui.RefineryUtilities;
 
@@ -232,9 +233,22 @@ public class Tennis extends JFrame implements ActionListener {
             System.out.println(TS.getText());
             System.out.println(set.getText());
             System.out.println(issue.getSelectedItem());*/
-            float vitesse = TennisManager.vitesseService(Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()));
+            if(!PS.getText().isBlank() && !DS.getText().isBlank() && !TS.getText().isBlank() && !set.getText().isBlank()) {
+                if(RobustesseManager.StringToFloat(PS.getText()) == 0 && RobustesseManager.StringToFloat(DS.getText()) == 0 && RobustesseManager.StringToFloat(TS.getText()) == 0 && RobustesseManager.StringToInteger(set.getText()) == 0) {
+                    float vitesse = TennisManager.vitesseService(Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()));
+                    TennisManager.ajouterTennis(TennisManager.idSeance(AuthentificationManager.personne), Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()), Integer.parseInt(set.getText()), TennisManager.issueMatch((String) issue.getSelectedItem()), vitesse, AuthentificationManager.personne);
+                }
 
-            TennisManager.ajouterTennis(TennisManager.idSeance(AuthentificationManager.personne), Float.parseFloat(PS.getText()), Float.parseFloat(DS.getText()), Float.parseFloat(TS.getText()), Integer.parseInt(set.getText()), TennisManager.issueMatch((String)issue.getSelectedItem()), vitesse, AuthentificationManager.personne);
+                else {
+                    if(RobustesseManager.StringToFloat(PS.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(PS.getText()), premierService);  }
+                    if(RobustesseManager.StringToFloat(DS.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(DS.getText()), deuxiemeService); }
+                    if(RobustesseManager.StringToFloat(TS.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(TS.getText()), troisiemeService); }
+                    if(RobustesseManager.StringToInteger(set.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(set.getText()), nbSet); }
+                }
+            }
+            else {
+                RobustesseManager.erreur(4, null);
+            }
         }
         if(Button==vitesse){
             ArrayList<Float> vitesse = TennisManager.VitesseMoy(AuthentificationManager.personne);

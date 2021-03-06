@@ -2,6 +2,7 @@ package gui;
 
 import manager.AuthentificationManager;
 import manager.IndividuManager;
+import manager.RobustesseManager;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -133,30 +134,35 @@ public class Formulaire extends JFrame implements ActionListener {
 		if(Button == enregistrer) {
 			Session session = HibernateUtil.getSession();
 			if(!lastName.getText().isBlank() && !firstName.getText().isBlank() && !identifiant.getText().isBlank() && !password.getText().isBlank()) {
+				if(RobustesseManager.StringtoString(lastName.getText()) == 0 && RobustesseManager.StringtoString(firstName.getText()) == 0) {
+					if (elo.getText().isBlank()) {
+						eloC = 0;
+					} else {
+						eloC = Integer.parseInt(elo.getText());
+					}
+					if (AuthentificationManager.existIndividu(session, identifiant.getText())) {
+						RobustesseManager.erreur(6,null);
+					}
+					if (!AuthentificationManager.existIndividu(session, identifiant.getText())) {
+						IndividuManager fm = new IndividuManager();
+						fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String) frequency.getSelectedItem());
+					}
 
-				if (elo.getText().isBlank()) {
-					eloC = 0;
-				} else {
-					eloC = Integer.parseInt(elo.getText());
+					if (elo.getText().isBlank()) {
+						//System.out.println("Classement ELO : 0");
+					} else {
+						//System.out.println("Classement ELO : " + elo.getText());
+					}
 				}
-				if(AuthentificationManager.existIndividu(session,identifiant.getText())) {
-					erreurIdentifiant();
-				}
-				if(!AuthentificationManager.existIndividu(session,identifiant.getText())) {
-					IndividuManager fm = new IndividuManager();
-					fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String) frequency.getSelectedItem());
-				}
-
-				if (elo.getText().isBlank()) {
-					//System.out.println("Classement ELO : 0");
-				} else {
-					//System.out.println("Classement ELO : " + elo.getText());
+				else {
+					if(RobustesseManager.StringtoString(lastName.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringtoString(lastName.getText()), nom);  }
+					if(RobustesseManager.StringtoString(firstName.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringtoString(firstName.getText()), prenom); }
 				}
 
 				//System.out.println("Frequence de jeu : " + frequency.getSelectedItem());
 			}
 			else {
-				erreurAttributs();
+				RobustesseManager.erreur(4, null);
 			}
 
 
@@ -390,7 +396,7 @@ public class Formulaire extends JFrame implements ActionListener {
 		return complete;
 	}
 
-	void erreurAttributs() {
+	/*void erreurAttributs() {
 		JFrame jf = new JFrame();
 
 		JPanel container = new JPanel();
@@ -419,6 +425,6 @@ public class Formulaire extends JFrame implements ActionListener {
 		jf.setLocationRelativeTo(null);
 		jf.setLocationRelativeTo(null);
 
-	}
+	}*/
 
 }

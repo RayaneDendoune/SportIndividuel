@@ -4,6 +4,7 @@ import chart.BarChart;
 import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.NatationManager;
+import manager.RobustesseManager;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
@@ -205,23 +206,34 @@ public class Natation extends JFrame implements ActionListener {
 
             final java.sql.Date dateSQL = new java.sql.Date(new Date().getTime()) ;
 
-            int hour = Integer.parseInt(time.getText())/60;
-            int min = Integer.parseInt(time.getText())%60;
+            if(!longueur.getText().isBlank() && !time.getText().isBlank()) {
+                if(RobustesseManager.StringToFloat(longueur.getText()) == 0 && RobustesseManager.StringToInteger(time.getText()) == 0) {
+                    int hour = Integer.parseInt(time.getText()) / 60;
+                    int min = Integer.parseInt(time.getText()) % 60;
 
-            final Time timeTotal = new Time(hour, min,00);
+                    final Time timeTotal = new Time(hour, min, 00);
 
-            int calorie = (int)NatationManager.calories(AuthentificationManager.personne, (String)nage.getSelectedItem(), Integer.parseInt(time.getText()));
+                    int calorie = (int) NatationManager.calories(AuthentificationManager.personne, (String) nage.getSelectedItem(), Integer.parseInt(time.getText()));
 
-            float tempsMoy = NatationManager.tempsMoyLongueur(Integer.parseInt(longueur.getText()), Integer.parseInt(time.getText()));
-            int heure = (int)tempsMoy/3600;
-            int tempsT = (int)tempsMoy - (heure*3600);
+                    float tempsMoy = NatationManager.tempsMoyLongueur(Integer.parseInt(longueur.getText()), Integer.parseInt(time.getText()));
+                    int heure = (int) tempsMoy / 3600;
+                    int tempsT = (int) tempsMoy - (heure * 3600);
 
-            int minutes = tempsT/60;
-            int secondes = tempsT%60;
+                    int minutes = tempsT / 60;
+                    int secondes = tempsT % 60;
 
-            final Time tempsLongueur = new Time(heure, minutes, secondes);
+                    final Time tempsLongueur = new Time(heure, minutes, secondes);
 
-            NatationManager.ajouterNatation(NatationManager.idSeance(AuthentificationManager.personne), Integer.parseInt(longueur.getText()), timeTotal, (String)nage.getSelectedItem(), calorie, tempsLongueur, dateSQL, AuthentificationManager.personne);
+                    NatationManager.ajouterNatation(NatationManager.idSeance(AuthentificationManager.personne), Integer.parseInt(longueur.getText()), timeTotal, (String) nage.getSelectedItem(), calorie, tempsLongueur, dateSQL, AuthentificationManager.personne);
+                }
+                else {
+                    if(RobustesseManager.StringToFloat(longueur.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(longueur.getText()), nb_longueur);  }
+                    if(RobustesseManager.StringToInteger(time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(time.getText()), temps); }
+                }
+            }
+            else {
+                RobustesseManager.erreur(4, null);
+            }
         }
         if(Button == tempsMoy){
             ArrayList<Time> tpsMoy = NatationManager.tpsMoyLongueur(AuthentificationManager.personne);

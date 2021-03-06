@@ -3,6 +3,7 @@ package gui;
 import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.EchecManager;
+import manager.RobustesseManager;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
@@ -206,21 +207,31 @@ public class Echecs extends JFrame implements ActionListener {
             /*System.out.println(adversaire.getText());
             System.out.println(time.getText());
             System.out.println(issue.getSelectedItem());*/
+            if(!adversaire.getText().isBlank() && !time.getText().isBlank()) {
+                if(RobustesseManager.StringToFloat(adversaire.getText()) == 0 && RobustesseManager.StringToInteger(time.getText()) == 0) {
+                    int heure = Integer.parseInt(time.getText()) / 60;
+                    int min = Integer.parseInt(time.getText()) % 60;
 
-            int heure = Integer.parseInt(time.getText())/60;
-            int min = Integer.parseInt(time.getText())%60;
+                    final Time timeSQL = new Time(heure, min, 00);
 
-            final Time timeSQL = new Time(heure, min,00);
+                    char issuePartie = EchecManager.issue((String) issue.getSelectedItem());
+                    int niveauConcentration = EchecManager.niveauConcentration(AuthentificationManager.personne, issuePartie);
 
-            char issuePartie = EchecManager.issue((String)issue.getSelectedItem());
-            int niveauConcentration = EchecManager.niveauConcentration(AuthentificationManager.personne, issuePartie);
+                    int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String) issue.getSelectedItem());
+                    //EchecManager.updateValue(AuthentificationManager.personne, 1204);
+                    EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, EchecManager.competenceMentale(AuthentificationManager.personne), issuePartie, niveauConcentration, AuthentificationManager.personne);
+                    //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
 
-            int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem());
-            //EchecManager.updateValue(AuthentificationManager.personne, 1204);
-            EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, EchecManager.competenceMentale(AuthentificationManager.personne), issuePartie, niveauConcentration, AuthentificationManager.personne);
-            //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
-
-            EchecManager.updateValue(AuthentificationManager.personne, newElo);
+                    EchecManager.updateValue(AuthentificationManager.personne, newElo);
+                }
+                else {
+                    if(RobustesseManager.StringToInteger(adversaire.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(adversaire.getText()), eloAdv);  }
+                    if(RobustesseManager.StringToInteger(time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(time.getText()), temps); }
+                }
+            }
+            else {
+                RobustesseManager.erreur(4, null);
+            }
         }
 
         if(Button == elo){

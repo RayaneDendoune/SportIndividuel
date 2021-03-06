@@ -4,13 +4,16 @@ import chart.BarChart;
 import chart.LineChart;
 import manager.AuthentificationManager;
 import manager.CourseManager;
+import manager.RobustesseManager;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -181,13 +184,23 @@ public class Course extends JFrame implements ActionListener {
 
         if(Button == enregistrer) {
             final java.sql.Date dateSQL = new java.sql.Date(new Date().getTime()) ;
+            if(!dist.getText().isBlank() && !time.getText().isBlank()){
 
-            int heure = Integer.parseInt(time.getText())/60;
-            int min = Integer.parseInt(time.getText())%60;
+                if(RobustesseManager.StringToFloat(dist.getText()) == 0 && RobustesseManager.StringToInteger(time.getText()) == 0) {
+                    int heure = Integer.parseInt(time.getText()) / 60;
+                    int min = Integer.parseInt(time.getText()) % 60;
+                    final Time timeSQL = new Time(heure, min, 00);
 
-            final Time timeSQL = new Time(heure, min,00);
-
-            CourseManager.ajouterCourse(CourseManager.idSeance(AuthentificationManager.personne), Float.parseFloat(dist.getText()), timeSQL, CourseManager.vitesseMoyenne(Float.parseFloat(dist.getText()), Integer.parseInt(time.getText())), CourseManager.nbPas(Float.parseFloat(dist.getText())), dateSQL, AuthentificationManager.personne);
+                    CourseManager.ajouterCourse(CourseManager.idSeance(AuthentificationManager.personne), Float.parseFloat(dist.getText()), timeSQL, CourseManager.vitesseMoyenne(Float.parseFloat(dist.getText()), Integer.parseInt(time.getText())), CourseManager.nbPas(Float.parseFloat(dist.getText())), dateSQL, AuthentificationManager.personne);
+                }
+                else {
+                    if(RobustesseManager.StringToFloat(dist.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(dist.getText()), distance);  }
+                    if(RobustesseManager.StringToInteger(time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(time.getText()), temps); }
+                }
+            }
+            else {
+                RobustesseManager.erreur(4, null);
+            }
 
         }
 
