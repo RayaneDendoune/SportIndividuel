@@ -78,6 +78,10 @@ public class RobustesseManager {
             error += "L'identifiant est déjà utiliser veuillez en selectionner un nouveau";
         }
 
+        if(erreur == 7) {
+            error += "Un elo entre 1000 et 3200 est attendu";
+        }
+
         return error;
     }
 

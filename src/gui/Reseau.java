@@ -19,7 +19,7 @@ public class Reseau extends JFrame implements ActionListener {
     private JLabel titreSuggestion = new JLabel("Suggestion d'amis");
     private JLabel titreDemande = new JLabel("Demande d'amis");
 
-    private JButton testAmis = new JButton("Test amis");
+    private JButton testAmis = new JButton("Mes amis");
     private JButton retour = new JButton("Retour");
 
     ArrayList<Individu> amis = ReseauManager.sportJouer(AuthentificationManager.personne);

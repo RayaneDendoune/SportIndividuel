@@ -1,6 +1,7 @@
 package gui;
 
 import manager.AuthentificationManager;
+import manager.FormulaireManager;
 import manager.IndividuManager;
 import manager.RobustesseManager;
 import org.hibernate.Session;
@@ -135,23 +136,27 @@ public class Formulaire extends JFrame implements ActionListener {
 			Session session = HibernateUtil.getSession();
 			if(!lastName.getText().isBlank() && !firstName.getText().isBlank() && !identifiant.getText().isBlank() && !password.getText().isBlank()) {
 				if(RobustesseManager.StringtoString(lastName.getText()) == 0 && RobustesseManager.StringtoString(firstName.getText()) == 0) {
-					if (elo.getText().isBlank()) {
+					/*if (elo.getText().isBlank()) {
 						eloC = 0;
 					} else {
 						eloC = Integer.parseInt(elo.getText());
-					}
+					}*/
+
 					if (AuthentificationManager.existIndividu(session, identifiant.getText())) {
 						RobustesseManager.erreur(6,null);
 					}
 					if (!AuthentificationManager.existIndividu(session, identifiant.getText())) {
-						IndividuManager fm = new IndividuManager();
-						fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC, (String) frequency.getSelectedItem());
-					}
-
-					if (elo.getText().isBlank()) {
-						//System.out.println("Classement ELO : 0");
-					} else {
-						//System.out.println("Classement ELO : " + elo.getText());
+						if (!(RobustesseManager.StringToInteger(elo.getText()) == 0)) {
+							RobustesseManager.erreur(RobustesseManager.StringToInteger(elo.getText()), classement);
+						}
+						else if(!(Integer.parseInt(elo.getText()) >1000 && Integer.parseInt(elo.getText()) < 3200)) {
+							RobustesseManager.erreur(7, classement);
+						}
+						else {
+							eloC = FormulaireManager.choixElo(elo.getText(), (String) frequency.getSelectedItem());
+							IndividuManager fm = new IndividuManager();
+							fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC);
+						}
 					}
 				}
 				else {

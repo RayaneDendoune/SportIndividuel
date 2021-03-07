@@ -15,24 +15,9 @@ public class Individu implements Comparable{
     private float poids;
     private float taille;
     private int elo;
-    private String frequence_jeu;
 
 
     public Individu() {}
-
-    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
-        super();
-        this.id_individu = id_individu;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mdp = mdp;
-        this.sexe = sexe;
-        this.age = age;
-        this.poids = poids;
-        this.taille = taille;
-        this.elo = elo;
-        this.frequence_jeu = frequence_jeu;
-    }
 
     public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
         super();
@@ -47,7 +32,7 @@ public class Individu implements Comparable{
         this.elo = elo;
     }
 
-    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, String frequence_jeu) {
+    public Individu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille) {
         super();
         this.id_individu = id_individu;
         this.nom = nom;
@@ -57,7 +42,6 @@ public class Individu implements Comparable{
         this.age = age;
         this.poids = poids;
         this.taille = taille;
-        this.frequence_jeu = frequence_jeu;
     }
 
     public String getId_individu() {
@@ -96,10 +80,6 @@ public class Individu implements Comparable{
         return elo;
     }
 
-    public String getFrequence_jeu() {
-        return frequence_jeu;
-    }
-
     public void setId_individu(String id_individu) {
         this.id_individu = id_individu;
     }
@@ -136,10 +116,6 @@ public class Individu implements Comparable{
         this.elo = elo;
     }
 
-    public void setFrequence_jeu(String frequence_jeu) {
-        this.frequence_jeu = frequence_jeu;
-    }
-
     public String toString() {
         String text="";
         //text+="L'id est " + getId_individu();
@@ -150,7 +126,6 @@ public class Individu implements Comparable{
     @Override
     public int compareTo(Object o) {
         int comparePoids=(int)((Individu)o).getPoids();
-
         return (int) (this.poids-comparePoids);
     }
 }

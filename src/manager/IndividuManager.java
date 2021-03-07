@@ -15,7 +15,7 @@ public class IndividuManager {
 
     public IndividuManager() { }
 
-    public void ajouterIndividu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo, String frequence_jeu) {
+    public void ajouterIndividu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -29,7 +29,6 @@ public class IndividuManager {
         i.setPoids(poids);
         i.setTaille(taille);
         i.setElo(elo);
-        i.setFrequence_jeu(frequence_jeu);
         session.save(i);
         session.getTransaction().commit();
        // session.close();
