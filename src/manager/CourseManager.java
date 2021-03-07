@@ -84,8 +84,8 @@ public class CourseManager {
 
     public static float vitesseMoyenne(float distanceKM, int min) {
         float distanceM = distanceKM*1000;
-        int sec = min/60;
-        float vitesse = distanceKM/sec;
+        int sec = min*60;
+        float vitesse = distanceM/sec;
 
         return vitesse;
     }
