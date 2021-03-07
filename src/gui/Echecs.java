@@ -215,11 +215,12 @@ public class Echecs extends JFrame implements ActionListener {
                     final Time timeSQL = new Time(heure, min, 00);
 
                     char issuePartie = EchecManager.issue((String) issue.getSelectedItem());
-                    int niveauConcentration = EchecManager.niveauConcentration(AuthentificationManager.personne, issuePartie);
+                    String competence = EchecManager.competenceMentale(AuthentificationManager.personne);
+                    int niveauConcentration = EchecManager.niveauConcentration(AuthentificationManager.personne, issuePartie, competence);
 
                     int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String) issue.getSelectedItem());
                     //EchecManager.updateValue(AuthentificationManager.personne, 1204);
-                    EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, EchecManager.competenceMentale(AuthentificationManager.personne), issuePartie, niveauConcentration, AuthentificationManager.personne);
+                    EchecManager.ajouterEchec(EchecManager.idSeance(AuthentificationManager.personne), Integer.parseInt(adversaire.getText()), newElo, timeSQL, competence, issuePartie, niveauConcentration, AuthentificationManager.personne);
                     //System.out.println("Votre elo actuel est : " + AuthentificationManager.personne.getElo() + "    Futur Elo : " + EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(adversaire.getText()), (String)issue.getSelectedItem()));
 
                     EchecManager.updateValue(AuthentificationManager.personne, newElo);
@@ -238,6 +239,15 @@ public class Echecs extends JFrame implements ActionListener {
             ArrayList<Integer> eloArray = EchecManager.elo(AuthentificationManager.personne);
 
             LineChart lcl = new LineChart("Echec - Elo","Evolution de l'elo", "Elo" , "Numéro de la seance", "Elo", eloArray);
+            lcl.pack();
+            RefineryUtilities.centerFrameOnScreen(lcl);
+            lcl.setVisible(true);
+        }
+
+        if(Button == nvConcentration) {
+            ArrayList<Integer> niveau = EchecManager.concentration(AuthentificationManager.personne);
+
+            LineChart lcl = new LineChart("Echec - Niveau de concentration","Niveau de concentration", "Niveau de concentration" , "Numéro de la seance", "Niveau de concentration", niveau);
             lcl.pack();
             RefineryUtilities.centerFrameOnScreen(lcl);
             lcl.setVisible(true);

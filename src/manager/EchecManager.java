@@ -158,6 +158,25 @@ public class EchecManager {
         return individus;
     }
 
+    public static ArrayList<Integer> concentration(Individu individu) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Integer> niveauConcentration = new ArrayList<Integer>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Partie_echec pe where pe.individu=:individu");
+        readQuery.setString("individu", individu.getId_individu());
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Partie_echec pe = (Partie_echec) iterator.next();
+            //System.out.println(sc.toString());
+            niveauConcentration.add(pe.getNiveau_concentration());
+        }
+        readTransaction.commit();
+        return niveauConcentration;
+    }
+
     public static String competenceMentale(Individu individu) {
         int elo = individu.getElo();
         String text = "";
@@ -176,9 +195,10 @@ public class EchecManager {
 
         return text;
     }
-    public static int niveauConcentration(Individu individu, char issue) {
+    public static int niveauConcentration(Individu individu, char issue, String competence) {
         float issueMatch = 0;
         int niveauConcentration = 0;
+        int competenceMentale = 0;
 
         if(issue == 'V') {
             issueMatch = 1;
@@ -190,7 +210,20 @@ public class EchecManager {
             issueMatch = 0.5f;
         }
 
-        niveauConcentration = (int) ((individu.getElo()/32)*issueMatch);
+        if(competence.equals("novice")) {
+            competenceMentale = 15;
+        }
+        else if(competence.equals("intermédiaire")) {
+            competenceMentale = 23;
+        }
+        else if(competence.equals("confirmé")) {
+            competenceMentale = 26;
+        }
+        else if(competence.equals("expert")) {
+            competenceMentale = 32;
+        }
+
+        niveauConcentration = (int) ((individu.getElo()/competenceMentale)*issueMatch);
 
         return niveauConcentration;
     }

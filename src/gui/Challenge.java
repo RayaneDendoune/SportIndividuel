@@ -238,11 +238,18 @@ public class Challenge extends JFrame implements ActionListener {
                         ArrayList<Integer> elo1 = EchecManager.elo(AuthentificationManager.personne);
                         ArrayList<Integer> elo2 = EchecManager.elo(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
 
+                        ArrayList<Integer> concentration1 = EchecManager.concentration(AuthentificationManager.personne);
+                        ArrayList<Integer> concentration2 = EchecManager.concentration(IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)));
+
                         ComparativeLineChart elo = new ComparativeLineChart("Echec - Comparaison Elo","Evolution de l'elo", "Elo " + AuthentificationManager.personne.getId_individu(), "Elo " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Elo", elo1, elo2);
                         elo.pack();
                         RefineryUtilities.positionFrameOnScreen(elo, 0.3, 0.5);
                         elo.setVisible(true);
 
+                        ComparativeLineChart concentration = new ComparativeLineChart("Echec - Comparaison Niveau de concentration","Niveau de concentration", "Niveau de concentration de " + AuthentificationManager.personne.getId_individu(), "Niveau de concentration de " + IndividuManager.rechercheIndividuParId(amisAvecIndividu.get(j)).getId_individu(), "Numéro de la seance", "Niveau de concentration", concentration1, concentration2);
+                        concentration.pack();
+                        RefineryUtilities.positionFrameOnScreen(concentration, 0.8, 0.5);
+                        concentration.setVisible(true);
 
                     }
 
