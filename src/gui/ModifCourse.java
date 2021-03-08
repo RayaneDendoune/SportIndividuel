@@ -1,13 +1,13 @@
 package gui;
 
-import manager.AuthentificationManager;
-import manager.CourseManager;
-import model.Seance_course;
+import manager.*;
+import model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -17,11 +17,7 @@ public class ModifCourse extends JFrame implements ActionListener {
     private int selection;
     private JLabel disposition = new JLabel();
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
-    private static JLabel distance = new JLabel("Distance (en km)");
-    private static JTextField dist = new JTextField(5);
 
-    private static JLabel temps = new JLabel("Temps (en minutes) ");
-    private static JTextField time = new JTextField(5);
 
     public ModifCourse(int selection) {
         this.selection = selection;
@@ -29,19 +25,47 @@ public class ModifCourse extends JFrame implements ActionListener {
     }
 
     public void build(int selection) {
-        this.setSize(650, 500);
+        this.setSize(750, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false); //Taille non changeable
 
-        ArrayList<JButton> nbButtons = nbButton(CourseManager.seanceCourseIndividu(AuthentificationManager.personne));
+       /* ArrayList<JButton> nbButtons = nbButton(CourseManager.seanceCourseIndividu(AuthentificationManager.personne));
+        for(int i = 0; i<nbButtons.size(); i++) {
+            nbButtons.get(i).addActionListener(this);
+        }*/
+        ArrayList<JButton> nbButtons = new ArrayList<JButton>();
+        JPanel donneeEntree = new JPanel();
+
+        if(selection == 1) {
+            nbButtons = nbButtonCourse(CourseManager.seanceCourseIndividu(AuthentificationManager.personne));
+            donneeEntree = Course.donnee();
+        }
+        else if(selection == 2) {
+            nbButtons = nbButtonNatation(NatationManager.seanceNatationIndividu(AuthentificationManager.personne));
+            donneeEntree = Natation.donnee();
+        }
+        else if(selection == 3) {
+            nbButtons = nbButtonsTennis(TennisManager.seanceTennisIndividu(AuthentificationManager.personne));
+            donneeEntree = Tennis.donnee();
+        }
+        else if(selection == 4) {
+            nbButtons = nbButtonsCyclisme(CyclismeManager.seanceCyclismeIndividu(AuthentificationManager.personne));
+            donneeEntree = Cyclisme.donnee();
+
+        }
+        else if(selection == 5) {
+            nbButtons = nbButtonsEchec(EchecManager.seanceEchecIndividu(AuthentificationManager.personne));
+            donneeEntree = Echecs.donnee();
+        }
+
         for(int i = 0; i<nbButtons.size(); i++) {
             nbButtons.get(i).addActionListener(this);
         }
+
         pan.setLayout(new BorderLayout());
 
         JScrollPane grid = buttons(nbButtons);
-        JPanel donneeEntree = donnee();
         JPanel completeEast = completeEast(donneeEntree);
         JPanel complete = complete(grid, completeEast);
 
@@ -96,49 +120,38 @@ public class ModifCourse extends JFrame implements ActionListener {
 
         return grid;
     }
-    public static JPanel donnee() {
-        JPanel grid = new JPanel();
-        grid.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 0;
-        c.gridy = 0;
-        grid.add(distance, c);
-
-        c.ipadx = 80; //Taille de l'endroit ou on peut r��crire
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
-        grid.add(dist, c);
-
-        c.ipadx = 0; //Remettre a 0 parce sinon �a d�cale tout (si pas compris, met en commentaire cette ligne tu verras)
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 0;
-        c.gridy = 1;
-        grid.add(temps, c);
-
-        c.ipadx = 80; //Remettre la taille en question
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 1;
-        grid.add(time, c);
-
-        return grid;
-    }
-
-
-    public ArrayList<JButton> nbButton(ArrayList<Seance_course> sc) {
-
-
+    public ArrayList<JButton> nbButtonCourse(ArrayList<Seance_course> sc) {
         for(int  i = 0; i<sc.size(); i++) {
             buttons.add((new JButton(sc.get(i).getId_seance_course() + "  " + sc.get(i).getDistance() + "  " + sc.get(i).getTemps() + "  " + sc.get(i).getDate() )));
         }
+        return buttons;
+    }
 
+    public ArrayList<JButton> nbButtonNatation(ArrayList<Seance_natation> sn) {
+        for(int  i = 0; i<sn.size(); i++) {
+            buttons.add((new JButton(sn.get(i).getId_seance_natation() + "  " + sn.get(i).getNb_longueur() + "  " + sn.get(i).getType_nage() + "  " + sn.get(i).getTemps_total() + "  " + sn.get(i).getDate())));
+        }
+        return buttons;
+    }
+
+    public ArrayList<JButton> nbButtonsTennis(ArrayList<Seance_tennis> st) {
+        for(int  i = 0; i<st.size(); i++) {
+            buttons.add((new JButton(st.get(i).getId_seance_tennis() + "  " + st.get(i).getPremier_service() + "  " + st.get(i).getDeuxieme_service() + "  " + st.get(i).getTroisieme_service() + "  " + st.get(i).getNb_set() + "  " + st.get(i).getIssue_match())));
+        }
+        return buttons;
+    }
+
+    public ArrayList<JButton> nbButtonsCyclisme(ArrayList<Seance_cyclisme> seance_cyclisme) {
+        for(int  i = 0; i<seance_cyclisme.size(); i++) {
+            buttons.add((new JButton(seance_cyclisme.get(i).getId_seance_cyclisme() + "  " + seance_cyclisme.get(i).getObjectif_seance() + "  " + seance_cyclisme.get(i).getNiveau_activite_physique() + "  " + seance_cyclisme.get(i).getPoids())));
+        }
+        return buttons;
+    }
+    public ArrayList<JButton> nbButtonsEchec(ArrayList<Partie_echec> partie_echec) {
+        for(int  i = 0; i<partie_echec.size(); i++) {
+            buttons.add((new JButton(partie_echec.get(i).getId_partie_echec() + "  " + partie_echec.get(i).getElo_adversaire() + "  " + partie_echec.get(i).getDuree() + "  " + partie_echec.get(i).getIssue_partie())));
+        }
         return buttons;
     }
 
@@ -146,13 +159,49 @@ public class ModifCourse extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object Button = e.getSource();
         ArrayList<Seance_course> sc = CourseManager.seanceCourseIndividu(AuthentificationManager.personne);
+        ArrayList<Seance_natation> sn = NatationManager.seanceNatationIndividu(AuthentificationManager.personne);
+        ArrayList<Seance_tennis> st = TennisManager.seanceTennisIndividu(AuthentificationManager.personne);
+        ArrayList<Seance_cyclisme> seance_cyclisme = CyclismeManager.seanceCyclismeIndividu((AuthentificationManager.personne));
+        ArrayList<Partie_echec> partie_echec = EchecManager.seanceEchecIndividu(AuthentificationManager.personne);
 
         for(int  i = 0; i<buttons.size(); i++) {
-            if(Button ==buttons.get(i)&& !dist.getText().isBlank() && !time.getText().isBlank()){
-                int heure = Integer.parseInt(time.getText()) / 60;
-                int min = Integer.parseInt(time.getText()) % 60;
-                final Time TimeSQL = new Time(heure, min, 00);
-                CourseManager.updateCourse(sc.get(i),  Float.parseFloat(dist.getText()),TimeSQL);
+           if(selection == 1) {
+               if (Button == buttons.get(i) && !Course.dist.getText().isBlank() && !Course.time.getText().isBlank()) {
+                   int heure = Integer.parseInt(Course.time.getText()) / 60;
+                   int min = Integer.parseInt(Course.time.getText()) % 60;
+                   final Time TimeSQL = new Time(heure, min, 00);
+                   CourseManager.updateCourse(sc.get(i), Float.parseFloat(Course.dist.getText()), TimeSQL);
+               }
+           }
+
+           if(selection == 2) {
+               if (Button == buttons.get(i) && !Natation.longueur.getText().isBlank() && !Natation.time.getText().isBlank()) {
+                   int heure = Integer.parseInt(Natation.time.getText()) / 60;
+                   int min = Integer.parseInt(Natation.time.getText()) % 60;
+                   final Time TimeSQL = new Time(heure, min, 00);
+                   NatationManager.updateNatation(sn.get(i), Integer.parseInt(Natation.longueur.getText()), TimeSQL, (String) Natation.nage.getSelectedItem());
+               }
+           }
+           if(selection ==3){
+               if (Button == buttons.get(i) && !Tennis.PS.getText().isBlank() && !Tennis.DS.getText().isBlank() && !Tennis.TS.getText().isBlank() && !Tennis.set.getText().isBlank()){
+                   TennisManager.updateTennis(st.get(i),Float.parseFloat(Tennis.PS.getText()),Float.parseFloat(Tennis.DS.getText()),Float.parseFloat(Tennis.TS.getText()),Integer.parseInt(Tennis.set.getText()), TennisManager.issueMatch((String) Tennis.issue.getSelectedItem()));
+               }
+           }
+
+            if(selection ==4){
+                if (Button == buttons.get(i) && !Cyclisme.weight.getText().isBlank()){
+                    CyclismeManager.updateCyclisme(seance_cyclisme.get(i), Float.parseFloat(Cyclisme.weight.getText()), (String)Cyclisme.objectif.getSelectedItem(), (String) Cyclisme.niveau.getSelectedItem());
+                }
+            }
+            if(selection == 5){
+                if(Button== buttons.get(i) && !Echecs.adversaire.getText().isBlank() && !Echecs.time.getText().isBlank()){
+                    int heure = Integer.parseInt(Echecs.time.getText()) / 60;
+                    int min = Integer.parseInt(Echecs.time.getText()) % 60;
+                    final Time TimeSQL = new Time(heure, min, 00);
+                    char issuePartie = EchecManager.issue((String) Echecs.issue.getSelectedItem());
+
+                    EchecManager.updateEchec(partie_echec.get(i),Integer.parseInt(Echecs.adversaire.getText()),TimeSQL,issuePartie);
+                }
             }
         }
     }

@@ -19,23 +19,24 @@ public class Tennis extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Tennis");
 
-    private JLabel premierService = new JLabel("Premier Service (en km/h)");
-    private JTextField PS = new JTextField(5);
+    public static JLabel premierService = new JLabel("Premier Service (en km/h)");
+    public static JTextField PS = new JTextField(5);
 
-    private JLabel deuxiemeService = new JLabel("Deuxieme Service (en km/h) ");
-    private JTextField DS = new JTextField(5);
+    public static JLabel deuxiemeService = new JLabel("Deuxieme Service (en km/h) ");
+    public static JTextField DS = new JTextField(5);
 
-    private JLabel troisiemeService = new JLabel("Troisieme Service (en km/h) ");
-    private JTextField TS = new JTextField(5);
+    public static JLabel troisiemeService = new JLabel("Troisieme Service (en km/h) ");
+    public static JTextField TS = new JTextField(5);
 
-    private JLabel issueMatch = new JLabel("Issue du match ");
-    private JComboBox issue = new JComboBox();
+    public static JLabel issueMatch = new JLabel("Issue du match ");
+    public static JComboBox issue = new JComboBox();
 
-    private JLabel nbSet = new JLabel("Nombre de set ");
-    private JTextField set = new JTextField(5);
+    public static JLabel nbSet = new JLabel("Nombre de set ");
+    public static JTextField set = new JTextField(5);
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
+    private JButton modifier = new JButton("Modifier");
 
     private JButton vitesse = new JButton("Vitesse moyenne");
     private JButton pourcentageReussite = new JButton("Pourcentage de réussite");
@@ -55,6 +56,7 @@ public class Tennis extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        modifier.addActionListener(this);
         vitesse.addActionListener(this);
         pourcentageReussite.addActionListener(this);
 
@@ -73,7 +75,7 @@ public class Tennis extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public JPanel donnee() {
+    public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -169,6 +171,13 @@ public class Tennis extends JFrame implements ActionListener {
         c.gridy = 0;
         grid.add(enregistrer, c);
 
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        grid.add(modifier, c);
+
         return grid;
     }
     public JPanel graphiques() {
@@ -250,6 +259,11 @@ public class Tennis extends JFrame implements ActionListener {
                 RobustesseManager.erreur(4, null);
             }
         }
+
+        if(Button==modifier){
+            new ModifCourse(3);
+            dispose();
+        }
         if(Button==vitesse){
             ArrayList<Float> vitesse = TennisManager.VitesseMoy(AuthentificationManager.personne);
             LineChart lcl = new LineChart("Tennis - Vitesse Moyenne par Service", "Vitesse Moyenne par service en fonction de la séance", vitesse, "Vitesse Moyenne", "Numéro de la seance", "Vitesse Moyenne");
@@ -258,6 +272,7 @@ public class Tennis extends JFrame implements ActionListener {
             lcl.setVisible(true);
         }
 
+
         if(Button==pourcentageReussite) {
             ArrayList<Character> issue = TennisManager.nbVictoire(AuthentificationManager.personne);
             PieChart pc = new PieChart("Tennis - Pourcentage de réussite", issue, "Pourcentage de réussite");
@@ -265,6 +280,7 @@ public class Tennis extends JFrame implements ActionListener {
             RefineryUtilities.centerFrameOnScreen(pc);
             pc.setVisible(true);
         }
+
     }
 
     /*public static void main(String[] args) {

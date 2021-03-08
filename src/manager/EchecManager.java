@@ -1,9 +1,6 @@
 package manager;
 
-import model.Individu;
-import model.Partie_echec;
-import model.Seance_cyclisme;
-import model.Seance_natation;
+import model.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,6 +28,22 @@ public class EchecManager {
         session.save(partie_echec);
         session.getTransaction().commit();
     }
+    public static void updateEchec(Partie_echec partie, int eloAdversaire, Time temps, char issue) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        partie.setElo_adversaire(eloAdversaire);
+        partie.setDuree(temps);
+        partie.setIssue_partie(issue);
+        partie.setNiveau_competence_mentale(competenceMentale(AuthentificationManager.personne));
+        partie.setNiveau_concentration(niveauConcentration(AuthentificationManager.personne,issue,competenceMentale(AuthentificationManager.personne)));
+
+
+
+        session.update(partie);
+        session.getTransaction().commit();
+    }
+
 
     public static long nbPartieEchec(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -227,4 +240,37 @@ public class EchecManager {
 
         return niveauConcentration;
     }
+
+    public static ArrayList<Partie_echec> listEchec() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Partie_echec> listEchec = new ArrayList<Partie_echec>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Partie_echec partieEchec");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Partie_echec partieEchec = (Partie_echec) iterator.next();
+            //System.out.println(sc.toString());
+            listEchec.add(partieEchec);
+        }
+        readTransaction.commit();
+        return listEchec;
+    }
+
+    public static ArrayList<Partie_echec> seanceEchecIndividu(Individu individu) {
+        ArrayList<Partie_echec> listEchec = listEchec();
+        ArrayList<Partie_echec> seanceIndividu = new ArrayList<Partie_echec>();
+
+        for(int i = 0; i<listEchec.size(); i++) {
+            if(listEchec.get(i).getIndividu().getId_individu().equals(individu.getId_individu())) {
+                seanceIndividu.add(listEchec.get(i));
+            }
+        }
+
+        return seanceIndividu;
+    }
+
 }

@@ -23,11 +23,11 @@ public class Course extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Course");
 
-    private static JLabel distance = new JLabel("Distance (en km)");
-    private static JTextField dist = new JTextField(5);
+    public static JLabel distance = new JLabel("Distance (en km)");
+    public static JTextField dist = new JTextField(5);
 
-    private static JLabel temps = new JLabel("Temps (en minutes) ");
-    private static JTextField time = new JTextField(5);
+    public static JLabel temps = new JLabel("Temps (en minutes) ");
+    public static JTextField time = new JTextField(5);
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");

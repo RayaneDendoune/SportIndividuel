@@ -21,17 +21,18 @@ public class Natation extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Natation");
 
-    private JLabel nb_longueur = new JLabel("Nombre de longueur total ");
-    private JTextField longueur = new JTextField(5);
+    public static JLabel nb_longueur = new JLabel("Nombre de longueur total ");
+    public static JTextField longueur = new JTextField(5);
 
-    private JLabel temps = new JLabel("Temps (en minutes) ");
-    private JTextField time = new JTextField(5);
+    public static JLabel temps = new JLabel("Temps (en minutes) ");
+    public static JTextField time = new JTextField(5);
 
-    private JLabel typeNage = new JLabel("Type de nage");
-    private JComboBox nage  = new JComboBox();
+    public static JLabel typeNage = new JLabel("Type de nage");
+    public static JComboBox nage  = new JComboBox();
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
+    private JButton modifier = new JButton("Modifier");
 
     private JButton calorie = new JButton("Calories brulées");
     private JButton tempsMoy = new JButton("Temps Moyen/Longueur");
@@ -48,12 +49,13 @@ public class Natation extends JFrame implements ActionListener {
         setResizable(false); //Taille non changeable
 
         nage.addItem("Crawl");
-        nage.addItem("Dos-Crawlé");
+        nage.addItem("Dos-Crawle");
         nage.addItem("Brasse");
         nage.addItem("Papillon");
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        modifier.addActionListener(this);
         calorie.addActionListener(this);
         tempsMoy.addActionListener(this);
 
@@ -73,10 +75,15 @@ public class Natation extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public JPanel donnee() {
+    public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+
+        /*nage.addItem("Crawl");
+        nage.addItem("Dos-Crawlé");
+        nage.addItem("Brasse");
+        nage.addItem("Papillon");*/
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
@@ -139,6 +146,13 @@ public class Natation extends JFrame implements ActionListener {
         c.gridx = 1;
         c.gridy = 0;
         grid.add(enregistrer, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        grid.add(modifier, c);
 
         return grid;
     }
@@ -235,6 +249,12 @@ public class Natation extends JFrame implements ActionListener {
                 RobustesseManager.erreur(4, null);
             }
         }
+
+        if(Button == modifier) {
+            new ModifCourse(2);
+            dispose();
+        }
+
         if(Button == tempsMoy){
             ArrayList<Time> tpsMoy = NatationManager.tpsMoyLongueur(AuthentificationManager.personne);
             LineChart lcl = new LineChart(tpsMoy, "Natation - Temps moyen par longueur", "Temps moyen par longueur en fonction de la séance" , "Temps moyen", "Numéro de la seance", "Temps moyen (en secondes)");

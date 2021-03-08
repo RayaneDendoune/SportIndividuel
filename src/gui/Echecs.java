@@ -19,20 +19,21 @@ public class Echecs extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Echecs");
 
-    private String competence = "Votre Compétence Mental est au niveau " + EchecManager.competenceMentale(AuthentificationManager.personne);
-    private JLabel competenceMentale = new JLabel(competence);
+    public static String competence = "Votre Compétence Mental est au niveau " + EchecManager.competenceMentale(AuthentificationManager.personne);
+    public static JLabel competenceMentale = new JLabel(competence);
 
-    private JLabel eloAdv = new JLabel("Elo de l'adversaire ");
-    private JTextField adversaire = new JTextField(5);
+    public static JLabel eloAdv = new JLabel("Elo de l'adversaire ");
+    public static JTextField adversaire = new JTextField(5);
 
-    private JLabel temps = new JLabel("Temps (en minutes) ");
-    private JTextField time = new JTextField(5);
+    public static JLabel temps = new JLabel("Temps (en minutes) ");
+    public static JTextField time = new JTextField(5);
 
-    private JLabel issueMatch = new JLabel("Issue du match ");
-    private JComboBox issue = new JComboBox();
+    public static JLabel issueMatch = new JLabel("Issue du match ");
+    public static JComboBox issue = new JComboBox();
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
+    private JButton modifier = new JButton("Modifier");
 
     private JButton elo = new JButton("Classement ELO");
     private JButton nvConcentration = new JButton("Niveau de concentration");
@@ -53,6 +54,7 @@ public class Echecs extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        modifier.addActionListener(this);
         elo.addActionListener(this);
         nvConcentration.addActionListener(this);
 
@@ -71,7 +73,7 @@ public class Echecs extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public JPanel donnee() {
+    public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -137,6 +139,13 @@ public class Echecs extends JFrame implements ActionListener {
         c.gridx = 1;
         c.gridy = 0;
         grid.add(enregistrer, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        grid.add(modifier, c);
 
         return grid;
     }
@@ -233,6 +242,10 @@ public class Echecs extends JFrame implements ActionListener {
             else {
                 RobustesseManager.erreur(4, null);
             }
+        }
+        if(Button==modifier){
+            new ModifCourse(5);
+            dispose();
         }
 
         if(Button == elo){

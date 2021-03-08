@@ -1,9 +1,6 @@
 package manager;
 
-import model.Individu;
-import model.Seance_course;
-import model.Seance_cyclisme;
-import model.Seance_natation;
+import model.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,6 +25,18 @@ public class CyclismeManager {
 
 
         session.save(seance_cyclisme);
+        session.getTransaction().commit();
+    }
+
+    public static void updateCyclisme(Seance_cyclisme seance, float poids, String objectifSeance, String niv_activite_physique) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        seance.setPoids(poids);
+        seance.setObjectif_seance(objectifSeance);
+        seance.setNiveau_activite_physique(niv_activite_physique);
+
+        session.update(seance);
         session.getTransaction().commit();
     }
 
@@ -74,7 +83,7 @@ public class CyclismeManager {
         }
         calcul *= (Math.pow(poids,0.48)) * (Math.pow(taille,0.50) * (Math.pow(age,(-0.13))));
 
-        if(niveau.equals("Sédentaire")) {
+        if(niveau.equals("Sedentaire")) {
             nv = 1.37f;
         }
         else if(niveau.equals("Actif")) {
@@ -157,4 +166,37 @@ public class CyclismeManager {
         int besoin = (int)(poids*1.2);
         return besoin;
     }
+
+    public static ArrayList<Seance_cyclisme> listCyclisme() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Seance_cyclisme> listCyclisme = new ArrayList<Seance_cyclisme>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_cyclisme seanceCyclisme");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_cyclisme seanceCyclisme = (Seance_cyclisme) iterator.next();
+            //System.out.println(sc.toString());
+            listCyclisme.add(seanceCyclisme);
+        }
+        readTransaction.commit();
+        return listCyclisme;
+    }
+
+    public static ArrayList<Seance_cyclisme> seanceCyclismeIndividu(Individu individu) {
+        ArrayList<Seance_cyclisme> listCyclisme = listCyclisme();
+        ArrayList<Seance_cyclisme> seanceIndividu = new ArrayList<Seance_cyclisme>();
+
+        for(int i = 0; i<listCyclisme.size(); i++) {
+            if(listCyclisme.get(i).getIndividu().getId_individu().equals(individu.getId_individu())) {
+                seanceIndividu.add(listCyclisme.get(i));
+            }
+        }
+
+        return seanceIndividu;
+    }
+
 }

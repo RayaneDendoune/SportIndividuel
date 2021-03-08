@@ -18,17 +18,18 @@ public class Cyclisme extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Cyclisme");
 
-    private JLabel niveauActivitePhysique = new JLabel("Niveau activité physique ");
-    private JComboBox niveau = new JComboBox();
+    public static JLabel niveauActivitePhysique = new JLabel("Niveau activité physique ");
+    public static JComboBox niveau = new JComboBox();
 
-    private JLabel poids = new JLabel("Poids (en kg) ");
-    private JTextField weight = new JTextField(5);
+    public static JLabel poids = new JLabel("Poids (en kg) ");
+    public static JTextField weight = new JTextField(5);
 
-    private JLabel objSeance = new JLabel("Objectif de la séance");
-    private JComboBox objectif  = new JComboBox();
+    public static JLabel objSeance = new JLabel("Objectif de la séance");
+    public static JComboBox objectif  = new JComboBox();
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
+    private JButton modifier = new JButton("Modifier");
 
     private JButton proteine = new JButton("Besoin en proteine");
     private JButton energie = new JButton("Dépense énergétique");
@@ -48,12 +49,13 @@ public class Cyclisme extends JFrame implements ActionListener {
         objectif.addItem("Perte de poids"); //Inventez des niveaux !!!!!!!!
         objectif.addItem("Endurance musculaire");
 
-        niveau.addItem("Sédentaire");
+        niveau.addItem("Sedentaire");
         niveau.addItem("Actif");
         niveau.addItem("Sportif");
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        modifier.addActionListener(this);
         proteine.addActionListener(this);
         energie.addActionListener(this);
 
@@ -72,7 +74,7 @@ public class Cyclisme extends JFrame implements ActionListener {
 
     }
 
-    public JPanel donnee() {
+    public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -138,6 +140,13 @@ public class Cyclisme extends JFrame implements ActionListener {
         c.gridx = 1;
         c.gridy = 0;
         grid.add(enregistrer, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        grid.add(modifier, c);
 
         return grid;
     }
@@ -216,6 +225,11 @@ public class Cyclisme extends JFrame implements ActionListener {
             else {
                 RobustesseManager.erreur(4, null);
             }
+        }
+
+        if(Button==modifier){
+            new ModifCourse(4);
+            dispose();
         }
 
         if(Button == proteine) {

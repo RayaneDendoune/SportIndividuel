@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
+import java.sql.Time;
 import java.util.*;
 
 public class TennisManager {
@@ -32,6 +33,21 @@ public class TennisManager {
         session.save(seance_tennis);
         session.getTransaction().commit();
 
+    }
+    public static void updateTennis(Seance_tennis seance, float premierService, float deuxiemeService, float troisiemeService, int nbSet,char issueMatch) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        float vitesse = TennisManager.vitesseService(premierService, deuxiemeService, troisiemeService);
+
+        seance.setPremier_service(premierService);
+        seance.setDeuxieme_service(deuxiemeService);
+        seance.setTroisieme_service(troisiemeService);
+        seance.setNb_set(nbSet);
+        seance.setIssue_match(issueMatch);
+        seance.setVitesse_moy_service(vitesse);
+
+        session.update(seance);
+        session.getTransaction().commit();
     }
 
     public static long nbSeanceTennis(Individu individu){
@@ -140,6 +156,38 @@ public class TennisManager {
         readTransaction.commit();
 
         return individus;
+
+    }
+    public static ArrayList<Seance_tennis> listTennis() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Seance_tennis> listNatation = new ArrayList<Seance_tennis>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_tennis st");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_tennis st = (Seance_tennis) iterator.next();
+            //System.out.println(sc.toString());
+            listNatation.add(st);
+        }
+        readTransaction.commit();
+        return listNatation;
+    }
+
+    public static ArrayList<Seance_tennis> seanceTennisIndividu(Individu individu) {
+        ArrayList<Seance_tennis> listTennis = listTennis();
+        ArrayList<Seance_tennis> seanceIndividu = new ArrayList<Seance_tennis>();
+
+        for(int i = 0; i<listTennis.size(); i++) {
+            if(listTennis.get(i).getIndividu().getId_individu().equals(individu.getId_individu())) {
+                seanceIndividu.add(listTennis.get(i));
+            }
+        }
+
+        return seanceIndividu;
     }
 
 

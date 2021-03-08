@@ -1,5 +1,6 @@
 package manager;
 
+import gui.Authentification;
 import model.Individu;
 import model.Seance_course;
 import model.Seance_natation;
@@ -29,6 +30,29 @@ public class NatationManager {
         seance_natation.setIndividu(individu);
 
         session.save(seance_natation);
+        session.getTransaction().commit();
+    }
+
+    public static void updateNatation(Seance_natation seance, int nbLongueur, Time temps, String typeNage) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        int timeH = temps.getHours()*60;
+        int time = timeH + temps.getMinutes();
+        float tempsMoy = NatationManager.tempsMoyLongueur(nbLongueur, time);
+        int heure = (int) tempsMoy / 3600;
+        int tempsT = (int) tempsMoy - (heure * 3600);
+        int minutes = tempsT / 60;
+        int secondes = tempsT % 60;
+        final Time tempsLongueur = new Time(heure, minutes, secondes);
+
+        seance.setNb_longueur(nbLongueur);
+        seance.setTemps_total(temps);
+        seance.setTemps_moy_longueur(tempsLongueur);
+        seance.setCalorie_perdu((int) calories(AuthentificationManager.personne, typeNage, time));
+        seance.setType_nage(typeNage);
+
+        session.update(seance);
         session.getTransaction().commit();
     }
 
@@ -62,13 +86,6 @@ public class NatationManager {
     public static float tempsMoyLongueur(int nbLongueur, int min) {
         int sec = min*60;
         float tempsMoy = sec/nbLongueur; //Temps en secondes
-        //return tempsMoy; //Le temps est en seconde il faudra le mettre en TIME
-
-        /*int heure = (int)tempsMoy/3600;
-        int tempsT = (int)tempsMoy - (heure*3600);
-
-        int minutes = tempsT/60;
-        int secondes = tempsT%60;*/
 
         return tempsMoy;
     }
@@ -78,7 +95,7 @@ public class NatationManager {
         if(typeNage.equals("Brasse")) {
             met = 10;
         }
-        else if(typeNage.equals("Dos-Crawlé")|| typeNage.equals("Crawl")) {
+        else if(typeNage.equals("Dos-Crawle")|| typeNage.equals("Crawl")) {
             met = 8;
         }
         else if(typeNage.equals("Papillon") ) {
@@ -154,5 +171,37 @@ public class NatationManager {
         readTransaction.commit();
 
         return individus;
+    }
+
+    public static ArrayList<Seance_natation> listNatation() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Seance_natation> listNatation = new ArrayList<Seance_natation>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_natation sn");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_natation sn = (Seance_natation) iterator.next();
+            //System.out.println(sc.toString());
+            listNatation.add(sn);
+        }
+        readTransaction.commit();
+        return listNatation;
+    }
+
+    public static ArrayList<Seance_natation> seanceNatationIndividu(Individu individu) {
+        ArrayList<Seance_natation> listNatation = listNatation();
+        ArrayList<Seance_natation> seanceIndividu = new ArrayList<Seance_natation>();
+
+        for(int i = 0; i<listNatation.size(); i++) {
+            if(listNatation.get(i).getIndividu().getId_individu().equals(individu.getId_individu())) {
+                seanceIndividu.add(listNatation.get(i));
+            }
+        }
+
+        return seanceIndividu;
     }
 }

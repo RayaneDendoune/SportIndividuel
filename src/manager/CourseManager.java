@@ -38,8 +38,6 @@ public class CourseManager {
         int timeH = temps.getHours()*60;
         int time = timeH + temps.getMinutes();
 
-
-
         seance.setDistance(distance);
         seance.setTemps(temps);
         seance.setNb_pas(nbPas(distance));
