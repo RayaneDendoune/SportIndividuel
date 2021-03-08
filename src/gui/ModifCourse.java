@@ -18,6 +18,9 @@ public class ModifCourse extends JFrame implements ActionListener {
     private JLabel disposition = new JLabel();
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
+    private JButton retour = new JButton("Retour");
+    private JLabel titre = new JLabel();
+
 
     public ModifCourse(int selection) {
         this.selection = selection;
@@ -40,34 +43,44 @@ public class ModifCourse extends JFrame implements ActionListener {
         if(selection == 1) {
             nbButtons = nbButtonCourse(CourseManager.seanceCourseIndividu(AuthentificationManager.personne));
             donneeEntree = Course.donnee();
+            titre.setText("Modication Course");
         }
         else if(selection == 2) {
             nbButtons = nbButtonNatation(NatationManager.seanceNatationIndividu(AuthentificationManager.personne));
             donneeEntree = Natation.donnee();
+            titre.setText("Modication Natation");
         }
         else if(selection == 3) {
             nbButtons = nbButtonsTennis(TennisManager.seanceTennisIndividu(AuthentificationManager.personne));
             donneeEntree = Tennis.donnee();
+            titre.setText("Modication Tennis");
         }
         else if(selection == 4) {
             nbButtons = nbButtonsCyclisme(CyclismeManager.seanceCyclismeIndividu(AuthentificationManager.personne));
             donneeEntree = Cyclisme.donnee();
+            titre.setText("Modication Cyclisme");
 
         }
         else if(selection == 5) {
             nbButtons = nbButtonsEchec(EchecManager.seanceEchecIndividu(AuthentificationManager.personne));
             donneeEntree = Echecs.donnee();
+            titre.setText("Modication Echecs");
         }
 
         for(int i = 0; i<nbButtons.size(); i++) {
             nbButtons.get(i).addActionListener(this);
         }
 
+        retour.addActionListener(this);
+
         pan.setLayout(new BorderLayout());
 
         JScrollPane grid = buttons(nbButtons);
         JPanel completeEast = completeEast(donneeEntree);
-        JPanel complete = complete(grid, completeEast);
+        //completeEast.add(donneeEntree);
+        JPanel completeCenter = completeCenter(grid, completeEast);
+
+        JPanel complete = complete(completeCenter);
 
         pan.add(complete, BorderLayout.WEST);
         this.setContentPane(pan);
@@ -105,18 +118,40 @@ public class ModifCourse extends JFrame implements ActionListener {
         return grid;
     }
 
-    public JPanel complete(JScrollPane scroll, JPanel completeEast) {
+    public JPanel completeCenter(JScrollPane scroll, JPanel completeEast) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         c.gridx = 0;
         c.gridy = 0;
-        grid.add(scroll, c);
+        grid.add(completeEast, c);
 
         c.gridx = 1;
         c.gridy = 0;
-        grid.add(completeEast, c);
+        grid.add(scroll, c);
+
+        return grid;
+    }
+
+    public JPanel complete(JPanel completeCenter) {
+        JPanel grid = new JPanel();
+        grid.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.gridx = 0;
+        c.gridy = 0;
+        grid.add(titre, c);
+
+        c.insets = new Insets(20,0,0,0);
+        c.gridx = 0;
+        c.gridy = 1;
+        grid.add(completeCenter, c);
+
+        c.insets = new Insets(20,0,0,0);
+        c.gridx = 0;
+        c.gridy = 2;
+        grid.add(retour, c);
 
         return grid;
     }
@@ -164,6 +199,29 @@ public class ModifCourse extends JFrame implements ActionListener {
         ArrayList<Seance_cyclisme> seance_cyclisme = CyclismeManager.seanceCyclismeIndividu((AuthentificationManager.personne));
         ArrayList<Partie_echec> partie_echec = EchecManager.seanceEchecIndividu(AuthentificationManager.personne);
 
+        if(Button == retour) {
+            if(selection == 1) {
+                new Course();
+                dispose();
+            }
+            else if(selection == 2) {
+                new Natation();
+                dispose();
+            }
+            else if(selection == 3) {
+                new Tennis();
+                dispose();
+            }
+            else if(selection == 4) {
+                new Cyclisme();
+                dispose();
+            }
+            else if(selection == 5) {
+                new Echecs();
+                dispose();
+            }
+        }
+
         for(int  i = 0; i<buttons.size(); i++) {
            if(selection == 1) {
                if (Button == buttons.get(i) && !Course.dist.getText().isBlank() && !Course.time.getText().isBlank()) {
@@ -199,8 +257,9 @@ public class ModifCourse extends JFrame implements ActionListener {
                     int min = Integer.parseInt(Echecs.time.getText()) % 60;
                     final Time TimeSQL = new Time(heure, min, 00);
                     char issuePartie = EchecManager.issue((String) Echecs.issue.getSelectedItem());
+                    int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(Echecs.adversaire.getText()), (String) Echecs.issue.getSelectedItem());
 
-                    EchecManager.updateEchec(partie_echec.get(i),Integer.parseInt(Echecs.adversaire.getText()),TimeSQL,issuePartie);
+                    EchecManager.updateEchec(partie_echec.get(i),Integer.parseInt(Echecs.adversaire.getText()),TimeSQL,issuePartie, newElo);
                 }
             }
         }

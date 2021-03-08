@@ -28,10 +28,11 @@ public class EchecManager {
         session.save(partie_echec);
         session.getTransaction().commit();
     }
-    public static void updateEchec(Partie_echec partie, int eloAdversaire, Time temps, char issue) {
+    public static void updateEchec(Partie_echec partie, int eloAdversaire, Time temps, char issue, int newElo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
+        partie.setFutur_elo(newElo);
         partie.setElo_adversaire(eloAdversaire);
         partie.setDuree(temps);
         partie.setIssue_partie(issue);

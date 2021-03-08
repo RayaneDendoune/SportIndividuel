@@ -32,9 +32,14 @@ public class CyclismeManager {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
+        int nrj = CyclismeManager.depenseNRJ(AuthentificationManager.personne, niv_activite_physique);
+        int besoin = CyclismeManager.besoinProteine((int)poids);
+
         seance.setPoids(poids);
         seance.setObjectif_seance(objectifSeance);
         seance.setNiveau_activite_physique(niv_activite_physique);
+        seance.setBesoin_proteine(besoin);
+        seance.setDepense_energetique(nrj);
 
         session.update(seance);
         session.getTransaction().commit();
