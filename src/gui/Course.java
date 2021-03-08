@@ -23,14 +23,15 @@ public class Course extends JFrame implements ActionListener {
 
     private JLabel sport = new JLabel("Course");
 
-    private JLabel distance = new JLabel("Distance (en km)");
-    private JTextField dist = new JTextField(5);
+    private static JLabel distance = new JLabel("Distance (en km)");
+    private static JTextField dist = new JTextField(5);
 
-    private JLabel temps = new JLabel("Temps (en minutes) ");
-    private JTextField time = new JTextField(5);
+    private static JLabel temps = new JLabel("Temps (en minutes) ");
+    private static JTextField time = new JTextField(5);
 
     private JButton enregistrer = new JButton("Enregistrer");
     private JButton retour = new JButton("Retour");
+    private JButton modifier = new JButton("Modifier");
 
     private JButton vitesse = new JButton("Vitesse moyenne");
     private JButton nbPas = new JButton("Nombre de pas");
@@ -47,6 +48,7 @@ public class Course extends JFrame implements ActionListener {
 
         retour.addActionListener(this);
         enregistrer.addActionListener(this);
+        modifier.addActionListener(this);
         vitesse.addActionListener(this);
         nbPas.addActionListener(this);
 
@@ -65,7 +67,7 @@ public class Course extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public JPanel donnee() {
+    public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -117,6 +119,13 @@ public class Course extends JFrame implements ActionListener {
         c.gridx = 1;
         c.gridy = 0;
         grid.add(enregistrer, c);
+
+        c.insets = new Insets(0,20,0,0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        grid.add(modifier, c);
 
         return grid;
     }
@@ -202,6 +211,11 @@ public class Course extends JFrame implements ActionListener {
                 RobustesseManager.erreur(4, null);
             }
 
+        }
+
+        if(Button == modifier) {
+            new ModifCourse(1);
+            dispose();
         }
 
         if(Button == vitesse) {

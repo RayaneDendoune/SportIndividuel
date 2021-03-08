@@ -1,5 +1,6 @@
 package manager;
 
+import model.Demande;
 import model.Individu;
 import model.Seance_course;
 import org.hibernate.Query;
@@ -30,6 +31,23 @@ public class CourseManager {
         session.getTransaction().commit();
     }
 
+    public static void updateCourse(Seance_course seance, float distance, Time temps) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        int timeH = temps.getHours()*60;
+        int time = timeH + temps.getMinutes();
+
+
+
+        seance.setDistance(distance);
+        seance.setTemps(temps);
+        seance.setNb_pas(nbPas(distance));
+        seance.setVitesse_moy(vitesseMoyenne(distance, time));
+
+        session.update(seance);
+        session.getTransaction().commit();
+    }
 
 
     public static String existSeanceCourse(Session session, String id_seance_course) {
@@ -166,6 +184,38 @@ public class CourseManager {
         readTransaction.commit();
 
         return individus;
+    }
+
+    public static ArrayList<Seance_course> listCourse() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        ArrayList<Seance_course> listCourse = new ArrayList<Seance_course>();
+        Transaction readTransaction = session.beginTransaction();
+
+        Query readQuery = session.createQuery("from Seance_course sc");
+
+
+        List result = readQuery.list();
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            Seance_course sc = (Seance_course) iterator.next();
+            //System.out.println(sc.toString());
+            listCourse.add(sc);
+        }
+        readTransaction.commit();
+        return listCourse;
+    }
+
+    public static ArrayList<Seance_course> seanceCourseIndividu(Individu individu) {
+        ArrayList<Seance_course> listCourse = listCourse();
+        ArrayList<Seance_course> seanceIndividu = new ArrayList<Seance_course>();
+
+        for(int i = 0; i<listCourse.size(); i++) {
+            if(listCourse.get(i).getIndividu().getId_individu().equals(individu.getId_individu())) {
+                seanceIndividu.add(listCourse.get(i));
+            }
+        }
+
+        return seanceIndividu;
     }
 
 
