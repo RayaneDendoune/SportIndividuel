@@ -38,6 +38,10 @@ public class Accueil extends JFrame implements ActionListener {
 	private ImageIcon iconRs2 = new ImageIcon(iconRs.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 	private JButton imgRs = new JButton(iconRs2);
 
+	private ImageIcon deco = new ImageIcon("src/images/deconnexion.png");
+	private ImageIcon deco2 = new ImageIcon(deco.getImage().getScaledInstance(25,25,Image.SCALE_DEFAULT));
+	private JButton deconnexion = new JButton(deco2);
+
 	
 	public Accueil() {
 		build();
@@ -55,10 +59,12 @@ public class Accueil extends JFrame implements ActionListener {
 		imgTennis.addActionListener(this);
 		imgEchecs.addActionListener(this);
 		imgRs.addActionListener(this);
+		deconnexion.addActionListener(this);
 
 		JPanel grid = imgButtons(); //Partie avec les boutons
+		JPanel header = header();
 
-		JPanel panel = complete(grid);
+		JPanel panel = complete(grid, header);
 		pan.add(panel, BorderLayout.CENTER);
 		this.setContentPane(pan);
 
@@ -110,14 +116,31 @@ public class Accueil extends JFrame implements ActionListener {
 		return grid;
 	}
 
-	public JPanel complete(JPanel grid) {
+	public JPanel header() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.gridx = 3;
+		c.gridy = 0;
+		panel.add(bienvenue, c);
+
+		c.insets = new Insets(0,20,0,0);
+		c.gridx = 5;
+		c.gridy = 0;
+		panel.add(deconnexion, c);
+
+		return panel;
+	}
+
+	public JPanel complete(JPanel grid, JPanel header) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.gridx = 0;
 		c.gridy = 0;
-		panel.add(bienvenue, c);
+		panel.add(header, c);
 
 		c.gridx = 0;
 		c.gridy = 1;
@@ -165,6 +188,11 @@ public class Accueil extends JFrame implements ActionListener {
 
 		if(Button==imgRs) {
 			new Reseau();
+			dispose();
+		}
+
+		if(Button == deconnexion) {
+			new Authentification();
 			dispose();
 		}
 	}

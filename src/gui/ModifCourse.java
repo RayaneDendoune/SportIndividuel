@@ -221,65 +221,104 @@ public class ModifCourse extends JFrame implements ActionListener {
                 dispose();
             }
         }
-        /*if(RobustesseManager.StringToFloat(Course.dist.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Course.dist.getText()), Course.distance); }
-        else if(RobustesseManager.StringToInteger(Course.time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Course.time.getText()), Course.temps); }
 
-        if(RobustesseManager.StringToInteger(Natation.longueur.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.longueur.getText()), Natation.nb_longueur);}
-        else if(RobustesseManager.StringToInteger(Natation.time.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.time.getText()), Natation.temps);}
-
-        if(RobustesseManager.StringToFloat(Tennis.PS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.PS.getText()), Tennis.premierService);}
-        else if(RobustesseManager.StringToFloat(Tennis.DS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.DS.getText()), Tennis.deuxiemeService);}
-        else if(RobustesseManager.StringToFloat(Tennis.TS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.TS.getText()), Tennis.troisiemeService);}
-        else if(RobustesseManager.StringToInteger(Tennis.set.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Tennis.set.getText()),Tennis.nbSet);}
-
-        if(RobustesseManager.StringToFloat(Cyclisme.weight.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Cyclisme.weight.getText()),Cyclisme.poids);}*/
-       
-        /*JTextField fr = new JTextField();
-        String saisi = fr.getText();
-        if(saisi.contains("a")){
-            RobustesseManager.erreur(4, Course.distance);
-        }*/
-
-        for(int  i = 0; i<buttons.size(); i++) {
-           if(selection == 1) {
-               if (Button == buttons.get(i) && !Course.dist.getText().isBlank() && !Course.time.getText().isBlank()) {
-                   if (RobustesseManager.StringToFloat(Course.dist.getText()) == 0 && RobustesseManager.StringToInteger(Course.time.getText()) == 0) {
-                       int heure = Integer.parseInt(Course.time.getText()) / 60;
-                       int min = Integer.parseInt(Course.time.getText()) % 60;
-                       final Time TimeSQL = new Time(heure, min, 00);
-                       CourseManager.updateCourse(sc.get(i), Float.parseFloat(Course.dist.getText()), TimeSQL);
-                   }
-               }
-           }
-
-           if(selection == 2) {
-               if (Button == buttons.get(i) && !Natation.longueur.getText().isBlank() && !Natation.time.getText().isBlank()) {
-                   int heure = Integer.parseInt(Natation.time.getText()) / 60;
-                   int min = Integer.parseInt(Natation.time.getText()) % 60;
-                   final Time TimeSQL = new Time(heure, min, 00);
-                   NatationManager.updateNatation(sn.get(i), Integer.parseInt(Natation.longueur.getText()), TimeSQL, (String) Natation.nage.getSelectedItem());
-               }
-           }
-           if(selection ==3){
-               if (Button == buttons.get(i) && !Tennis.PS.getText().isBlank() && !Tennis.DS.getText().isBlank() && !Tennis.TS.getText().isBlank() && !Tennis.set.getText().isBlank()){
-                   TennisManager.updateTennis(st.get(i),Float.parseFloat(Tennis.PS.getText()),Float.parseFloat(Tennis.DS.getText()),Float.parseFloat(Tennis.TS.getText()),Integer.parseInt(Tennis.set.getText()), TennisManager.issueMatch((String) Tennis.issue.getSelectedItem()));
-               }
-           }
-
-            if(selection ==4){
-                if (Button == buttons.get(i) && !Cyclisme.weight.getText().isBlank()){
-                    CyclismeManager.updateCyclisme(seance_cyclisme.get(i), Float.parseFloat(Cyclisme.weight.getText()), (String)Cyclisme.objectif.getSelectedItem(), (String) Cyclisme.niveau.getSelectedItem());
+        for (int i = 0; i < buttons.size(); i++) {
+            if (selection == 1) {
+                if (Button == buttons.get(i)) {
+                    if(!Course.dist.getText().isBlank() && !Course.time.getText().isBlank()) {
+                        if (RobustesseManager.StringToFloat(Course.dist.getText()) == 0 && RobustesseManager.StringToInteger(Course.time.getText()) == 0) {
+                            int heure = Integer.parseInt(Course.time.getText()) / 60;
+                            int min = Integer.parseInt(Course.time.getText()) % 60;
+                            final Time TimeSQL = new Time(heure, min, 00);
+                            CourseManager.updateCourse(sc.get(i), Float.parseFloat(Course.dist.getText()), TimeSQL);
+                        } else {
+                            if (RobustesseManager.StringToFloat(Course.dist.getText()) != 0) {
+                                RobustesseManager.erreur(RobustesseManager.StringToFloat(Course.dist.getText()), Course.distance);
+                            }
+                            if (RobustesseManager.StringToInteger(Course.time.getText()) != 0) {
+                                RobustesseManager.erreur(RobustesseManager.StringToInteger(Course.time.getText()), Course.temps);
+                            }
+                        }
+                    }
+                    else {
+                        RobustesseManager.erreur(4, null);
+                    }
                 }
             }
-            if(selection == 5){
-                if(Button== buttons.get(i) && !Echecs.adversaire.getText().isBlank() && !Echecs.time.getText().isBlank()){
-                    int heure = Integer.parseInt(Echecs.time.getText()) / 60;
-                    int min = Integer.parseInt(Echecs.time.getText()) % 60;
-                    final Time TimeSQL = new Time(heure, min, 00);
-                    char issuePartie = EchecManager.issue((String) Echecs.issue.getSelectedItem());
-                    int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(Echecs.adversaire.getText()), (String) Echecs.issue.getSelectedItem());
 
-                    EchecManager.updateEchec(partie_echec.get(i),Integer.parseInt(Echecs.adversaire.getText()),TimeSQL,issuePartie, newElo);
+            if (selection == 2) {
+                if (Button == buttons.get(i) ) {
+                    if(!Natation.longueur.getText().isBlank() && !Natation.time.getText().isBlank()) {
+                        if(RobustesseManager.StringToInteger(Natation.longueur.getText()) == 0 && RobustesseManager.StringToInteger(Natation.time.getText())==0) {
+                            int heure = Integer.parseInt(Natation.time.getText()) / 60;
+                            int min = Integer.parseInt(Natation.time.getText()) % 60;
+                            final Time TimeSQL = new Time(heure, min, 00);
+                            NatationManager.updateNatation(sn.get(i), Integer.parseInt(Natation.longueur.getText()), TimeSQL, (String) Natation.nage.getSelectedItem());
+                        }
+                        else {
+                            if(RobustesseManager.StringToInteger(Natation.longueur.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.longueur.getText()), Natation.nb_longueur); }
+                            if(RobustesseManager.StringToInteger(Natation.time.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.time.getText()), Natation.temps); }
+                        }
+                    }
+                    else {
+                        RobustesseManager.erreur(4, null);
+                    }
+                }
+            }
+            if (selection == 3) {
+                if (Button == buttons.get(i)) {
+                    if(!Tennis.PS.getText().isBlank() && !Tennis.DS.getText().isBlank() && !Tennis.TS.getText().isBlank() && !Tennis.set.getText().isBlank()) {
+                        if(RobustesseManager.StringToFloat(Tennis.PS.getText()) ==0 && RobustesseManager.StringToFloat(Tennis.DS.getText()) ==0 && RobustesseManager.StringToFloat(Tennis.TS.getText()) ==0 && RobustesseManager.StringToInteger(Tennis.set.getText())==0) {
+                            TennisManager.updateTennis(st.get(i), Float.parseFloat(Tennis.PS.getText()), Float.parseFloat(Tennis.DS.getText()), Float.parseFloat(Tennis.TS.getText()), Integer.parseInt(Tennis.set.getText()), TennisManager.issueMatch((String) Tennis.issue.getSelectedItem()));
+                        }
+                        else{
+                            if(RobustesseManager.StringToFloat(Tennis.PS.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.PS.getText()), Tennis.premierService); }
+                            if(RobustesseManager.StringToFloat(Tennis.DS.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.DS.getText()), Tennis.deuxiemeService); }
+                            if(RobustesseManager.StringToFloat(Tennis.TS.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.TS.getText()), Tennis.troisiemeService); }
+                            if(RobustesseManager.StringToInteger(Tennis.set.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Tennis.set.getText()), Tennis.nbSet); }
+                        }
+                    }
+                    else {
+                        RobustesseManager.erreur(4, null);
+                    }
+                }
+
+            }
+
+            if (selection == 4) {
+                if (Button == buttons.get(i)) {
+                    if (!Cyclisme.weight.getText().isBlank()) {
+                        if(RobustesseManager.StringToFloat(Cyclisme.weight.getText()) == 0) {
+                            CyclismeManager.updateCyclisme(seance_cyclisme.get(i), Float.parseFloat(Cyclisme.weight.getText()), (String) Cyclisme.objectif.getSelectedItem(), (String) Cyclisme.niveau.getSelectedItem());
+                        } else {
+                            if(RobustesseManager.StringToFloat(Cyclisme.weight.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Cyclisme.weight.getText()), Cyclisme.poids); }
+                        }
+                    } else {
+                        RobustesseManager.erreur(4, null);
+                    }
+                }
+            }
+
+            if (selection == 5) {
+                if(Button == buttons.get(i)) {
+                    if(!Echecs.adversaire.getText().isBlank() && !Echecs.time.getText().isBlank()) {
+                        if(RobustesseManager.StringToInteger(Echecs.adversaire.getText()) == 0 && RobustesseManager.StringToInteger(Echecs.time.getText()) == 0) {
+                            int heure = Integer.parseInt(Echecs.time.getText()) / 60;
+                            int min = Integer.parseInt(Echecs.time.getText()) % 60;
+                            final Time TimeSQL = new Time(heure, min, 00);
+                            char issuePartie = EchecManager.issue((String) Echecs.issue.getSelectedItem());
+                            int newElo = EchecManager.newElo(AuthentificationManager.personne, Integer.parseInt(Echecs.adversaire.getText()), (String) Echecs.issue.getSelectedItem());
+
+                            EchecManager.updateEchec(partie_echec.get(i), Integer.parseInt(Echecs.adversaire.getText()), TimeSQL, issuePartie, newElo);
+                        }
+                        else {
+                            if(RobustesseManager.StringToInteger(Echecs.adversaire.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Echecs.adversaire.getText()), Echecs.eloAdv); }
+                            if(RobustesseManager.StringToInteger(Echecs.time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Echecs.time.getText()), Echecs.temps); }
+                        }
+                    }
+                    else {
+                        RobustesseManager.erreur(4, null);
+                    }
                 }
             }
         }

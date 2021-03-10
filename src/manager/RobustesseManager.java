@@ -1,5 +1,7 @@
 package manager;
 
+import gui.*;
+
 import javax.swing.*;
 
 public class RobustesseManager {
@@ -83,6 +85,63 @@ public class RobustesseManager {
         }
 
         return error;
+    }
+
+    public static boolean modificationRobustesse(int selection) {
+        if(selection == 1) {
+            if(RobustesseManager.StringToFloat(Course.dist.getText()) == 0 && RobustesseManager.StringToInteger(Course.time.getText()) == 0) {
+                return false;
+            }
+        }
+        else if(selection == 2) {
+            if(RobustesseManager.StringToInteger(Natation.longueur.getText()) == 0 && RobustesseManager.StringToInteger(Natation.time.getText())==0) {
+                return false;
+            }
+        }
+        else if(selection == 3) {
+            if(RobustesseManager.StringToFloat(Tennis.PS.getText()) ==0 && RobustesseManager.StringToFloat(Tennis.DS.getText()) ==0 && RobustesseManager.StringToFloat(Tennis.TS.getText()) ==0 && RobustesseManager.StringToInteger(Tennis.set.getText())==0) {
+                return false;
+            }
+        }
+        else if(selection == 4) {
+            if(RobustesseManager.StringToFloat(Cyclisme.weight.getText())==0) {
+                return false;
+            }
+        }
+        else if(selection == 5) {
+            if(RobustesseManager.StringToInteger(Echecs.adversaire.getText()) == 0 && RobustesseManager.StringToInteger(Echecs.time.getText()) == 0) {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void modificationProbleme(int selection) {
+        if(selection == 1) {
+            if(RobustesseManager.StringToFloat(Course.dist.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Course.dist.getText()), Course.distance); }
+            if(RobustesseManager.StringToInteger(Course.time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Course.time.getText()), Course.temps); }
+        }
+        else if(selection == 2) {
+            if(RobustesseManager.StringToInteger(Natation.longueur.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.longueur.getText()), Natation.nb_longueur);}
+            if(RobustesseManager.StringToInteger(Natation.time.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.time.getText()), Natation.temps);}
+        }
+        else if(selection == 3) {
+            if(RobustesseManager.StringToFloat(Tennis.PS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.PS.getText()), Tennis.premierService);}
+            if(RobustesseManager.StringToFloat(Tennis.DS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.DS.getText()), Tennis.deuxiemeService);}
+            if(RobustesseManager.StringToFloat(Tennis.TS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.TS.getText()), Tennis.troisiemeService);}
+            if(RobustesseManager.StringToInteger(Tennis.set.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Tennis.set.getText()),Tennis.nbSet);}
+        }
+        else if(selection == 4) {
+            if(RobustesseManager.StringToFloat(Cyclisme.weight.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Cyclisme.weight.getText()),Cyclisme.poids);}
+        }
+        else if(selection == 5) {
+            if(RobustesseManager.StringToInteger(Echecs.adversaire.getText())!=0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Echecs.adversaire.getText()), Echecs.eloAdv); }
+            if(RobustesseManager.StringToInteger(Echecs.time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Echecs.time.getText()), Echecs.temps); }
+        }
     }
 
     public static int tailleFrame(String text) {
