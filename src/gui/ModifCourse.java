@@ -221,14 +221,34 @@ public class ModifCourse extends JFrame implements ActionListener {
                 dispose();
             }
         }
+        /*if(RobustesseManager.StringToFloat(Course.dist.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Course.dist.getText()), Course.distance); }
+        else if(RobustesseManager.StringToInteger(Course.time.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToInteger(Course.time.getText()), Course.temps); }
+
+        if(RobustesseManager.StringToInteger(Natation.longueur.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.longueur.getText()), Natation.nb_longueur);}
+        else if(RobustesseManager.StringToInteger(Natation.time.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Natation.time.getText()), Natation.temps);}
+
+        if(RobustesseManager.StringToFloat(Tennis.PS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.PS.getText()), Tennis.premierService);}
+        else if(RobustesseManager.StringToFloat(Tennis.DS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.DS.getText()), Tennis.deuxiemeService);}
+        else if(RobustesseManager.StringToFloat(Tennis.TS.getText()) !=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Tennis.TS.getText()), Tennis.troisiemeService);}
+        else if(RobustesseManager.StringToInteger(Tennis.set.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToInteger(Tennis.set.getText()),Tennis.nbSet);}
+
+        if(RobustesseManager.StringToFloat(Cyclisme.weight.getText())!=0){ RobustesseManager.erreur(RobustesseManager.StringToFloat(Cyclisme.weight.getText()),Cyclisme.poids);}*/
+       
+        /*JTextField fr = new JTextField();
+        String saisi = fr.getText();
+        if(saisi.contains("a")){
+            RobustesseManager.erreur(4, Course.distance);
+        }*/
 
         for(int  i = 0; i<buttons.size(); i++) {
            if(selection == 1) {
                if (Button == buttons.get(i) && !Course.dist.getText().isBlank() && !Course.time.getText().isBlank()) {
-                   int heure = Integer.parseInt(Course.time.getText()) / 60;
-                   int min = Integer.parseInt(Course.time.getText()) % 60;
-                   final Time TimeSQL = new Time(heure, min, 00);
-                   CourseManager.updateCourse(sc.get(i), Float.parseFloat(Course.dist.getText()), TimeSQL);
+                   if (RobustesseManager.StringToFloat(Course.dist.getText()) == 0 && RobustesseManager.StringToInteger(Course.time.getText()) == 0) {
+                       int heure = Integer.parseInt(Course.time.getText()) / 60;
+                       int min = Integer.parseInt(Course.time.getText()) % 60;
+                       final Time TimeSQL = new Time(heure, min, 00);
+                       CourseManager.updateCourse(sc.get(i), Float.parseFloat(Course.dist.getText()), TimeSQL);
+                   }
                }
            }
 
