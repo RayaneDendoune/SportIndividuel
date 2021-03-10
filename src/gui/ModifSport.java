@@ -11,7 +11,7 @@ import java.sql.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class ModifCourse extends JFrame implements ActionListener {
+public class ModifSport extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();
     private int selection;
@@ -22,13 +22,14 @@ public class ModifCourse extends JFrame implements ActionListener {
     private JLabel titre = new JLabel();
 
 
-    public ModifCourse(int selection) {
+    public ModifSport(int selection) {
         this.selection = selection;
         build(selection);
     }
 
     public void build(int selection) {
         this.setSize(750, 500);
+        //this.setPreferredSize(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false); //Taille non changeable

@@ -228,7 +228,7 @@ public class Cyclisme extends JFrame implements ActionListener {
         }
 
         if(Button==modifier){
-            new ModifCourse(4);
+            new ModifSport(4);
             dispose();
         }
 

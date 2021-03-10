@@ -244,7 +244,7 @@ public class Echecs extends JFrame implements ActionListener {
             }
         }
         if(Button==modifier){
-            new ModifCourse(5);
+            new ModifSport(5);
             dispose();
         }
 

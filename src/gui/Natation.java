@@ -251,7 +251,7 @@ public class Natation extends JFrame implements ActionListener {
         }
 
         if(Button == modifier) {
-            new ModifCourse(2);
+            new ModifSport(2);
             dispose();
         }
 

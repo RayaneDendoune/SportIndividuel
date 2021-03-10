@@ -8,12 +8,10 @@ import manager.RobustesseManager;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -214,7 +212,7 @@ public class Course extends JFrame implements ActionListener {
         }
 
         if(Button == modifier) {
-            new ModifCourse(1);
+            new ModifSport(1);
             dispose();
         }
 

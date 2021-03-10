@@ -261,7 +261,7 @@ public class Tennis extends JFrame implements ActionListener {
         }
 
         if(Button==modifier){
-            new ModifCourse(3);
+            new ModifSport(3);
             dispose();
         }
         if(Button==vitesse){
