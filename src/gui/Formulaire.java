@@ -149,8 +149,15 @@ public class Formulaire extends JFrame implements ActionListener {
 						if (!(RobustesseManager.StringToInteger(elo.getText()) == 0)) {
 							RobustesseManager.erreur(RobustesseManager.StringToInteger(elo.getText()), classement);
 						}
-						else if(!(Integer.parseInt(elo.getText()) >1000 && Integer.parseInt(elo.getText()) < 3200)) {
-							RobustesseManager.erreur(7, classement);
+						else if(!elo.getText().isBlank()) {
+							if(!(Integer.parseInt(elo.getText()) >1000 && Integer.parseInt(elo.getText()) < 3200)) {
+								RobustesseManager.erreur(7, classement);
+							}
+							else {
+								eloC = FormulaireManager.choixElo(elo.getText(), (String) frequency.getSelectedItem());
+								IndividuManager fm = new IndividuManager();
+								fm.ajouterIndividu(identifiant.getText(), lastName.getText(), firstName.getText(), password.getText(), (char) gender.getSelectedItem(), (int) old.getSelectedItem(), (float) weight.getSelectedItem(), (float) tall.getSelectedItem(), eloC);
+							}
 						}
 						else {
 							eloC = FormulaireManager.choixElo(elo.getText(), (String) frequency.getSelectedItem());
