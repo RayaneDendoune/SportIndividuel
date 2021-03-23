@@ -15,7 +15,7 @@ public class ModifSport extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();
     private int selection;
-    private JLabel disposition = new JLabel();
+    private JLabel nomColonne = new JLabel();
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
     private JButton retour = new JButton("Retour");
@@ -44,27 +44,32 @@ public class ModifSport extends JFrame implements ActionListener {
         if(selection == 1) {
             nbButtons = nbButtonCourse(CourseManager.seanceCourseIndividu(AuthentificationManager.personne));
             donneeEntree = Course.donnee();
+            nomColonne.setText("Id seance/Distance/Temps/Date");
             titre.setText("Modication Course");
         }
         else if(selection == 2) {
             nbButtons = nbButtonNatation(NatationManager.seanceNatationIndividu(AuthentificationManager.personne));
             donneeEntree = Natation.donnee();
+            nomColonne.setText("Id seance/Nb longueur/Type Nage/Temps total/Date");
             titre.setText("Modication Natation");
         }
         else if(selection == 3) {
             nbButtons = nbButtonsTennis(TennisManager.seanceTennisIndividu(AuthentificationManager.personne));
             donneeEntree = Tennis.donnee();
+            nomColonne.setText("Id seance/Service 1/Service 2/Service 3/Nb Set/Issue match");
             titre.setText("Modication Tennis");
         }
         else if(selection == 4) {
             nbButtons = nbButtonsCyclisme(CyclismeManager.seanceCyclismeIndividu(AuthentificationManager.personne));
             donneeEntree = Cyclisme.donnee();
+            nomColonne.setText("Id seance/Objectif Seance/Niveau activité physique/Poids");
             titre.setText("Modication Cyclisme");
 
         }
         else if(selection == 5) {
             nbButtons = nbButtonsEchec(EchecManager.seanceEchecIndividu(AuthentificationManager.personne));
             donneeEntree = Echecs.donnee();
+            nomColonne.setText("Id seance/Elo adversaire/Duree/Issue partie");
             titre.setText("Modication Echecs");
         }
 
@@ -79,7 +84,7 @@ public class ModifSport extends JFrame implements ActionListener {
         JScrollPane grid = buttons(nbButtons);
         JPanel completeEast = completeEast(donneeEntree);
         //completeEast.add(donneeEntree);
-        JPanel completeCenter = completeCenter(grid, completeEast);
+        JPanel completeCenter = completeCenter(grid, completeEast, nomColonne);
 
         JPanel complete = complete(completeCenter);
 
@@ -94,7 +99,7 @@ public class ModifSport extends JFrame implements ActionListener {
         GridBagConstraints c = new GridBagConstraints();
 
         for(int i = 0; i<but.size(); i++) {
-            c.insets = new Insets(0,20,0,0);
+            //c.insets = new Insets(0,20,0,0);
             c.fill = GridBagConstraints.HORIZONTAL;
             c.weightx = 0.5;
             c.gridx = 0;
@@ -119,17 +124,21 @@ public class ModifSport extends JFrame implements ActionListener {
         return grid;
     }
 
-    public JPanel completeCenter(JScrollPane scroll, JPanel completeEast) {
+    public JPanel completeCenter(JScrollPane scroll, JPanel completeEast, JLabel nomColonne) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 0;
+        grid.add(nomColonne, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
         grid.add(completeEast, c);
 
         c.gridx = 1;
-        c.gridy = 0;
+        c.gridy = 1;
         grid.add(scroll, c);
 
         return grid;
