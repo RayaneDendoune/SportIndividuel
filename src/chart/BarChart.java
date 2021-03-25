@@ -13,10 +13,12 @@ import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+//Classe qui permet de faire des graphique en barres pour un seul utilisateur
 public class BarChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
+    //Bar Chart avec une arraylist de integer
     public BarChart(String titleFrame, String titleGraph, ArrayList<Integer> al, String serie, String xLabel, String yLabel) {
 
         super(titleFrame);
@@ -29,6 +31,7 @@ public class BarChart extends JFrame {
 
     }
 
+    //Renvoyer les valeur grâce a une arraylist de integer
     private CategoryDataset createBarDataset(ArrayList<Integer> nbPas, String serie) {
         String series1 = serie;
 
@@ -42,6 +45,7 @@ public class BarChart extends JFrame {
         return dataset;
     }
 
+    //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(CategoryDataset dataset, String title, String xLabel, String yLabel) {
 
         JFreeChart chart = ChartFactory.createBarChart(title, xLabel, yLabel, dataset, PlotOrientation.VERTICAL, true, true, false);
@@ -50,7 +54,7 @@ public class BarChart extends JFrame {
 
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         ArrayList<Integer> al = new ArrayList<Integer>();
         al.add(3578);
@@ -61,9 +65,8 @@ public class BarChart extends JFrame {
         /*BarChart demo = new BarChart("Nombre de pas moyen", al, "Nombre de pas", "Numéro de la séance", "Nb pas");
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);*/
-    }
-
+        demo.setVisible(true);
+    }*/
 }
 
 

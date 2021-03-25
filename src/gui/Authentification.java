@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
+//Classe qui représente la page d'authentification en interface graphique
 public class Authentification extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = -541698616292452515L;

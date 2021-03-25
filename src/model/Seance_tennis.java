@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 
+//Table "Seance_tennis" pour la base de donnée
 @Entity
 public class Seance_tennis {
 

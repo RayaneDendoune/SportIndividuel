@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Classe qui représente la page de réseau social en interface graphique
 public class Reseau extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();

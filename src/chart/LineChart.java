@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.sql.Time;
 import java.util.ArrayList;
 
+//Classe qui permet de faire des graphique en courbe pour un seul utilisateur
 public class LineChart extends JFrame {
 
 
@@ -90,20 +91,7 @@ public class LineChart extends JFrame {
         return dataset;
     }
 
-
-    /*private CategoryDataset createBarDataset(ArrayList<Integer> nbPas) {
-        String series1 = "Nombre de pas";
-
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        for(int i = 0; i<nbPas.size(); i++) {
-            String category1 = "" + (i+1);
-            dataset.addValue(nbPas.get(i), series1, category1);
-        }
-
-        return dataset;
-    }*/
-
+    //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis) {
         return ChartFactory.createXYLineChart(title, xAxis, yAxis, dataset, PlotOrientation.VERTICAL, true, true, false);
     }

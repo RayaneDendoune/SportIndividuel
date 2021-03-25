@@ -11,25 +11,17 @@ import org.jfree.ui.RefineryUtilities;
 import javax.swing.*;
 import java.util.ArrayList;
 
+//Classe qui permet de faire des graphique circulaire pour un seul utilisateur
 public class PieChart extends JFrame {
     private static final long serialVersionUID = 1L;
 
+    //Pie Chart avec une arraylist de Character
     public PieChart(String titleFrame, ArrayList<Character> issue, String titleGraph) {
         super(titleFrame);
         setContentPane(createDemoPanel(issue, titleGraph));
     }
 
-    /*private PieDataset createDataset() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Double(43.2));
-        dataset.setValue("Two", new Double(10.0));
-        dataset.setValue("Three", new Double(27.5));
-        dataset.setValue("Four", new Double(17.5));
-        dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));
-        return dataset;
-    }*/
-
+    //Renvoyer les valeurs grâce a une arraylist de Character
     private PieDataset createIssueDataset(ArrayList<Character> issue) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         int victoire=0;
@@ -50,9 +42,11 @@ public class PieChart extends JFrame {
         return dataset;
     }
 
+    //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(PieDataset dataset, String title) {
         return ChartFactory.createPieChart(title, dataset, true, true, false);
     }
+
 
     public JPanel createDemoPanel(ArrayList<Character> issue, String title) {
         JFreeChart chart = createChart(createIssueDataset(issue), title);

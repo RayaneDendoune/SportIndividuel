@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 
+//Table "Individu" pour la base de donnée
 @Entity
 public class Individu implements Comparable{
     @Id

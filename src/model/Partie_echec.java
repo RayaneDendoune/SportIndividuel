@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.sql.Time;
 
+//Table "Partie_echec" pour la base de donnée
 @Entity
 public class Partie_echec {
 

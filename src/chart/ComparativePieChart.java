@@ -10,10 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+//Classe qui permet de faire des graphique circulaire pour comparer deux utilisateurs
 public class ComparativePieChart extends JFrame {
     private static final long serialVersionUID = 1L;
     JPanel pan = new JPanel();
 
+    //Comparative Pie Chart avec deux arraylist de Character
     public ComparativePieChart(ArrayList<Character> issue1, ArrayList<Character> issue2, String titleFrame, String titleGraph1, String titleGraph2) {
         super(titleFrame);
 
@@ -29,6 +31,7 @@ public class ComparativePieChart extends JFrame {
         setContentPane(pan);
     }
 
+    //Renvoyer les valeurs grâce a deux arraylist de Character
     private PieDataset createIssueDataset(ArrayList<Character> issue) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         int victoire=0;
@@ -49,6 +52,7 @@ public class ComparativePieChart extends JFrame {
         return dataset;
     }
 
+    //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(PieDataset dataset, String title) {
         return ChartFactory.createPieChart(title, dataset, true, true, false);
     }

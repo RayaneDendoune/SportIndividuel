@@ -11,6 +11,7 @@ import java.sql.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 
+//Classe qui permet de modifier les données de l'utilisateur en interface graphique
 public class ModifSport extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();

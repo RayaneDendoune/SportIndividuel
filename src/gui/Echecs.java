@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.ArrayList;
 
+//Classe qui représente la page du sport echecs en interface graphique
 public class Echecs extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();

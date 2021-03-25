@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+//Classe qui représente la page du sport tennis en interface graphique
 public class Tennis extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();

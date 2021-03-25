@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//Classe qui représente la page de formulaire d'inscription en interface graphique
 public class Formulaire extends JFrame implements ActionListener {
 	
 	private JPanel pan  = new JPanel();

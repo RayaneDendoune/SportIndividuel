@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Classe qui représente l'accueil en interface graphique
 public class Accueil extends JFrame implements ActionListener {
 
 	private JPanel pan  = new JPanel();

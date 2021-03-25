@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.util.ArrayList;
 
+//Table "Amis" pour la base de donnée
 @Entity
 public class Amis {
     @Id

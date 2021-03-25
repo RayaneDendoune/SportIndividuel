@@ -11,10 +11,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+//Classe qui permet de faire des graphique en barres pour comparer deux utilisateurs
 public class ComparativeBarChart  extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
+    //Comparative Bar Chart avec deux arraylist de integer
     public ComparativeBarChart(ArrayList<Integer> user, ArrayList<Integer> friend, String titleFrame, String titleGraph, String serie1, String serie2, String xLabel, String yLabel) {
         super(titleFrame);
         CategoryDataset dataset = createBarDataset(user, friend, serie1, serie2);
@@ -24,6 +26,7 @@ public class ComparativeBarChart  extends JFrame {
         setContentPane(chartPanel);
     }
 
+    //Renvoyer les valeur grâce a deux arraylists de integer
     private CategoryDataset createBarDataset(ArrayList<Integer> user, ArrayList<Integer> friend, String serie1, String serie2) {
         String series1 = serie1;
         String series2 = serie2;
@@ -42,6 +45,7 @@ public class ComparativeBarChart  extends JFrame {
         return dataset;
     }
 
+    //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(CategoryDataset dataset, String title, String xLabel, String yLabel) {
         JFreeChart chart = ChartFactory.createBarChart(title, xLabel, yLabel, dataset, PlotOrientation.VERTICAL, true, true, false);
         return chart;

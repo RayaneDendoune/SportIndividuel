@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
+//Table "Seance_course" pour la base de donnée
 @Entity
 public class Seance_course {
 

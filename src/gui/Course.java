@@ -15,6 +15,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
+//Classe qui représente la page du sport course en interface graphique
 public class Course extends JFrame implements ActionListener {
 
     private JPanel pan  = new JPanel();
