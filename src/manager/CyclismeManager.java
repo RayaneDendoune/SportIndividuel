@@ -23,7 +23,6 @@ public class CyclismeManager {
     /**
      * \fn void ajouterCyclisme(String id_seance_cyclisme, String niveau_activite_physique, float poids, String objectif_seance, int depense_energetique, int besoin_proteine, Individu individu)
      * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_cyclisme dans la base de donnée grâce aux données entrées en paramètres.
-     *
      * \param [in] id_seance_cyclisme Clé primaire de la table Seance_cyclisme (Type String)
      * \param [in] niveau_activite_physique Niveau d'activité physique durant la séance (type String)
      * \param [in] poids Poids actuel de l'individu (Type Float)

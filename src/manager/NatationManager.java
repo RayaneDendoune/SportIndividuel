@@ -27,7 +27,6 @@ public class NatationManager {
     /**
      * \fn void ajouterNatation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu)
      * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_natation dans la base de donnée grâce aux données entrées en paramètres.
-     *
      * \param [in] id_seance_natation Clé primaire de la table Seance_natation (Type String)
      * \param [in] nb_longueur Nombre de longueur effectué durant la séance (Type Integer)
      * \param [in] temps_total Temps total passé durant la séance (Type Time)

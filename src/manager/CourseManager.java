@@ -28,7 +28,6 @@ public class CourseManager {
     /**
      * \fn void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu)
      * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_course dans la base de donnée grâce aux données entrées en paramètres.
-     *
      * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
      * \param [in] distance Distance parcourue durant la séance (Type Float)
      * \param [in] temps Temps total de la séance effectué (Type Time)

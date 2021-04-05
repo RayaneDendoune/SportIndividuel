@@ -25,7 +25,6 @@ public class TennisManager {
     /**
      * \fn void ajouterTennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu)
      * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_tennis dans la base de donnée grâce aux données entrées en paramètres.
-     *
      * \param [in] id_seance_tennis Clé primaire de la table Seance_tennis (Type String)
      * \param [in] premier_service Premier Service meilleur service (Type Float)
      * \param [in] deuxieme_service Deuxieme Service meilleur service  (Type Float)
