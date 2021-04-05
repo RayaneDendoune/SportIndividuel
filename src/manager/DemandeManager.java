@@ -32,6 +32,7 @@ public class DemandeManager {
      * \param [in] nb Clé primaire de la table Demande (Type Integer)
      * \param [in] id_destinataire Identifiant du destinataire (Type String)
      * \param [in] id_expediteur Identifiant de l'expéditeur (Type String)
+     *
      */
     public static void ajouterDemande(int nb, String id_destinataire, String id_expediteur){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

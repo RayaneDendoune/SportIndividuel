@@ -33,6 +33,7 @@ public class TennisManager {
      * \param [in] issue_match Issue du match (Type Character)
      * \param [in] vitesse_moy_service Vitesse moyenne des meilleurs services durant ce match (Type Float)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public static void ajouterTennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu) {
 

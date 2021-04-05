@@ -24,6 +24,7 @@ public class ChallengeManager {
      * \param [in] i1 Individu qui est actuellement connecté (Type Individu)
      * \param [in] i2 Individu avec lequel on peut comparer (Type Individu)
      * \return ArrayList de String avec les sport en commun entre les deux individu passé en paramètres
+     *
      */
     public static ArrayList<String> sportEnCommun(Individu i1, Individu i2) {
         ArrayList<String> sportEnCommun = new ArrayList<String>();

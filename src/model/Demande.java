@@ -77,6 +77,7 @@ public class Demande {
      * \fn void setId_expediteur(String id_expediteur)
      * \brief Fonction qui modifie l'identifiant de l'expéditeur
      * \param [in] id_expediteur Identifiant de l'expéditeur (Type String)
+     *
      */
     public void setId_expediteur(String id_expediteur) { this.id_expediteur = id_expediteur; }
 

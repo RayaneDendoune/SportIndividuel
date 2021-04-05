@@ -175,6 +175,7 @@ public class Seance_course {
      * \fn void setIndividu(Individu individu)
      * \brief Fonction qui modifie l'individu
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public void setIndividu(Individu individu) {
         this.individu = individu;

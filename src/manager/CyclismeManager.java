@@ -30,6 +30,7 @@ public class CyclismeManager {
      * \param [in] depense_energetique Dépense énergétique faite par l'individu durant sa séance (type Integer)
      * \param [in] besoin_proteine Besoin en protéïne de l'individu après sa séance (type Integer)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public static void ajouterCyclisme(String id_seance_cyclisme, String niveau_activite_physique, float poids, String objectif_seance, int depense_energetique, int besoin_proteine, Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

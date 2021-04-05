@@ -35,6 +35,7 @@ public class ComparativePieChart extends JFrame {
      * \param titleFrame Titre de la fenêtre (Type String)
      * \param titleGraph1 Titre du graphique de l'utilisateur (Type String)
      * \param titleGraph2 Titre du graphique de l'ami (Type String)
+     *
      */
     //Comparative Pie Chart avec deux arraylist de Character
     public ComparativePieChart(ArrayList<Character> issue1, ArrayList<Character> issue2, String titleFrame, String titleGraph1, String titleGraph2) {

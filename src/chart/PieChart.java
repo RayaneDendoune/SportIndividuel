@@ -33,6 +33,7 @@ public class PieChart extends JFrame {
      * \param titleFrame Titre de la fenêtre (Type String)
      * \param issue Données de l'utilisateur (Type ArrayList<Float>)
      * \param titleGraph Titre du graphique (Type String)
+     *
      */
     //Pie Chart avec une arraylist de Character
     public PieChart(String titleFrame, ArrayList<Character> issue, String titleGraph) {

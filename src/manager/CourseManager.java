@@ -35,6 +35,7 @@ public class CourseManager {
      * \param [in] nb_pas Nombre de pas moyen effectué par l'utilisateur durant la séance (Type Integer)
      * \param [in] date Date où la séance à été effectuée (Type Date)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public static void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

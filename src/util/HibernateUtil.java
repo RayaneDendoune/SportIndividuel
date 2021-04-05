@@ -10,6 +10,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
  * \version 1.0
  * \date 29/03/2021
+ *
  */
 public class HibernateUtil {
     private static SessionFactory sessionFactory;

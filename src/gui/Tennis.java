@@ -21,7 +21,6 @@ import java.util.ArrayList;
  * \date 29/03/2021
  *
  * Classe contenant toutes les fonctions associées à la création de l'interface de la page de sport Tennis.
- *
  */
 //Classe qui représente la page du sport tennis en interface graphique
 public class Tennis extends JFrame implements ActionListener {

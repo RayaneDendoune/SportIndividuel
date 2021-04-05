@@ -246,6 +246,7 @@ public class Individu implements Comparable{
      * \fn String toString()
      * \brief Fonction qui retourne un String
      * \return Retourne un String
+     *
      */
     public String toString() {
         String text="";

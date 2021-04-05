@@ -27,7 +27,6 @@ import javax.swing.JTextField;
  * \date 29/03/2021
  *
  * Classe contenant toutes les fonctions associées à la création de l'interface Authentification.
- *
  */
 //Classe qui représente la page d'authentification en interface graphique
 public class Authentification extends JFrame implements ActionListener{

@@ -20,7 +20,6 @@ import java.util.List;
  * \date 29/03/2021
  *
  * Classe contenant toutes les fonctions associées aux amis.
- *
  */
 public class AmisManager {
     public static Amis amis;

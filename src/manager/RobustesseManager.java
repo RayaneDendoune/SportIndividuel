@@ -206,6 +206,7 @@ public class RobustesseManager {
      * \brief Fonction qui ouvre une fenêtre d'erreur selon le numéro d'erreur passé en paramètre
      * \param [in] erreur Numéro de l'erreur (Type Integer)
      * \param [in] label Champs dans lequel l'utilisateur s'est tromper (Type JLabel)
+     *
      */
     public static void erreur(int erreur, JLabel label) {
         JLabel errorAttribut = new JLabel();

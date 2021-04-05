@@ -192,6 +192,7 @@ public class Seance_tennis {
      * \fn void setIndividu(Individu individu)
      * \brief Fonction qui modifie l'individu
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public void setIndividu(Individu individu) {
         this.individu = individu;

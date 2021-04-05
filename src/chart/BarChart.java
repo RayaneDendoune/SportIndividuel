@@ -38,6 +38,7 @@ public class BarChart extends JFrame {
      * \param serie Nom de la bar (Type String)
      * \param xLabel Nom de l'axe des abscisses (Type String)
      * \param yLabel Nom de l'axe des ordonnées (Type String)
+     *
      */
     //Bar Chart avec une arraylist de integer
     public BarChart(String titleFrame, String titleGraph, ArrayList<Integer> al, String serie, String xLabel, String yLabel) {

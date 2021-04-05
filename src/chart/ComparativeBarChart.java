@@ -39,6 +39,7 @@ public class ComparativeBarChart  extends JFrame {
      * \param serie2 Nom de la bar de l'ami (Type String)
      * \param xLabel Nom de l'axe des abscisses (Type String)
      * \param yLabel Nom de l'axe des ordonnées (Type String)
+     *
      */
     //Comparative Bar Chart avec deux arraylist de integer
     public ComparativeBarChart(ArrayList<Integer> user, ArrayList<Integer> friend, String titleFrame, String titleGraph, String serie1, String serie2, String xLabel, String yLabel) {

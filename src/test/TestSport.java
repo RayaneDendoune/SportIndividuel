@@ -9,7 +9,6 @@ import util.DataInit;
  * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
  * \version 1.0
  * \date 29/03/2021
- *
  */
 public class TestSport {
 	public static void main(String[] args) {

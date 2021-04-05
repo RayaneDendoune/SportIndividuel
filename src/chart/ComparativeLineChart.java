@@ -40,6 +40,7 @@ public class ComparativeLineChart extends JFrame {
      * \param key2 Nom de la courbe de l'ami (Type String)
      * \param xAxis Nom de l'axe des abscisses (Type String)
      * \param yAxis Nom de l'axe des ordonnées (Type String)
+     *
      */
     //Comparative Line Chart avec deux arraylist de float
     public ComparativeLineChart(ArrayList<Float> user, ArrayList<Float> friend, String titleFrame, String titleGraph, String key1, String key2, String xAxis, String yAxis) {

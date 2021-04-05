@@ -67,6 +67,7 @@ public class Partie_echec {
      * \fn void setId_partie_echec(String id_partie_echec)
      * \brief Fonction qui modifie l'identifiant de la partie d'échec
      * \param [in] id_partie_echec Clé primaire de la table Partie_echec (Type String)
+     *
      */
     public void setId_partie_echec(String id_partie_echec) {
         this.id_partie_echec = id_partie_echec;

@@ -41,6 +41,7 @@ public class LineChart extends JFrame {
      * \param key Nom de la courbe (Type String)
      * \param xAxis Nom de l'axe des abscisses (Type String)
      * \param yAxis Nom de l'axe des ordonnées (Type String)
+     *
      */
     //Line Chart avec une arraylist de float
     public LineChart(String titleFrame, String titleGraph, ArrayList<Float> al, String key, String xAxis, String yAxis) {

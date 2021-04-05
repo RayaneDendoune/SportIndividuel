@@ -18,6 +18,7 @@ public class FormulaireManager {
      * \param [in] elo Elo que l'utilisateur aura écrit (Type String)
      * \param [in] frequence_jeu Frequence de jeu que l'utilisateur aura sélectionner (Type String)
      * \return Retourne un Integer avec l'elo de l'individu selon ce qu'il a entré comme paramètre.
+     *
      */
     public static int choixElo(String elo, String frequence_jeu){
         int elofinal = 0;

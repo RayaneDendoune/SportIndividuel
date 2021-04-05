@@ -62,6 +62,7 @@ public class AuthentificationManager {
      *
      * \param [in] id_individu Identifiant de l'individu qui veut se connecter (Type String)
      * \return Si l'individu existe, la fonction retourne son mot de passe, sinon la fonction ne retourne rien
+     *
      */
     public static String existPassword(String id_individu) {
         Session session = HibernateUtil.getSession();

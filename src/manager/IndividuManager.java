@@ -38,6 +38,7 @@ public class IndividuManager {
      * \param [in] poids Poids de l'individu (Type Float)
      * \param [in] taille Taille de l'individu (Type Float)
      * \param [in] elo Elo de l'individu (Type Integer)
+     *
      */
     public void ajouterIndividu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

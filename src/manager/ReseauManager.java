@@ -67,6 +67,7 @@ public class ReseauManager {
      * \brief Fonction qui supprime les occurrences des individus dans l'ArrayList passé en paramètre
      * \param [in][out] finalArray ArrayList d'individus (Type Individu)
      * \return Retourne une ArrayList d'Individu sans doublons
+     *
      */
     public static ArrayList<Individu> suppOcc(ArrayList<Individu> finalArray) {
 

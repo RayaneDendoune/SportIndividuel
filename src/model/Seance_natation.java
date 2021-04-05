@@ -43,6 +43,7 @@ public class Seance_natation {
      * \param [in] temps_moy_longueur Temps moyen par longueur fait par l'individu durant sa séance (Type Time)
      * \param [in] date Date où la séance à été effectuée (Type Date)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public Seance_natation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu) {
         this.id_seance_natation = id_seance_natation;

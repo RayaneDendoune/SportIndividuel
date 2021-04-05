@@ -33,6 +33,7 @@ public class EchecManager {
      * \param [in] issue_partie Issue de la partie (Type Character)
      * \param [in] niveau_concentration Niveau de Concentration (Type Integer)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     *
      */
     public static void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, String niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

@@ -186,7 +186,6 @@ public class Course extends JFrame implements ActionListener {
      * \param [in] panel JPanel (Type JPanel)
      * \param [in] graphique JPanel (Type JPanel)
      * \return Retourne un JPanel
-     *
      */
     public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();

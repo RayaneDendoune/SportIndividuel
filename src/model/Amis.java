@@ -53,6 +53,7 @@ public class Amis {
      * \fn void setNo_amis(int no_amis)
      * \brief Fonction qui modifie le numéro d'Amis
      * \param [in] no_amis Clé primaire de la table Amis (Type Integer)
+     *
      */
     public void setNo_amis(int no_amis) {
         this.no_amis = no_amis;
