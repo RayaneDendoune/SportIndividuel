@@ -11,6 +11,16 @@ import java.sql.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+ * \file ModifSport.java
+ * \brief Classe qui permet de créer l'interface de la page ModifSport
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface de la page ModifSport.
+ *
+ */
 //Classe qui permet de modifier les données de l'utilisateur en interface graphique
 public class ModifSport extends JFrame implements ActionListener {
 
@@ -22,12 +32,20 @@ public class ModifSport extends JFrame implements ActionListener {
     private JButton retour = new JButton("Retour");
     private JLabel titre = new JLabel();
 
-
+    /**
+     * \fn ModifSport(int selection)
+     * \brief Constructeur de ModifSport
+     * \param [in] selection Chiffre qui permet de selectionner le sport voulu (Type Integer)
+     */
     public ModifSport(int selection) {
         this.selection = selection;
         build(selection);
     }
 
+    /**
+     * \fn void build()
+     * \brief Fonction qui permet la construction de la fenêtre de la page de sport Cyclisme
+     */
     public void build(int selection) {
         this.setSize(750, 500);
         //this.setPreferredSize(null);
@@ -94,6 +112,12 @@ public class ModifSport extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * \fn JScrollPane buttons(ArrayList<JButton> but)
+     * \brief Fonction qui renvoie un JScrollPane avec des boutons correspondant aux différentes séances de l'utilisateur
+     * \param [in] but ArrayList<JButton> (Type ArrayList<JButton>)
+     * \return Retourne un JScrollPane de boutons
+     */
     public JScrollPane buttons(ArrayList<JButton> but) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -113,6 +137,12 @@ public class ModifSport extends JFrame implements ActionListener {
         return scrollPane;
     }
 
+    /**
+     * \fn JPanel completeEast(JPanel donnee)
+     * \brief Fonction qui renvoie un JPanel
+     * \param [in] donnee JPanel (Type JPanel)
+     * \return Retourne un JPanel
+     */
     public JPanel completeEast(JPanel donnee) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -125,6 +155,14 @@ public class ModifSport extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JPanel completeCenter(JScrollPane scroll, JPanel completeEast, JLabel nomColonne)
+     * \brief Fonction qui renvoie un JPanel qui assemble un JPanel, un JLabel & JScrollPane
+     * \param [in] scroll JScrollPane (Type JScrollPane)
+     * \param [in] completeEast JPanel (Type JPanel)
+     * \param [in] nomColonne JLabel (Type JLabel)
+     * \return Retourne un JPanel
+     */
     public JPanel completeCenter(JScrollPane scroll, JPanel completeEast, JLabel nomColonne) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -145,6 +183,12 @@ public class ModifSport extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JPanel complete(JPanel completeCenter)
+     * \brief Fonction qui renvoie un JPanel
+     * \param [in] completeCenter JPanel (Type JPanel)
+     * \return Retourne un JPanel
+     */
     public JPanel complete(JPanel completeCenter) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -167,6 +211,12 @@ public class ModifSport extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn ArrayList<JButton> nbButtonCourse(ArrayList<Seance_course> sc)
+     * \brief Fonction qui renvoie une ArrayList de JButton en fonction de taille de l'arraylist passé en paramètre
+     * \param [in] sc ArrayList<Seance_course> (Type ArrayList<Seance_course>)
+     * \return Retourne une ArrayList de JButton
+     */
     public ArrayList<JButton> nbButtonCourse(ArrayList<Seance_course> sc) {
         for(int  i = 0; i<sc.size(); i++) {
             buttons.add((new JButton(sc.get(i).getId_seance_course() + "  " + sc.get(i).getDistance() + "  " + sc.get(i).getTemps() + "  " + sc.get(i).getDate() )));
@@ -174,6 +224,12 @@ public class ModifSport extends JFrame implements ActionListener {
         return buttons;
     }
 
+    /**
+     * \fn ArrayList<JButton> nbButtonNatation(ArrayList<Seance_natation> sn)
+     * \brief Fonction qui renvoie une ArrayList de JButton en fonction de taille de l'arraylist passé en paramètre
+     * \param [in] sn ArrayList<Seance_natation> (Type ArrayList<Seance_natation>)
+     * \return Retourne une ArrayList de JButton
+     */
     public ArrayList<JButton> nbButtonNatation(ArrayList<Seance_natation> sn) {
         for(int  i = 0; i<sn.size(); i++) {
             buttons.add((new JButton(sn.get(i).getId_seance_natation() + "  " + sn.get(i).getNb_longueur() + "  " + sn.get(i).getType_nage() + "  " + sn.get(i).getTemps_total() + "  " + sn.get(i).getDate())));
@@ -181,6 +237,12 @@ public class ModifSport extends JFrame implements ActionListener {
         return buttons;
     }
 
+    /**
+     * \fn ArrayList<JButton> nbButtonsTennis(ArrayList<Seance_tennis> st)
+     * \brief Fonction qui renvoie une ArrayList de JButton en fonction de taille de l'arraylist passé en paramètre
+     * \param [in] st ArrayList<Seance_tennis> (Type ArrayList<Seance_tennis>)
+     * \return Retourne une ArrayList de JButton
+     */
     public ArrayList<JButton> nbButtonsTennis(ArrayList<Seance_tennis> st) {
         for(int  i = 0; i<st.size(); i++) {
             buttons.add((new JButton(st.get(i).getId_seance_tennis() + "  " + st.get(i).getPremier_service() + "  " + st.get(i).getDeuxieme_service() + "  " + st.get(i).getTroisieme_service() + "  " + st.get(i).getNb_set() + "  " + st.get(i).getIssue_match())));
@@ -188,12 +250,25 @@ public class ModifSport extends JFrame implements ActionListener {
         return buttons;
     }
 
+    /**
+     * \fn ArrayList<JButton> nbButtonsCyclisme(ArrayList<Seance_cyclisme> seance_cyclisme)
+     * \brief Fonction qui renvoie une ArrayList de JButton en fonction de taille de l'arraylist passé en paramètre
+     * \param [in] seance_cyclisme ArrayList<Seance_cyclisme> (Type ArrayList<Seance_cyclisme>)
+     * \return Retourne une ArrayList de JButton
+     */
     public ArrayList<JButton> nbButtonsCyclisme(ArrayList<Seance_cyclisme> seance_cyclisme) {
         for(int  i = 0; i<seance_cyclisme.size(); i++) {
             buttons.add((new JButton(seance_cyclisme.get(i).getId_seance_cyclisme() + "  " + seance_cyclisme.get(i).getObjectif_seance() + "  " + seance_cyclisme.get(i).getNiveau_activite_physique() + "  " + seance_cyclisme.get(i).getPoids())));
         }
         return buttons;
     }
+
+    /**
+     * \fn ArrayList<JButton> nbButtonsEchec(ArrayList<Partie_echec> partie_echec)
+     * \brief Fonction qui renvoie une ArrayList de JButton en fonction de taille de l'arraylist passé en paramètre
+     * \param [in] partie_echec ArrayList<Partie_echec> (Type ArrayList<Partie_echec>)
+     * \return Retourne une ArrayList de JButton
+     */
     public ArrayList<JButton> nbButtonsEchec(ArrayList<Partie_echec> partie_echec) {
         for(int  i = 0; i<partie_echec.size(); i++) {
             buttons.add((new JButton(partie_echec.get(i).getId_partie_echec() + "  " + partie_echec.get(i).getElo_adversaire() + "  " + partie_echec.get(i).getDuree() + "  " + partie_echec.get(i).getIssue_partie())));
@@ -201,6 +276,11 @@ public class ModifSport extends JFrame implements ActionListener {
         return buttons;
     }
 
+    /**
+     * \fn void actionPerformed(ActionEvent e)
+     * \brief Fonction qui donne des actions aux boutons
+     * \param [in] a ActionEvent (Type ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object Button = e.getSource();

@@ -4,6 +4,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
+/**
+ * \file DataInit.java
+ * \brief Classe qui permet de faire la configuration entre les classes de données et les tables dans la base de données
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ */
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
     private static AnnotationConfiguration config;

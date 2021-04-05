@@ -14,6 +14,16 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+ * \file Challenge.java
+ * \brief Classe qui permet de créer l'interface de Challenge
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface Challenge.
+ *
+ */
 //Classe qui représente la page de challenge entre amis en interface graphique
 public class Challenge extends JFrame implements ActionListener {
 
@@ -36,6 +46,10 @@ public class Challenge extends JFrame implements ActionListener {
         build();
     }
 
+    /**
+     * \fn void build()
+     * \brief Fonction qui permet la construction de la fenêtre de Challenge
+     */
     public void build() {
         this.setSize(550, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +86,11 @@ public class Challenge extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * \fn JPanel buttons()
+     * \brief Fonction qui retourne un JPanel pour les boutons
+     * \return Retourne un JPanel avec les boutons
+     */
     public JPanel buttons() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -94,6 +113,13 @@ public class Challenge extends JFrame implements ActionListener {
     }
 
 
+    /**
+     * \fn JScrollPane panelAmis(ArrayList<JButton> selectionAmis, ArrayList<JComboBox> sportAmis)
+     * \brief Fonction qui retourne un JScrollPane avec les amis de l'utilisateur
+     * \param [in] selectionAmis Amis de l'utilisateur (Type ArrayList<JButton>)
+     * \param [in] sportAmis Sport en commun entre les amis et l'utilisateur
+     * \return Retourne un JScrollPane avec les amis de l'utilisateur
+     */
     public JScrollPane panelAmis(ArrayList<JButton> selectionAmis, ArrayList<JComboBox> sportAmis) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -131,6 +157,13 @@ public class Challenge extends JFrame implements ActionListener {
         return scrollPane;
     }
 
+    /**
+     * \fn JPanel complete(JPanel buttons, JScrollPane panelAmis)
+     * \brief Fonction qui retourne un panel qui assemble tous les JPanel & JScrollPane
+     * \param [in] buttons JPanel (Type JPanel)
+     * \param [in] panelAmis JScrollPane (Type JScrollPane)
+     * \return Retourne un JPanel
+     */
     public JPanel complete(JPanel buttons, JScrollPane panelAmis) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -153,6 +186,11 @@ public class Challenge extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn void actionPerformed(ActionEvent e)
+     * \brief Fonction qui donne des actions aux boutons
+     * \param [in] a ActionEvent (Type ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object Button = e.getSource();

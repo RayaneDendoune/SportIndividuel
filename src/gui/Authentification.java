@@ -19,6 +19,16 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/**
+ * \file Authentification.java
+ * \brief Classe qui permet de créer l'interface de l'Authentification
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface Authentification.
+ *
+ */
 //Classe qui représente la page d'authentification en interface graphique
 public class Authentification extends JFrame implements ActionListener{
 	
@@ -44,7 +54,11 @@ public class Authentification extends JFrame implements ActionListener{
 	public Authentification() {
 		build();
 	}
-	
+
+	/**
+	 * \fn void build()
+	 * \brief Fonction qui permet la construction de la fenêtre d'Authentification
+	 */
 	public void build() {
 		this.setTitle("Authentification"); //Cr�ation de la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -77,8 +91,12 @@ public class Authentification extends JFrame implements ActionListener{
 		
 		setVisible(true) ;
 	}
-	
-	
+
+	/**
+	 * \fn void actionPerformed(ActionEvent e)
+	 * \brief Fonction qui donne des actions aux boutons
+	 * \param [in] a ActionEvent (Type ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		Object Button = e.getSource();
 		if (Button == sinscrire) {
@@ -106,8 +124,13 @@ public class Authentification extends JFrame implements ActionListener{
 			}
 		}
 	}
-	
-	JPanel grid() {
+
+	/**
+	 * \fn JPanel grid()
+	 * \brief Fonction qui retourne un JPanel
+	 * \return Retourne un JPanel
+	 */
+	public JPanel grid() {
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -141,9 +164,15 @@ public class Authentification extends JFrame implements ActionListener{
 		c.ipadx=0;
 		return grid;
 	}
-	
-	
-	
+
+
+	/**
+	 * \fn JPanel grid2(JPanel grid, JPanel p)
+	 * \brief Fonction qui assemble tous les JPanel
+	 * \param [in] grid JPanel (Type JPanel)
+	 * \param [in] p JPanel (Type JPanel)
+	 * \return Retourne un JPanel
+	 */
 	JPanel grid2(JPanel grid, JPanel p) {
 		JPanel grid2 = new JPanel();
 		grid2.setLayout(new GridBagLayout());
@@ -179,7 +208,11 @@ public class Authentification extends JFrame implements ActionListener{
 		
 		return grid2;
 	}
-	
+
+	/**
+	 * \fn void erreur()
+	 * \brief Fonction qui ouvre une fenêtre d'erreur
+	 */
 	void erreur() {
 		JFrame jf = new JFrame();
 		

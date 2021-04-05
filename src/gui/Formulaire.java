@@ -22,6 +22,16 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/**
+ * \file Formulaire.java
+ * \brief Classe qui permet de créer l'interface Formulaire
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface Formulaire.
+ *
+ */
 //Classe qui représente la page de formulaire d'inscription en interface graphique
 public class Formulaire extends JFrame implements ActionListener {
 	
@@ -72,7 +82,11 @@ public class Formulaire extends JFrame implements ActionListener {
 	public Formulaire() {
 		build();
 	}
-	
+
+	/**
+	 * \fn void build()
+	 * \brief Fonction qui permet la construction de la fenêtre de la page Formulaire
+	 */
 	public void build() {
 		this.setTitle("Formulaire d'inscription"); //Création de la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -125,7 +139,12 @@ public class Formulaire extends JFrame implements ActionListener {
 		
 		setVisible(true) ;
 	}
-	
+
+	/**
+	 * \fn void actionPerformed(ActionEvent e)
+	 * \brief Fonction qui donne des actions aux boutons
+	 * \param [in] a ActionEvent (Type ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		Object Button = e.getSource();
 		if (Button == retour) {
@@ -181,7 +200,12 @@ public class Formulaire extends JFrame implements ActionListener {
 
 		}
 	}
-	
+
+	/**
+	 * \fn JPanel grid()
+	 * \brief Fonction qui retourne un JPanel
+	 * \return Retourne un JPanel
+	 */
 	public JPanel grid() {
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridBagLayout());
@@ -301,6 +325,11 @@ public class Formulaire extends JFrame implements ActionListener {
 		return grid;
 	}
 
+	/**
+	 * \fn JPanel echec()
+	 * \brief Fonction qui retourne un JPanel pour les joueurs d'échecs
+	 * \return Retourne un JPanel
+	 */
 	public JPanel echec() {
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridBagLayout());
@@ -344,7 +373,12 @@ public class Formulaire extends JFrame implements ActionListener {
 		
 		return grid;
 	}
-	
+
+	/**
+	 * \fn JPanel completeEchec()
+	 * \brief Fonction qui complete le JPanel pour les échecs
+	 * \return Retourne un JPanel
+	 */
 	public JPanel completeEchec() {
 		JPanel grid = echec();
 		
@@ -362,7 +396,12 @@ public class Formulaire extends JFrame implements ActionListener {
 		
 		return echec;
 	}
-	
+
+	/**
+	 * \fn JPanel buttons()
+	 * \brief Fonction qui retourne un JPanel pour les boutons
+	 * \return Retourne un JPanel avec les boutons
+	 */
 	public JPanel buttons() {
 		JPanel button = new JPanel();
 		button.setLayout(new GridBagLayout());
@@ -379,7 +418,15 @@ public class Formulaire extends JFrame implements ActionListener {
 		
 		return button;
 	}
-	
+
+	/**
+	 * \fn JPanel completeGrid(JPanel grid, JPanel echec, JPanel button)
+	 * \brief Fonction qui retourne un panel qui assemble tous les JPanel
+	 * \param [in] grid JPanel (Type JPanel)
+	 * \param [in] echec JPanel (Type JPanel)
+	 * \param [in] button JPanel (Type JPanel)
+	 * \return Retourne un JPanel
+	 */
 	public JPanel completeGrid(JPanel grid, JPanel echec, JPanel button) {
 		JPanel complete = new JPanel();
 		complete.setLayout(new GridBagLayout());

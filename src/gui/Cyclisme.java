@@ -12,6 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * \file Cyclisme.java
+ * \brief Classe qui permet de créer l'interface de la page de sport Cyclisme
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface de la page de sport Cyclisme.
+ *
+ */
 //Classe qui représente la page du sport cyclisme en interface graphique
 public class Cyclisme extends JFrame implements ActionListener {
 
@@ -39,6 +49,10 @@ public class Cyclisme extends JFrame implements ActionListener {
         build();
     }
 
+    /**
+     * \fn void build()
+     * \brief Fonction qui permet la construction de la fenêtre de la page de sport Cyclisme
+     */
     public void build() {
         this.setSize(550, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,6 +89,11 @@ public class Cyclisme extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * \fn JPanel donnee()
+     * \brief Fonction qui retourne un JPanel sur lequel l'utilisateur pourra entrer ses données
+     * \return Retourne un JPanel
+     */
     public static JPanel donnee() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -124,6 +143,11 @@ public class Cyclisme extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JPanel buttons()
+     * \brief Fonction qui retourne un JPanel pour les boutons
+     * \return Retourne un JPanel avec les boutons
+     */
     public JPanel buttons() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -152,6 +176,11 @@ public class Cyclisme extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JPanel graphiques()
+     * \brief Fonction qui retourne un JPanel pour les graphiques
+     * \return Retourne un JPanel avec les graphiques
+     */
     public JPanel graphiques() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -173,6 +202,14 @@ public class Cyclisme extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JPanel complete(JPanel grid, JPanel panel, JPanel graphique)
+     * \brief Fonction qui retourne un panel qui assemble tous les JPanel
+     * \param [in] grid JPanel (Type JPanel)
+     * \param [in] panel JPanel (Type JPanel)
+     * \param [in] graphique JPanel (Type JPanel)
+     * \return Retourne un JPanel
+     */
     public JPanel complete(JPanel grid, JPanel panel, JPanel graphique) {
         JPanel complete = new JPanel();
         complete.setLayout(new GridBagLayout());
@@ -200,6 +237,11 @@ public class Cyclisme extends JFrame implements ActionListener {
         return complete;
     }
 
+    /**
+     * \fn void actionPerformed(ActionEvent e)
+     * \brief Fonction qui donne des actions aux boutons
+     * \param [in] a ActionEvent (Type ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object Button = e.getSource();

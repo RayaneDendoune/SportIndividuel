@@ -7,6 +7,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * \file Accueil.java
+ * \brief Classe qui permet de créer l'interface de l'Accueil
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface Accueil.
+ *
+ */
 //Classe qui représente l'accueil en interface graphique
 public class Accueil extends JFrame implements ActionListener {
 
@@ -47,7 +57,11 @@ public class Accueil extends JFrame implements ActionListener {
 	public Accueil() {
 		build();
 	}
-	
+
+	/**
+	 * \fn void build()
+	 * \brief Fonction qui permet la construction de la fenêtre d'Accueil
+	 */
 	public void build() {
 		this.setSize(550, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,6 +86,11 @@ public class Accueil extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
+	/**
+	 * \fn JPanel imgButtons()
+	 * \brief Fonction qui retourne un JPanel pour les boutons
+	 * \return Retourne un JPanel avec les boutons
+	 */
 	public JPanel imgButtons() {
 		JPanel grid = new JPanel();
 		grid.setLayout(new GridBagLayout());
@@ -117,6 +136,11 @@ public class Accueil extends JFrame implements ActionListener {
 		return grid;
 	}
 
+	/**
+	 * \fn JPanel header()
+	 * \brief Fonction qui retourne un JPanel pour le haut de la fenêtre
+	 * \return Retourne un JPanel
+	 */
 	public JPanel header() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
@@ -134,6 +158,13 @@ public class Accueil extends JFrame implements ActionListener {
 		return panel;
 	}
 
+	/**
+	 * \fn JPanel complete(JPanel grid, JPanel header)
+	 * \brief Fonction qui retourne un panel qui assemble tous les JPanel
+	 * \param [in] grid JPanel (Type JPanel)
+	 * \param [in] header JPanel (Type JPanel)
+	 * \return Retourne un JPanel
+	 */
 	public JPanel complete(JPanel grid, JPanel header) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
@@ -159,6 +190,11 @@ public class Accueil extends JFrame implements ActionListener {
 		new Accueil();
 	}
 
+	/**
+	 * \fn void actionPerformed(ActionEvent e)
+	 * \brief Fonction qui donne des actions aux boutons
+	 * \param [in] a ActionEvent (Type ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object Button = e.getSource();

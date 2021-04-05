@@ -11,6 +11,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * \file Reseau.java
+ * \brief Classe qui permet de créer l'interface de la page de Reseau Social
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la création de l'interface de la page de Reseau Social.
+ *
+ */
 //Classe qui représente la page de réseau social en interface graphique
 public class Reseau extends JFrame implements ActionListener {
 
@@ -40,6 +50,10 @@ public class Reseau extends JFrame implements ActionListener {
         build();
     }
 
+    /**
+     * \fn void build()
+     * \brief Fonction qui permet la construction de la fenêtre de la page de Reseau Social
+     */
     public void build() {
         this.setSize(550, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,6 +115,11 @@ public class Reseau extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * \fn JPanel buttons()
+     * \brief Fonction qui retourne un JPanel pour les boutons
+     * \return Retourne un JPanel avec les boutons
+     */
     public JPanel buttons() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -122,6 +141,11 @@ public class Reseau extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn JScrollPane panelSuggestion()
+     * \brief Fonction qui retourne un JScollPane avec les suggestions d'Amis
+     * \return Retourne un JScollPane
+     */
     public JScrollPane panelSuggestion() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -159,6 +183,11 @@ public class Reseau extends JFrame implements ActionListener {
         return scrollPane;
     }
 
+    /**
+     * \fn JScrollPane panelDemande()
+     * \brief Fonction qui retourne un JScollPane avec les demandes d'amis
+     * \return Retourne un JScollPane
+     */
     public JScrollPane panelDemande() {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -204,6 +233,14 @@ public class Reseau extends JFrame implements ActionListener {
         return scrollPane;
     }
 
+    /**
+     * \fn JPanel complete(JPanel buttons, JScrollPane panelSuggestion, JScrollPane panelDemande)
+     * \brief Fonction qui retourne un panel qui assemble tous les JPanel & JScrollPane
+     * \param [in] buttons JPanel (Type JPanel)
+     * \param [in] panelSuggestion JScrollPane (Type JScrollPane)
+     * \param [in] panelDemande JScrollPane (Type JScrollPane)
+     * \return Retourne un JPanel
+     */
     public JPanel complete(JPanel buttons, JScrollPane panelSuggestion, JScrollPane panelDemande) {
         JPanel grid = new JPanel();
         grid.setLayout(new GridBagLayout());
@@ -231,6 +268,11 @@ public class Reseau extends JFrame implements ActionListener {
         return grid;
     }
 
+    /**
+     * \fn void actionPerformed(ActionEvent e)
+     * \brief Fonction qui donne des actions aux boutons
+     * \param [in] a ActionEvent (Type ActionEvent)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object Button = e.getSource();
