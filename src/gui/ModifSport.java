@@ -280,6 +280,7 @@ public class ModifSport extends JFrame implements ActionListener {
      * \fn void actionPerformed(ActionEvent e)
      * \brief Fonction qui donne des actions aux boutons
      * \param [in] a ActionEvent (Type ActionEvent)
+     *
      */
     @Override
     public void actionPerformed(ActionEvent e) {

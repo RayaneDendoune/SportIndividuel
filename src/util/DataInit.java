@@ -10,7 +10,6 @@ import org.hibernate.tool.hbm2ddl.SchemaUpdate;
  * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
  * \version 1.0
  * \date 29/03/2021
- *
  */
 public class DataInit {
 

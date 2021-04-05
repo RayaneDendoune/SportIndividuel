@@ -426,6 +426,7 @@ public class Formulaire extends JFrame implements ActionListener {
 	 * \param [in] echec JPanel (Type JPanel)
 	 * \param [in] button JPanel (Type JPanel)
 	 * \return Retourne un JPanel
+	 *
 	 */
 	public JPanel completeGrid(JPanel grid, JPanel echec, JPanel button) {
 		JPanel complete = new JPanel();

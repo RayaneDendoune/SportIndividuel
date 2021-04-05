@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
  * \date 29/03/2021
  *
  * Classe contenant toutes les fonctions associées à la création de l'interface Accueil.
- *
  */
 //Classe qui représente l'accueil en interface graphique
 public class Accueil extends JFrame implements ActionListener {
