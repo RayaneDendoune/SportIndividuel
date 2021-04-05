@@ -4,7 +4,24 @@ import gui.*;
 
 import javax.swing.*;
 
+/**
+ * \file RobustesseManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant la robustesse dans le code
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées à la robustesse.
+ *
+ */
 public class RobustesseManager {
+
+    /**
+     * \fn int StringToFloat(String phrase)
+     * \brief Fonction qui renvoie un numéro d'erreur si le String passé en paramètre ne peut pas être transformé en Float
+     * \param [in] phrase Paramètre que nous voulons transformer en Float (Type String)
+     * \return Retourne un Integer qui correspond au numéro d'erreur si le String passé en paramètre ne peut pas être transformé en Float, 0 sinon
+     */
     public static int StringToFloat(String phrase) {
         boolean existPoint = false;
         char[] charArray = phrase.toCharArray();
@@ -31,6 +48,12 @@ public class RobustesseManager {
         return 0;
     }
 
+    /**
+     * \fn int StringToInteger(String phrase)
+     * \brief Fonction qui renvoie un numéro d'erreur si le String passé en paramètre ne peut pas être transformé en Integer
+     * \param [in] phrase Paramètre que nous voulons transformer en Integer (Type String)
+     * \return Retourne un Integer qui correspond au numéro d'erreur si le String passé en paramètre ne peut pas être transformé en Integer, 0 sinon
+     */
     public static int StringToInteger(String phrase) {
         char[] charArray = phrase.toCharArray();
         for(int i=0; i< charArray.length; i++) {
@@ -42,6 +65,12 @@ public class RobustesseManager {
         return 0;
     }
 
+    /**
+     * \fn int StringtoString(String phrase)
+     * \brief Fonction qui renvoie un numéro d'erreur si le String passé en paramètre contient des caractères numériques non désiré
+     * \param [in] phrase Paramètre que nous voulons transformer en String (Type String)
+     * \return Retourne un Integer qui correspond au numéro d'erreur si le String passé en paramètre contient des caractères numériques non désiré, 0 sinon
+     */
     public static int StringtoString(String phrase) {
         char[] charArray = phrase.toCharArray();
         for(int i=0; i< charArray.length; i++) {
@@ -53,6 +82,12 @@ public class RobustesseManager {
         return 0;
     }
 
+    /**
+     * \fn String noErreur(int erreur)
+     * \brief Fonction qui le message d'erreur selon le numéro de l'erreur passé en paramètre
+     * \param [in] erreur Numéro de l'erreur (Type Integer)
+     * \return Retourne un String qui correspond au message d'erreur selon le numéro de l'erreur passé en paramètre
+     */
     public static String noErreur(int erreur) {
         String error = "";
 
@@ -87,6 +122,12 @@ public class RobustesseManager {
         return error;
     }
 
+    /**
+     * \fn boolean modificationRobustesse(int selection)
+     * \brief Fonction qui retourne si il a une erreur dans les champs d'écriture selon le sport choisi
+     * \param [in] selection Numéro du sport choisis (Type Integer)
+     * \return Retourne false si il n'y a pas de probleme, True sinon
+     */
     public static boolean modificationRobustesse(int selection) {
         if(selection == 1) {
             if(RobustesseManager.StringToFloat(Course.dist.getText()) == 0 && RobustesseManager.StringToInteger(Course.time.getText()) == 0) {
@@ -120,6 +161,11 @@ public class RobustesseManager {
         return false;
     }
 
+    /**
+     * \fn void modificationProbleme(int selection)
+     * \brief Fonction qui ouvre une fenêtre d'erreur si l'utilisateur a fait une faute dans les champs selon le sport choisi passé en paramètre
+     * \param [in] selection Numéro du sport choisis (Type Integer)
+     */
     public static void modificationProbleme(int selection) {
         if(selection == 1) {
             if(RobustesseManager.StringToFloat(Course.dist.getText()) != 0) { RobustesseManager.erreur(RobustesseManager.StringToFloat(Course.dist.getText()), Course.distance); }
@@ -144,11 +190,23 @@ public class RobustesseManager {
         }
     }
 
+    /**
+     * \fn int tailleFrame(String text)
+     * \brief Fonction qui renvoie une taille de fenêtre selon le texte qui est écrit
+     * \param [in] text Texte écrit dans la fenêtre (Type String)
+     * \return Retourne la taille de la fenêtre
+     */
     public static int tailleFrame(String text) {
         char[] charArray = text.toCharArray();
         return charArray.length * 7;
     }
 
+    /**
+     * \fn void erreur(int erreur, JLabel label)
+     * \brief Fonction qui ouvre une fenêtre d'erreur selon le numéro d'erreur passé en paramètre
+     * \param [in] erreur Numéro de l'erreur (Type Integer)
+     * \param [in] label Champs dans lequel l'utilisateur s'est tromper (Type JLabel)
+     */
     public static void erreur(int erreur, JLabel label) {
         JLabel errorAttribut = new JLabel();
         JFrame jf = new JFrame();

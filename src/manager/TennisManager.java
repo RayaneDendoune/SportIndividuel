@@ -2,8 +2,6 @@ package manager;
 
 import gui.Tennis;
 import model.Individu;
-import model.Seance_course;
-import model.Seance_natation;
 import model.Seance_tennis;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,8 +11,30 @@ import util.HibernateUtil;
 import java.sql.Time;
 import java.util.*;
 
+/**
+ * \file TennisManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant le sport Tennis
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées au sport Tennis.
+ *
+ */
 public class TennisManager {
-    //Je pense que nbset ne sert a rien du tout, on peut l'enlever de la table.
+    /**
+     * \fn void ajouterTennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu)
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_tennis dans la base de donnée grâce aux données entrées en paramètres.
+     *
+     * \param [in] id_seance_tennis Clé primaire de la table Seance_tennis (Type String)
+     * \param [in] premier_service Premier Service meilleur service (Type Float)
+     * \param [in] deuxieme_service Deuxieme Service meilleur service  (Type Float)
+     * \param [in] troisieme_service Troisième Service meilleur service (Type Float)
+     * \param [in] nb_set Nombre de Set durant le match (Type Integer)
+     * \param [in] issue_match Issue du match (Type Character)
+     * \param [in] vitesse_moy_service Vitesse moyenne des meilleurs services durant ce match (Type Float)
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     */
     public static void ajouterTennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu) {
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -34,6 +54,17 @@ public class TennisManager {
         session.getTransaction().commit();
 
     }
+
+    /**
+     * \fn void updateTennis(Seance_tennis seance, float premierService, float deuxiemeService, float troisiemeService, int nbSet,char issueMatch)
+     * \brief Fonction qui met à jour la table Seance_tennis et refait de nouveaux calculs grâce aux données entrées en paramètres.
+     * \param [in] seance Seance de Tennis que l'on souhaite modifier (Type Seance_tennis)
+     * \param [in] premier_service Premier Service meilleur service (Type Float)
+     * \param [in] deuxieme_service Deuxieme Service meilleur service  (Type Float)
+     * \param [in] troisieme_service Troisième Service meilleur service (Type Float)
+     * \param [in] nb_set Nombre de Set durant le match (Type Integer)
+     * \param [in] issue_match Issue du match (Type Character)
+     */
     public static void updateTennis(Seance_tennis seance, float premierService, float deuxiemeService, float troisiemeService, int nbSet,char issueMatch) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -50,6 +81,12 @@ public class TennisManager {
         session.getTransaction().commit();
     }
 
+    /**
+     * \fn long nbSeanceTennis(Individu individu)
+     * \brief Fonction qui retourne le nombre de séance de Tennis que individu passé en paramètre a fait.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un Long avec le nombre de séance de Tennis que l'utilisateur a effectué.
+     */
     public static long nbSeanceTennis(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -63,6 +100,12 @@ public class TennisManager {
         return count;
     }
 
+    /**
+     * \fn String idSeance(Individu individu)
+     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Tennis que l'utilisateur a effectué incrémenter de 1.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un String avec un nouvel identifiant de séance de Tennis pour l'individu passé en paramètre
+     */
     public static String idSeance(Individu individu) {
         int nbOcc = ((int)nbSeanceTennis(individu)) + 1;
         String id = individu.getId_individu();
@@ -77,12 +120,25 @@ public class TennisManager {
         return seance;
     }
 
-
+    /**
+     * \fn float vitesseService(float service1, float service2, float service3)
+     * \brief Fonction qui calcule la vitesse moyenne des services
+     * \param [in] service1 Premier Service meilleur service (Type Float)
+     * \param [in] service2 Deuxieme Service meilleur service  (Type Float)
+     * \param [in] service3 Troisième Service meilleur service (Type Float)
+     * \return Retourne un Float avec la moyenne de la vitesse des services qui a été calculé.
+     */
     public static float vitesseService(float service1, float service2, float service3) {
         float vitesse = (service1 + service2 + service3)/3;
         return vitesse;
     }
 
+    /**
+     * \fn char issueMatch(String issue)
+     * \brief Fonction qui retourne un Character en fonction de l'issue de la partie (String) qui lui est rentré en paramètre
+     * \param [in] issue Issue de la partie (Type Character)
+     * \return Retourne un Character en fonction de l'issue de la partie
+     */
     public static char issueMatch(String issue) {
         if(issue.equals("Victoire")) {
             return 'V';
@@ -93,6 +149,12 @@ public class TennisManager {
         return ' ';
     }
 
+    /**
+     * \fn ArrayList<Float> VitesseMoy(Individu individu)
+     * \brief Fonction qui retourne les vitesses moyennes des services d'un individu pour chaque séance de la table Seance_tennis depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)!
+     * \return Retourne une ArrayList de Float avec les vitesses moyennes de l'individu à chaque séance.
+     */
     public static ArrayList<Float> VitesseMoy(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Float> vitesse = new ArrayList<Float>();
@@ -112,6 +174,12 @@ public class TennisManager {
         return vitesse;
     }
 
+    /**
+     * \fn ArrayList<Character> nbVictoire(Individu individu)
+     * \brief Fonction qui retourne les issues des matchs de l'individu pour chaque séance de la table Seance_tennis depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)!
+     * \return Retourne une ArrayList de Character avec les issues des match de l'individu à chaque séance.
+     */
     public static ArrayList<Character> nbVictoire(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Character> issue = new ArrayList<Character>();
@@ -131,6 +199,12 @@ public class TennisManager {
         return issue;
     }
 
+    /**
+     * \fn ArrayList<Individu> listIndividuTennis(Individu individu)
+     * \brief Fonction qui renvoie tous les individus de la table Seance_tennis excepté l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList d'Individu qui sont dans la table Seance_tennis excepté l'individu passé en paramètre
+     */
     //Fonction qui renvoie tous les individus dans la table
     public static ArrayList<Individu> listIndividuTennis(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
@@ -158,6 +232,12 @@ public class TennisManager {
         return individus;
 
     }
+
+    /**
+     * \fn ArrayList<Seance_tennis> listTennis()
+     * \brief Fonction qui parcours la table Seance_tennis et qui retourne toutes les données de cette table sous forme d'ArrayList de Seance_tennis
+     * \return ArrayList de Seance_tennis correspondant à toutes les données compris dans la table Seance_tennis dans la base de données
+     */
     public static ArrayList<Seance_tennis> listTennis() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Seance_tennis> listNatation = new ArrayList<Seance_tennis>();
@@ -177,6 +257,12 @@ public class TennisManager {
         return listNatation;
     }
 
+    /**
+     * \fn ArrayList<Seance_tennis> seanceTennisIndividu(Individu individu)
+     * \brief Fonction qui filtre la table Seance_tennis afin de retourner uniquement les Seance_tennis de l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Seance_tennis avec uniquement les séances de l'individu passé en paramètre.
+     */
     public static ArrayList<Seance_tennis> seanceTennisIndividu(Individu individu) {
         ArrayList<Seance_tennis> listTennis = listTennis();
         ArrayList<Seance_tennis> seanceIndividu = new ArrayList<Seance_tennis>();

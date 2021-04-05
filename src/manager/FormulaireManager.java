@@ -1,10 +1,24 @@
 package manager;
 
+/**
+ * \file FormulaireManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant le formulaire d'inscription
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées au formulaire d'inscription.
+ *
+ */
 public class FormulaireManager {
 
-
-    //Avant de faire cette fonction dans formulaire, il faut gérer le cas ou le mec ne rentre pas des valeur numérique
-    //Faire une condition que l'elo doit etre entre 1000 et 2800
+    /**
+     * \fn int choixElo(String elo, String frequence_jeu)
+     * \brief Fonction qui retourne filtre si l'individu connais son Elo ou pas, et s'il ne le connais pas, un elo lui sera attribué selon sa frequence de jeu
+     * \param [in] elo Elo que l'utilisateur aura écrit (Type String)
+     * \param [in] frequence_jeu Frequence de jeu que l'utilisateur aura sélectionner (Type String)
+     * \return Retourne un Integer avec l'elo de l'individu selon ce qu'il a entré comme paramètre.
+     */
     public static int choixElo(String elo, String frequence_jeu){
         int elofinal = 0;
 

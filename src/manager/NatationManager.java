@@ -2,7 +2,6 @@ package manager;
 
 import gui.Authentification;
 import model.Individu;
-import model.Seance_course;
 import model.Seance_natation;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,8 +12,31 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
+/**
+ * \file NatationManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant le sport Natation
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées au sport Natation.
+ *
+ */
 public class NatationManager {
 
+    /**
+     * \fn void ajouterNatation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu)
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_natation dans la base de donnée grâce aux données entrées en paramètres.
+     *
+     * \param [in] id_seance_natation Clé primaire de la table Seance_natation (Type String)
+     * \param [in] nb_longueur Nombre de longueur effectué durant la séance (Type Integer)
+     * \param [in] temps_total Temps total passé durant la séance (Type Time)
+     * \param [in] type_nage Type de nage effectué par l'individu durant sa séance (Type String)
+     * \param [in] calorie_perdu Nombre de calorie perdu par l'individu pendant sa séance (Type Integer)
+     * \param [in] temps_moy_longueur Temps moyen par longueur fait par l'individu durant sa séance (Type Time)
+     * \param [in] date Date où la séance à été effectuée (Type Date)
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     */
     public static void ajouterNatation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -33,6 +55,14 @@ public class NatationManager {
         session.getTransaction().commit();
     }
 
+    /**
+     * \fn void updateNatation(Seance_natation seance, int nbLongueur, Time temps, String typeNage)
+     * \brief Fonction qui met à jour la table Seance_natation et refait de nouveaux calculs grâce aux données entrées en paramètres.
+     * \param [in] seance Seance de Natation que l'on souhaite modifier (Type Seance_natation)
+     * \param [in] nbLongueur Nombre de longueur effectué durant la séance (Type Integer)
+     * \param [in] temps Temps total passé durant la séance (Type Time)
+     * \param [in] typeNage Type de nage effectué par l'individu durant sa séance (Type String)
+     */
     public static void updateNatation(Seance_natation seance, int nbLongueur, Time temps, String typeNage) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -56,7 +86,13 @@ public class NatationManager {
         session.getTransaction().commit();
     }
 
-    public static long nbSeanceCourse(Individu individu){
+    /**
+     * \fn long nbSeanceNatation(Individu individu)
+     * \brief Fonction qui retourne le nombre de séance de Natation que individu passé en paramètre a fait.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un Long avec le nombre de séance de Natation que l'utilisateur a effectué.
+     */
+    public static long nbSeanceNatation(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         Transaction readTransaction = session.beginTransaction();
@@ -69,8 +105,14 @@ public class NatationManager {
         return count;
     }
 
+    /**
+     * \fn String idSeance(Individu individu)
+     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Natation que l'utilisateur a effectué incrémenter de 1.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un String avec un nouvel identifiant de séance de Natation pour l'individu passé en paramètre
+     */
     public static String idSeance(Individu individu) {
-        int nbOcc = ((int)nbSeanceCourse(individu)) + 1;
+        int nbOcc = ((int)nbSeanceNatation(individu)) + 1;
         String id = individu.getId_individu();
         String seance ="";
         if(nbOcc<10) {
@@ -83,6 +125,13 @@ public class NatationManager {
         return seance;
     }
 
+    /**
+     * \fn float tempsMoyLongueur(int nbLongueur, int min)
+     * \brief Fonction qui calcule le temps moyen par longueur en fonction du nombre de longueur et du temps en minute passé en paramètre
+     * \param [in] nbLongueur Nombre de longueur effectué durant la séance (Type Integer)
+     * \param [in] min Temps en minute effectué par l'individu durant sa séance (Type Integer)
+     * \return Retourne un Float avec la vitesse moyenne qui a été calculée.
+     */
     public static float tempsMoyLongueur(int nbLongueur, int min) {
         int sec = min*60;
         float tempsMoy = sec/nbLongueur; //Temps en secondes
@@ -90,6 +139,14 @@ public class NatationManager {
         return tempsMoy;
     }
 
+    /**
+     * \fn float calories(Individu individu, String typeNage, int temps)
+     * \brief Fonction qui calcule le nombre de calories brulés lors de la séance grâce au type de nage et le temps mis durant la séance passés en paramètres
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \param [in] type_nage Type de nage effectué par l'individu durant sa séance (Type String)
+     * \param [in] temps Temps total passé durant la séance (Type Time)
+     * \return Retourne un Float avec le nombre de calories brulés qui a été calculé.
+     */
     public static float calories(Individu individu, String typeNage, int temps) {
         int met = 0;
         if(typeNage.equals("Brasse")) {
@@ -108,6 +165,12 @@ public class NatationManager {
         return totalCalories; //Résultat en Kcal et pas en calorie + TypeNage ne sert a riiien
     }
 
+    /**
+     * \fn ArrayList<Integer> nbCaloriesPerdues(Individu individu)
+     * \brief Fonction qui retourne le nombre de calories perdus par l'individu passé en paramètre pour chaque séance de la table Seance_natation depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Integer avec le nombre de calories perdus de l'individu à chaque séance.
+     */
     public static ArrayList<Integer> nbCaloriesPerdues(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Integer> nbCalorie = new ArrayList<Integer>();
@@ -127,6 +190,12 @@ public class NatationManager {
         return nbCalorie;
     }
 
+    /**
+     * \fn ArrayList<Time> tpsMoyLongueur(Individu individu)
+     * \brief Fonction qui retourne le temps moyen par longueur de l'individu passé en paramètre pour chaque séance de la table Seance_natation depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Time avec le temps moyen par longueur de l'individu à chaque séance.
+     */
     public static ArrayList<Time> tpsMoyLongueur(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Time> tempsMoyenLong = new ArrayList<Time>();
@@ -146,7 +215,13 @@ public class NatationManager {
         return tempsMoyenLong;
     }
 
-    //Fonction qui renvoie tous les individus dans la table
+    /**
+     * \fn  ArrayList<Individu> listIndividuNatation(Individu individu)
+     * \brief Fonction qui renvoie tous les individus de la table Seance_natation excepté l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList d'Individu qui sont dans la table Seance_natation excepté l'individu passé en paramètre
+     */
+    //Fonction qui renvoie tous les individus dans la table excepté l'individu passé en paramètre
     public static ArrayList<Individu> listIndividuNatation(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -173,6 +248,11 @@ public class NatationManager {
         return individus;
     }
 
+    /**
+     * \fn ArrayList<Seance_natation> listNatation()
+     * \brief Fonction qui parcours la table Seance_natation et qui retourne toutes les données de cette table sous forme d'ArrayList de Seance_natation
+     * \return ArrayList de Seance_natation correspondant à toutes les données compris dans la table Seance_natation dans la base de données
+     */
     public static ArrayList<Seance_natation> listNatation() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Seance_natation> listNatation = new ArrayList<Seance_natation>();
@@ -192,6 +272,12 @@ public class NatationManager {
         return listNatation;
     }
 
+    /**
+     * \fn ArrayList<Seance_natation> seanceNatationIndividu(Individu individu)
+     * \brief Fonction qui filtre la table Seance_natation afin de retourner uniquement les Seance_natation de l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Seance_natation avec uniquement les séances de l'individu passé en paramètre.
+     */
     public static ArrayList<Seance_natation> seanceNatationIndividu(Individu individu) {
         ArrayList<Seance_natation> listNatation = listNatation();
         ArrayList<Seance_natation> seanceIndividu = new ArrayList<Seance_natation>();

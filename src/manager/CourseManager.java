@@ -12,8 +12,31 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
+/**
+ * \file CourseManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant le sport Course
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées au sport Course.
+ *
+ */
 public class CourseManager {
     public static Seance_course seanceC;
+
+    /**
+     * \fn void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu)
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_course dans la base de donnée grâce aux données entrées en paramètres.
+     *
+     * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
+     * \param [in] distance Distance parcourue durant la séance (Type Float)
+     * \param [in] temps Temps total de la séance effectué (Type Time)
+     * \param [in] vitesse_moy Vitesse Moyenne que l'individu avait durant la séance (Type Float)
+     * \param [in] nb_pas Nombre de pas moyen effectué par l'utilisateur durant la séance (Type Integer)
+     * \param [in] date Date où la séance à été effectuée (Type Date)
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     */
     public static void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -31,6 +54,13 @@ public class CourseManager {
         session.getTransaction().commit();
     }
 
+    /**
+     * \fn void updateCourse(Seance_course seance, float distance, Time temps)
+     * \brief Fonction qui met à jour la table Seance_course et refait de nouveaux calculs grâce aux données entrées en paramètres.
+     * \param [in] seance Seance de Course que l'on souhaite modifier (Type Seance_course)
+     * \param [in] distance Distance parcourue durant la séance (Type Float)
+     * \param [in] temps Temps total de la séance effectué (Type Time)
+     */
     public static void updateCourse(Seance_course seance, float distance, Time temps) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -47,7 +77,13 @@ public class CourseManager {
         session.getTransaction().commit();
     }
 
-
+    /**
+     * \fn String existSeanceCourse(Session session, String id_seance_course)
+     * \brief Fonction qui retourne si un individu à déjà pratiquer ce sport
+     * \param [in] session Session pour se connecté à la base de données (Type Session)
+     * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
+     * \return Retourne un message d'erreur si l'individu n'a jamais pratiquer ce sport
+     */
     public static String existSeanceCourse(Session session, String id_seance_course) {
         Boolean present = false;
         Transaction readTransaction = session.beginTransaction();
@@ -71,6 +107,12 @@ public class CourseManager {
         return "";
     }
 
+    /**
+     * \fn long nbSeanceCourse(Individu individu)
+     * \brief Fonction qui retourne le nombre de séance de Course que individu passé en paramètre a fait.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un Long avec le nombre de séance de Course que l'utilisateur a effectué.
+     */
     public static long nbSeanceCourse(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -84,6 +126,12 @@ public class CourseManager {
         return count;
     }
 
+    /**
+     * \fn String idSeance(Individu individu)
+     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Course que l'utilisateur a effectué incrémenter de 1.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un String avec un nouvel identifiant de séance de Course pour l'individu passé en paramètre
+     */
     public static String idSeance(Individu individu) {
         int nbOcc = ((int)nbSeanceCourse(individu)) + 1;
         String id = individu.getId_individu();
@@ -98,6 +146,13 @@ public class CourseManager {
         return seance;
     }
 
+    /**
+     * \fn float vitesseMoyenne(float distanceKM, int min)
+     * \brief Fonction qui calcule la vitesse moyenne en fonction de la distance en km et le temps en minute passé en paramètre
+     * \param [in] distanceKM Distance effectué par l'individu durant sa séance (Type Float)
+     * \param [in] min Temps en minute effectué par l'individu durant sa séance (Type Integer)
+     * \return Retourne un Float avec la vitesse moyenne qui a été calculée.
+     */
     public static float vitesseMoyenne(float distanceKM, int min) {
         float distanceM = distanceKM*1000;
         int sec = min*60;
@@ -106,20 +161,23 @@ public class CourseManager {
         return vitesse;
     }
 
+    /**
+     * \fn int nbPas(float distance)
+     * \brief Fonction qui calcule le nombre de pas moyen en fonction de la distance passé en paramètre
+     * \param [in] distance Distance effectué par l'individu durant sa séance (Type Float)
+     * \return Retourne un Integer avec le nombre de pas moyen qui a été calculé.
+     */
     public static int nbPas(float distance){
         int nombrePas = (int)((distance*100000)/65);
         return nombrePas;
     }
 
-    /*public static float VitesseMoy(Session session,Seance_course seance_course){
-        Transaction readTransaction = session.beginTransaction();
-        float vitesse_moyenne= seance_course.getVitesse_moy();
-        System.out.println("la distance est "+ vitesse_moyenne);
-        readTransaction.commit();
-        return vitesse_moyenne;
-
-    }*/
-
+    /**
+     * \fn ArrayList<Float> VitesseMoy(Individu individu)
+     * \brief Fonction qui retourne les vitesses moyennes d'un individu pour chaque séance de la table Seance_course depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)!
+     * \return Retourne une ArrayList de Float avec les vitesses moyennes de l'individu à chaque séance.
+     */
     public static ArrayList<Float> VitesseMoy(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Float> vitesse = new ArrayList<Float>();
@@ -139,6 +197,12 @@ public class CourseManager {
         return vitesse;
     }
 
+    /**
+     * \fn ArrayList<Integer> nombrePas(Individu individu)
+     * \brief Fonction qui retourne le nombre de pas de l'individu passé en paramètre pour chaque séance de la table Seance_course depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Integer avec le nombre de pas de l'individu à chaque séance.
+     */
     public static ArrayList<Integer> nombrePas(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Integer> nbPas = new ArrayList<Integer>();
@@ -158,7 +222,13 @@ public class CourseManager {
         return nbPas;
     }
 
-    //Fonction qui renvoie tous les individus dans la table
+    /**
+     * \fn ArrayList<Individu> listIndividuCourse(Individu individu)
+     * \brief Fonction qui renvoie tous les individus de la table Seance_course excepté l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList d'Individu qui sont dans la table Seance_course excepté l'individu passé en paramètre
+     */
+    //Fonction qui renvoie tous les individus dans la table excepté l'individu passé en paramètre
     public static ArrayList<Individu> listIndividuCourse(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -184,6 +254,11 @@ public class CourseManager {
         return individus;
     }
 
+    /**
+     * \fn ArrayList<Seance_course> listCourse()
+     * \brief Fonction qui parcours la table Seance_course et qui retourne toutes les données de cette table sous forme d'ArrayList de Seance_course
+     * \return ArrayList de Seance_course correspondant à toutes les données compris dans la table Seance_course dans la base de données
+     */
     public static ArrayList<Seance_course> listCourse() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Seance_course> listCourse = new ArrayList<Seance_course>();
@@ -203,6 +278,12 @@ public class CourseManager {
         return listCourse;
     }
 
+    /**
+     * \fn ArrayList<Seance_course> seanceCourseIndividu(Individu individu)
+     * \brief Fonction qui filtre la table Seance_Course afin de retourner uniquement les Seance_course de l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Seance_Course avec uniquement les séances de l'individu passé en paramètre.
+     */
     public static ArrayList<Seance_course> seanceCourseIndividu(Individu individu) {
         ArrayList<Seance_course> listCourse = listCourse();
         ArrayList<Seance_course> seanceIndividu = new ArrayList<Seance_course>();
@@ -215,26 +296,4 @@ public class CourseManager {
 
         return seanceIndividu;
     }
-
-
-    public static void main (String []args){
-        /*Session session = HibernateUtil.getSession();
-        Seance_course sc = new Seance_course("Katarina_5");
-        CourseManager.seanceC.setId_seance_course("Katarina_5");
-        DistanceCourse(session, CourseManager.seanceC);
-
-
-        System.out.println("id seance course :" + sc.getId_seance_course() + "\ndistance :" + sc.getDistance() + "\ntemps :" + sc.getTemps() + "\nnb_pas :" + sc.getNb_pas() + "\ndate :" + sc.getDate());
-        Session session = HibernateUtil.getSession();
-        existSeanceCourse(session, "atarina_5");
-        nbSeanceCourse(AuthentificationManager.personne);
-        session.close();
-
-         */
-    }
-
-
-
-
-
 }

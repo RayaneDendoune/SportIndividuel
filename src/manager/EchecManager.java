@@ -9,8 +9,31 @@ import util.HibernateUtil;
 import java.sql.Time;
 import java.util.*;
 
+/**
+ * \file EchecManager.java
+ * \brief Classe qui s'occupe de toutes les opérations concernant le sport échecs
+ * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
+ * \version 1.0
+ * \date 29/03/2021
+ *
+ * Classe contenant toutes les fonctions associées au sport Echecs.
+ *
+ */
 public class EchecManager {
 
+    /**
+     * \fn void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, String niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu)
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Partie_echec dans la base de donnée grâce aux données entrées en paramètres.
+     *
+     * \param [in] id_partie_echec Clé primaire de la table Partie_echec (Type String)
+     * \param [in] elo_adversaire Elo de l'adversaire (Type Integer)
+     * \param [in] futur_elo Future Elo de l'individu après la partie en cours (Type Integer)
+     * \param [in] duree Duree totale de la partie (Type Time)
+     * \param [in] niveau_competence_mentale Niveau de Compétence Mentale (Type String)
+     * \param [in] issue_partie Issue de la partie (Type Character)
+     * \param [in] niveau_concentration Niveau de Concentration (Type Integer)
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     */
     public static void ajouterEchec(String id_partie_echec, int elo_adversaire, int futur_elo, Time duree, String niveau_competence_mentale, char issue_partie, int niveau_concentration, Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -28,6 +51,16 @@ public class EchecManager {
         session.save(partie_echec);
         session.getTransaction().commit();
     }
+
+    /**
+     * \fn void updateEchec(Partie_echec partie, int eloAdversaire, Time temps, char issue, int newElo)
+     * \brief Fonction qui met à jour la table Partie_echec et refait de nouveaux calculs grâce aux données entrées en paramètres.
+     * \param [in] partie Partie d'échecs que l'on souhaite modifier (Type Partie_echec)
+     * \param [in] elo_adversaire Elo de l'adversaire (Type Integer)
+     * \param [in] temps Temps total de la partie effectué (Type Time)
+     * \param [in] issue Issue de la partie (Type Character)
+     * \param [in] newElo Nouveau Elo après la modification de tous les paramètre (Type Integer)
+     */
     public static void updateEchec(Partie_echec partie, int eloAdversaire, Time temps, char issue, int newElo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -46,6 +79,12 @@ public class EchecManager {
     }
 
 
+    /**
+     * \fn long nbPartieEchec(Individu individu)
+     * \brief Fonction qui retourne le nombre de partie d'échec que individu passé en paramètre a fait.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un Long avec le nombre de partie d'échec que l'utilisateur a effectué.
+     */
     public static long nbPartieEchec(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -59,6 +98,12 @@ public class EchecManager {
         return count;
     }
 
+    /**
+     * \fn String idSeance(Individu individu)
+     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de partie d'échec que l'utilisateur a effectué incrémenter de 1.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un String avec un nouvel identifiant de partie d'échecs pour l'individu passé en paramètre
+     */
     public static String idSeance(Individu individu) {
         int nbOcc = ((int)nbPartieEchec(individu)) + 1;
         String id = individu.getId_individu();
@@ -73,6 +118,12 @@ public class EchecManager {
         return seance;
     }
 
+    /**
+     * \fn void updateValue(Individu individu, int newElo)
+     * \brief Fonction qui met à jour la table Individu et modifie l'elo de l'individu passé en paramètre.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \param [in] newElo Nouveau Elo par lequel nous voulons modifier l'elo actuel (Type Integer)
+     */
     public static void updateValue(Individu individu, int newElo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
@@ -82,6 +133,14 @@ public class EchecManager {
         session.getTransaction().commit();
     }
 
+    /**
+     * \fn int newElo(Individu individu, int eloAdv, String issue)
+     * \brief Fonction qui calcul le nouvel elo de l'individu grâce à l'elo de son adversaire et l'issue de la partie
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \param [in] eloAdv Elo de l'adversaire (Type Integer)
+     * \param [in] issue Issue de la partie (Type Character)
+     * \return Retourne un Integer avec le nouvel elo de l'individu après calcul
+     */
     public static int newElo(Individu individu, int eloAdv, String issue) {
         int difference = individu.getElo() - eloAdv;
         float proba = (float) (1/(1+Math.pow(10, ((-difference)/400))));
@@ -114,6 +173,12 @@ public class EchecManager {
         return futurElo;
     }
 
+    /**
+     * \fn char issue(String issue)
+     * \brief Fonction qui retourne un Character en fonction de l'issue de la partie qui lui est rentré en paramètre
+     * \param [in] issue Issue de la partie (Type String)
+     * \return Retourne un Character en fonction de l'issue de la partie
+     */
     public static char issue(String issue) {
         if(issue.equals("Victoire")) {
             return 'V';
@@ -127,6 +192,12 @@ public class EchecManager {
         return ' ';
     }
 
+    /**
+     * \fn ArrayList<Integer> elo(Individu individu)
+     * \brief Fonction qui retourne l'elo de l'individu passé en paramètre pour chaque séance de la table Partie_echec depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Integer avec les elos de l'individu à chaque séance.
+     */
     public static ArrayList<Integer> elo(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Integer> elo = new ArrayList<Integer>();
@@ -146,7 +217,13 @@ public class EchecManager {
         return elo;
     }
 
-    //Fonction qui renvoie tous les individus dans la table
+    /**
+     * \fn ArrayList<Individu> listIndividuEchec(Individu individu)
+     * \brief Fonction qui renvoie tous les individus de la table Partie_echec excepté l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList d'Individu qui sont dans la table Partie_echec excepté l'individu passé en paramètre
+     */
+    //Fonction qui renvoie tous les individus dans la table excepté l'individu passé en paramètre
     public static ArrayList<Individu> listIndividuEchec(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -172,6 +249,12 @@ public class EchecManager {
         return individus;
     }
 
+    /**
+     * \fn ArrayList<Integer> concentration(Individu individu)
+     * \brief Fonction qui retourne le niveau de concentration de l'individu passé en paramètre pour chaque partie de la table Partie_echec depuis la base de données.
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Integer avec le nombre de pas de l'individu à chaque séance.
+     */
     public static ArrayList<Integer> concentration(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Integer> niveauConcentration = new ArrayList<Integer>();
@@ -191,6 +274,12 @@ public class EchecManager {
         return niveauConcentration;
     }
 
+    /**
+     * \fn String competenceMentale(Individu individu)
+     * \brief Fonction qui renvoie la competence mentale de l'individu
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne un String avec la competence mentale de l'individu
+     */
     public static String competenceMentale(Individu individu) {
         int elo = individu.getElo();
         String text = "";
@@ -209,6 +298,14 @@ public class EchecManager {
 
         return text;
     }
+
+    /**
+     * \fn int niveauConcentration(Individu individu, char issue, String competence)
+     * \brief Fonction qui calcule le niveau de concentration de l'individu en fonction de l'issue de la partie et de son niveau de compétence mental passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \param [in] competence Niveau de Compétence Mentale (Type String)
+     * \return Retourne un Integer avec le niveau de concentration de l'individu durant la séance.
+     */
     public static int niveauConcentration(Individu individu, char issue, String competence) {
         float issueMatch = 0;
         int niveauConcentration = 0;
@@ -242,6 +339,11 @@ public class EchecManager {
         return niveauConcentration;
     }
 
+    /**
+     * \fn ArrayList<Partie_echec> listEchec()
+     * \brief Fonction qui parcours la table Partie_echec et qui retourne toutes les données de cette table sous forme d'ArrayList de Partie_echec
+     * \return ArrayList de Partie_echec correspondant à toutes les données compris dans la table Partie_echec dans la base de données
+     */
     public static ArrayList<Partie_echec> listEchec() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Partie_echec> listEchec = new ArrayList<Partie_echec>();
@@ -261,6 +363,12 @@ public class EchecManager {
         return listEchec;
     }
 
+    /**
+     * \fn ArrayList<Partie_echec> seanceEchecIndividu(Individu individu)
+     * \brief Fonction qui filtre la table Partie_echec afin de retourner uniquement les Partie_echec de l'individu passé en paramètre
+     * \param [in] individu Individu qui est actuellement connecté (Type Individu)
+     * \return Retourne une ArrayList de Partie_echec avec uniquement les parties de l'individu passé en paramètre.
+     */
     public static ArrayList<Partie_echec> seanceEchecIndividu(Individu individu) {
         ArrayList<Partie_echec> listEchec = listEchec();
         ArrayList<Partie_echec> seanceIndividu = new ArrayList<Partie_echec>();
