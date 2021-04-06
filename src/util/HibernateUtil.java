@@ -34,6 +34,7 @@ public class HibernateUtil {
         return config;
     }
 
+//Fonction qui permet l'ouverture de session
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {

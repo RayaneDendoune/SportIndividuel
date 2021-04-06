@@ -16,8 +16,6 @@
 
         <property name="current_session_context_class">thread</property>
 
-        <!--<property name="connection.pool_size">1</property> -->
-
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
         <property name="hibernate.connection.isolation">2</property>
