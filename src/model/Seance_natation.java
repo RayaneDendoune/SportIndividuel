@@ -14,7 +14,7 @@ import java.sql.Time;
  * Classe contenant toutes les fonctions associées à la création d'une séance de natation
  *
  */
-//Table "Seance_natation" pour la base de donnée
+//Table "Seance_natation" pour la base de données
 @Entity
 public class Seance_natation {
 
@@ -36,10 +36,10 @@ public class Seance_natation {
      * \fn Seance_natation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu)
      * \brief Constructeur de Seance_natation
      * \param [in] id_seance_natation Clé primaire de la table Seance_natation (Type String)
-     * \param [in] nb_longueur Nombre de longueur effectué durant la séance (Type Integer)
+     * \param [in] nb_longueur Nombre de longueurs effectués durant la séance (Type Integer)
      * \param [in] temps_total Temps total passé durant la séance (Type Time)
      * \param [in] type_nage Type de nage effectué par l'individu durant sa séance (Type String)
-     * \param [in] calorie_perdu Nombre de calorie perdu par l'individu pendant sa séance (Type Integer)
+     * \param [in] calorie_perdu Nombre de calories perdues par l'individu pendant sa séance (Type Integer)
      * \param [in] temps_moy_longueur Temps moyen par longueur fait par l'individu durant sa séance (Type Time)
      * \param [in] date Date où la séance à été effectuée (Type Date)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
@@ -76,8 +76,8 @@ public class Seance_natation {
 
     /**
      * \fn int getNb_longueur()
-     * \brief Fonction qui retourne le nombre de longueur faite par l'utilisateur durant la séance de natation
-     * \return Retourne un Integer avec le nombre de longueur fait
+     * \brief Fonction qui retourne le nombre de longueurs effectuées par l'utilisateur durant la séance de natation
+     * \return Retourne un Integer avec le nombre de longueurs effectuées
      */
     public int getNb_longueur() {
         return nb_longueur;
@@ -85,8 +85,8 @@ public class Seance_natation {
 
     /**
      * \fn void setNb_longueur(int nb_longueur)
-     * \brief Fonction qui modifie le nombre de longueur faite par l'utilisateur durant la séance de natation
-     * \param [in] nb_longueur Nombre de longueur effectué durant la séance (Type Integer)
+     * \brief Fonction qui modifie le nombre de longueurs effectuées par l'utilisateur durant la séance de natation
+     * \param [in] nb_longueur Nombre de longueur effectuées durant la séance (Type Integer)
      */
     public void setNb_longueur(int nb_longueur) {
         this.nb_longueur = nb_longueur;
@@ -140,7 +140,7 @@ public class Seance_natation {
     /**
      * \fn void setCalorie_perdu(int calorie_perdu)
      * \brief Fonction qui modifie les calories perdues de l'utilisateur durant la séance
-     * \param [in] calorie_perdu Nombre de calorie perdu par l'individu pendant sa séance (Type Integer)
+     * \param [in] calorie_perdu Nombre de calories perdues par l'individu pendant sa séance (Type Integer)
      */
     public void setCalorie_perdu(int calorie_perdu) {
         this.calorie_perdu = calorie_perdu;
@@ -158,7 +158,7 @@ public class Seance_natation {
     /**
      * \fn void setTemps_moy_longueur(Time temps_moy_longueur)
      * \brief Fonction qui modifie le temps moyen par longueur de l'utilisateur durant la séance
-     * \param [in] calorie_perdu Nombre de calorie perdu par l'individu pendant sa séance (Type Integer)
+     * \param [in] temps_moy_longueur Temps moyen par longueur de l'utilisateur durant la séance (Type Time)
      */
     public void setTemps_moy_longueur(Time temps_moy_longueur) {
         this.temps_moy_longueur = temps_moy_longueur;

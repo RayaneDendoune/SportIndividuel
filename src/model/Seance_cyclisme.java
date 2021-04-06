@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Classe contenant toutes les fonctions associées à la création d'une séance de cyclisme
  *
  */
-//Table "Seance_cyclisme" pour la base de donnée
+//Table "Seance_cyclisme" pour la base de données
 @Entity
 public class Seance_cyclisme {
     @Id
@@ -37,8 +37,8 @@ public class Seance_cyclisme {
      * \param [in] niveau_activite_physique Niveau d'activité physique durant la séance (type String)
      * \param [in] poids Poids actuel de l'individu (Type Float)
      * \param [in] objectif_seance Objectif de la séance de l'individu (type String)
-     * \param [in] depense_energetique Dépense énergétique faite par l'individu durant sa séance (type Integer)
-     * \param [in] besoin_proteine Besoin en protéïne de l'individu après sa séance (type Integer)
+     * \param [in] depense_energetique Dépenses énergétiques faite par l'individu durant sa séance (type Integer)
+     * \param [in] besoin_proteine Besoins en protéïnes de l'individu après sa séance (type Integer)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      *
      */
@@ -136,7 +136,7 @@ public class Seance_cyclisme {
     /**
      * \fn void setDepense_energetique(int depense_energetique)
      * \brief Fonction qui modifie les dépenses énergétiques de l'individu
-     * \param [in] depense_energetique Dépense énergétique faite par l'individu durant sa séance (type Integer)
+     * \param [in] depense_energetique Dépenses énergétiques faite par l'individu durant sa séance (type Integer)
      */
     public void setDepense_energetique(int depense_energetique) {
         this.depense_energetique = depense_energetique;
@@ -154,7 +154,7 @@ public class Seance_cyclisme {
     /**
      * \fn void setDepense_energetique(int depense_energetique)
      * \brief Fonction qui modifie les besoins en protéïnes de l'individu
-     * \param [in] besoin_proteine Besoin en protéïne de l'individu après sa séance (type Integer)
+     * \param [in] besoin_proteine Besoins en protéïnes de l'individu après sa séance (type Integer)
      */
     public void setBesoin_proteine(int besoin_proteine) {
         this.besoin_proteine = besoin_proteine;

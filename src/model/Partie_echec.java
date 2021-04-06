@@ -36,7 +36,7 @@ public class Partie_echec {
      * \brief Constructeur de Partie_echec
      * \param [in] id_partie_echec Clé primaire de la table Partie_echec (Type String)
      * \param [in] elo_adversaire Elo de l'adversaire (Type Integer)
-     * \param [in] futur_elo Future Elo de l'individu après la partie en cours (Type Integer)
+     * \param [in] futur_elo Futur Elo de l'individu après la partie en cours (Type Integer)
      * \param [in] duree Duree totale de la partie (Type Time)
      * \param [in] niveau_competence_mentale Niveau de Compétence Mentale (Type String)
      * \param [in] issue_partie Issue de la partie (Type Character)
@@ -103,7 +103,7 @@ public class Partie_echec {
     /**
      * \fn void setFutur_elo(int futur_elo)
      * \brief Fonction qui modifie l'elo de l'individu après la partie
-     * \param [in] futur_elo Future Elo de l'individu après la partie en cours (Type Integer)
+     * \param [in] futur_elo Futur Elo de l'individu après la partie en cours (Type Integer)
      */
     public void setFutur_elo(int futur_elo) {
         this.futur_elo = futur_elo;
@@ -121,7 +121,7 @@ public class Partie_echec {
     /**
      * \fn void setDuree(Time duree)
      * \brief Fonction qui modifie la durée d'une partie
-     * \param [in] duree Duree totale de la partie (Type Time)
+     * \param [in] duree Durée totale de la partie (Type Time)
      */
     public void setDuree(Time duree) {
         this.duree = duree;
@@ -129,8 +129,8 @@ public class Partie_echec {
 
     /**
      * \fn String getNiveau_competence_mentale()
-     * \brief Fonction qui retourne le niveau de compétence mental
-     * \return Retourne un String avec le niveau de compétence mental
+     * \brief Fonction qui retourne le niveau de compétence mentale
+     * \return Retourne un String avec le niveau de compétence mentale
      */
     public String getNiveau_competence_mentale() {
         return niveau_competence_mentale;
@@ -138,7 +138,7 @@ public class Partie_echec {
 
     /**
      * \fn void setNiveau_competence_mentale(String niveau_competence_mentale)
-     * \brief Fonction qui modifie le niveau de compétence mental
+     * \brief Fonction qui modifie le niveau de compétence mentale
      * \param [in] niveau_competence_mentale Niveau de Compétence Mentale (Type String)
      */
     public void setNiveau_competence_mentale(String niveau_competence_mentale) {

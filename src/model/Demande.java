@@ -12,7 +12,7 @@ import javax.persistence.*;
  * Classe contenant toutes les fonctions associées à la création d'une Demande.
  *
  */
-//Table "Demande" pour la base de donnée
+//Table "Demande" pour la base de données
 @Entity
 public class Demande {
 

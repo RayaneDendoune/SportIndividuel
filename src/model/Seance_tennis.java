@@ -12,7 +12,7 @@ import javax.persistence.*;
  * Classe contenant toutes les fonctions associées à la création d'une séance de tennis
  *
  */
-//Table "Seance_tennis" pour la base de donnée
+//Table "Seance_tennis" pour la base de données
 @Entity
 public class Seance_tennis {
 
@@ -34,9 +34,9 @@ public class Seance_tennis {
      * \fn Seance_tennis(String id_seance_tennis, float premier_service, float deuxieme_service, float troisieme_service, int nb_set, char issue_match, float vitesse_moy_service, Individu individu)
      * \brief Constructeur de Seance_tennis
      * \param [in] id_seance_tennis Clé primaire de la table Seance_tennis (Type String)
-     * \param [in] premier_service Premier Service meilleur service (Type Float)
-     * \param [in] deuxieme_service Deuxieme Service meilleur service  (Type Float)
-     * \param [in] troisieme_service Troisième Service meilleur service (Type Float)
+     * \param [in] premier_service Premier meilleur service (Type Float)
+     * \param [in] deuxieme_service Deuxieme meilleur service  (Type Float)
+     * \param [in] troisieme_service Troisième meilleur service (Type Float)
      * \param [in] nb_set Nombre de Set durant le match (Type Integer)
      * \param [in] issue_match Issue du match (Type Character)
      * \param [in] vitesse_moy_service Vitesse moyenne des meilleurs services durant ce match (Type Float)

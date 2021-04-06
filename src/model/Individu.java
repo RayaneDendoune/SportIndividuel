@@ -257,7 +257,7 @@ public class Individu implements Comparable{
 
     /**
      * \fn int compareTo(Object o)
-     * \brief Fonction qui permet de faire des comparaison
+     * \brief Fonction qui permet de faire des comparaisons
      * \return Retourne un Integer
      */
     @Override

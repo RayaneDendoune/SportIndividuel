@@ -15,7 +15,7 @@ import java.sql.Time;
  * Classe contenant toutes les fonctions associées à la création d'une séance de course
  *
  */
-//Table "Seance_course" pour la base de donnée
+//Table "Seance_course" pour la base de données
 @Entity
 public class Seance_course {
 
@@ -38,7 +38,7 @@ public class Seance_course {
      * \brief Constructeur de Seance_course
      * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
      * \param [in] distance Distance parcourue durant la séance (Type Float)
-     * \param [in] temps Temps total de la séance effectué (Type Time)
+     * \param [in] temps Temps total de la séance effectuée (Type Time)
      * \param [in] vitesse_moy Vitesse Moyenne que l'individu avait durant la séance (Type Float)
      * \param [in] nb_pas Nombre de pas moyen effectué par l'utilisateur durant la séance (Type Integer)
      * \param [in] date Date où la séance à été effectuée (Type Date)
@@ -102,7 +102,7 @@ public class Seance_course {
     /**
      * \fn void setTemps(Time temps)
      * \brief Fonction qui modifie le temps de la séance de course
-     * \param [in] temps Temps total de la séance effectué (Type Time)
+     * \param [in] temps Temps total de la séance effectuée (Type Time)
      */
     public void setTemps(Time temps) {
         this.temps = temps;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Classe contenant toutes les fonctions associées à la création de l'Amis.
  *
  */
-//Table "Amis" pour la base de donnée
+//Table "Amis" pour la base de données
 @Entity
 public class Amis {
     @Id
