@@ -44,7 +44,7 @@ public class ModifSport extends JFrame implements ActionListener {
 
     /**
      * \fn void build()
-     * \brief Fonction qui permet la construction de la fenêtre de la page de sport Cyclisme
+     * \brief Fonction qui permet la construction de la fenêtre de la page ModifSport
      */
     public void build(int selection) {
         this.setSize(750, 500);

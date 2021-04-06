@@ -57,7 +57,7 @@ public class Tennis extends JFrame implements ActionListener {
 
     /**
      * \fn void build()
-     * \brief Fonction qui permet la construction de la fenêtre de la page de sport Cyclisme
+     * \brief Fonction qui permet la construction de la fenêtre de la page de sport Tennis
      */
     public void build() {
         this.setSize(550, 400);
