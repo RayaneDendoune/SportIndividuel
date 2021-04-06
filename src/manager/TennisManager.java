@@ -83,9 +83,9 @@ public class TennisManager {
 
     /**
      * \fn long nbSeanceTennis(Individu individu)
-     * \brief Fonction qui retourne le nombre de séance de Tennis que individu passé en paramètre a fait.
+     * \brief Fonction qui retourne le nombre de séances de Tennis que l'individu passé en paramètre a fait.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne un Long avec le nombre de séance de Tennis que l'utilisateur a effectué.
+     * \return Retourne un Long avec le nombre de séances de Tennis que l'utilisateur a effectué.
      */
     public static long nbSeanceTennis(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -102,7 +102,7 @@ public class TennisManager {
 
     /**
      * \fn String idSeance(Individu individu)
-     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Tennis que l'utilisateur a effectué incrémenter de 1.
+     * \brief Fonction qui retourne un nouvel identifiant de séance grâce au nombre de séances de Tennis que l'utilisateur a effectué incrémenter de 1.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \return Retourne un String avec un nouvel identifiant de séance de Tennis pour l'individu passé en paramètre
      */
@@ -167,7 +167,6 @@ public class TennisManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_tennis st = (Seance_tennis) iterator.next();
-            //System.out.println(sc.toString());
             vitesse.add(st.getVitesse_moy_service());
         }
         readTransaction.commit();
@@ -178,7 +177,7 @@ public class TennisManager {
      * \fn ArrayList<Character> nbVictoire(Individu individu)
      * \brief Fonction qui retourne les issues des matchs de l'individu pour chaque séance de la table Seance_tennis depuis la base de données.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)!
-     * \return Retourne une ArrayList de Character avec les issues des match de l'individu à chaque séance.
+     * \return Retourne une ArrayList de Character avec les issues des matchs de l'individu à chaque séance.
      */
     public static ArrayList<Character> nbVictoire(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -192,7 +191,6 @@ public class TennisManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_tennis st = (Seance_tennis) iterator.next();
-            //System.out.println(sc.toString());
             issue.add(st.getIssue_match());
         }
         readTransaction.commit();
@@ -205,13 +203,13 @@ public class TennisManager {
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \return Retourne une ArrayList d'Individu qui sont dans la table Seance_tennis excepté l'individu passé en paramètre
      */
-    //Fonction qui renvoie tous les individus dans la table
+
     public static ArrayList<Individu> listIndividuTennis(Individu individu) {
         ArrayList<Individu> individus = new ArrayList<Individu>();
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        //Query readQuery = session.createQuery("from Seance_tennis");
+
         Query readQuery = session.createQuery("from Seance_tennis st where st.individu not in (SELECT st.individu from Seance_tennis st where st.individu=:individu)");
         readQuery.setString("individu", individu.getId_individu());
 
@@ -219,7 +217,6 @@ public class TennisManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_tennis st = (Seance_tennis) iterator.next();
-            //System.out.println(sc.toString());
             individus.add(st.getIndividu());
         }
 
@@ -250,7 +247,6 @@ public class TennisManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_tennis st = (Seance_tennis) iterator.next();
-            //System.out.println(sc.toString());
             listNatation.add(st);
         }
         readTransaction.commit();
@@ -259,9 +255,9 @@ public class TennisManager {
 
     /**
      * \fn ArrayList<Seance_tennis> seanceTennisIndividu(Individu individu)
-     * \brief Fonction qui filtre la table Seance_tennis afin de retourner uniquement les Seance_tennis de l'individu passé en paramètre
+     * \brief Fonction qui filtre la table Seance_tennis afin de retourner uniquement les Seance_tennis de l'individu passés en paramètres
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne une ArrayList de Seance_tennis avec uniquement les séances de l'individu passé en paramètre.
+     * \return Retourne une ArrayList de Seance_tennis avec uniquement les séances de l'individu passés en paramètres.
      */
     public static ArrayList<Seance_tennis> seanceTennisIndividu(Individu individu) {
         ArrayList<Seance_tennis> listTennis = listTennis();

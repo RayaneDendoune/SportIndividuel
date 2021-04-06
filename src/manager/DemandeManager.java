@@ -27,7 +27,9 @@ public class DemandeManager {
 
     /**
      * \fn void ajouterDemande(int nb, String id_destinataire, String id_expediteur)
-     * \brief Fonction qui ajoute une nouvelle ligne à la table Demande dans la base de donnée grâce aux données entrées en paramètres. Néanmoins, le développeur devra passé par la fonction void ajout(String id_destinataire, String id_expediteur) pour qu'une nouvelle ligne s'ajoute car la clé primaire sera ajouter grâce à elle. La fonction actuelle sera appelé dans ajout.
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Demande dans la base de données grâce aux données entrées en paramètres.
+     * Néanmoins, le développeur devra passé par la fonction void ajout(String id_destinataire, String id_expediteur) pour qu'une nouvelle
+     * ligne s'ajoute car la clé primaire sera ajouter grâce à elle. La fonction actuelle sera appelé dans ajout.
      *
      * \param [in] nb Clé primaire de la table Demande (Type Integer)
      * \param [in] id_destinataire Identifiant du destinataire (Type String)
@@ -65,7 +67,6 @@ public class DemandeManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Demande demande = (Demande) iterator.next();
-            //System.out.println(sc.toString());
             listDemande.add(demande);
         }
         readTransaction.commit();
@@ -74,7 +75,9 @@ public class DemandeManager {
 
     /**
      * \fn void ajout(String id_destinataire, String id_expediteur)
-     * \brief Fonction qui vérifie le numéro de demande d'amis de la dernière ligne de la table Demande afin de l'incrémenter et ainsi d'avoir un nouveau numéro de demande d'amis qui est la clé primaire de la table Demande. De plus, la fonction ajouterDemande est appelé afin d'ajouter la nouvelle ligne à la table Demande.
+     * \brief Fonction qui vérifie le numéro de demande d'amis de la dernière ligne de la table Demande afin de l'incrémenter
+     * et ainsi d'avoir un nouveau numéro de demande d'amis qui est la clé primaire de la table Demande. De plus,
+     * la fonction ajouterDemande est appelé afin d'ajouter la nouvelle ligne à la table Demande.
      * \param [in] id_destinataire Identifiant du destinataire (Type String)
      * \param [in] id_expediteur Identifiant de l'expéditeur (Type String)
      */
@@ -100,9 +103,9 @@ public class DemandeManager {
 
     /**
      * \fn ArrayList<String> idDemandeEnvoyer(Individu individu)
-     * \brief Fonction qui le nom des individus ayant reçu une invitation par l'individu passé en paramètre
+     * \brief Fonction qui retourne le nom des individus ayant reçus une invitation par l'individu passé en paramètre
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return ArrayList de String avec le nom des individus ayant reçu une invitation de l'utilisateur actuel
+     * \return ArrayList de String avec le nom des individus ayant reçus une invitation de l'utilisateur actuel
      */
     //Retourne une arraylist de string avec le nom des individu qui ont recu les demandes envoyé par individu passé en paramètre
     public static ArrayList<String> idDemandeEnvoyer(Individu individu) {
@@ -123,7 +126,7 @@ public class DemandeManager {
      * \brief Fonction qui retrouve une Demande grâce aux paramètres de la fonction.
      * \param [in] id_destinataire Identifiant du destinataire (Type String)
      * \param [in] id_expediteur Identifiant de l'expéditeur (Type String)
-     * \return Retourne une Demande qui a été retrouver grâce aux paramètres de la fonction.
+     * \return Retourne une Demande qui a été retrouvé grâce aux paramètres de la fonction.
      */
     //Retrouve dans la table Demande la ligne a supprimer
     public static Demande suppDemande(String id_destinataire, String id_expediteur) {
@@ -139,7 +142,7 @@ public class DemandeManager {
 
     /**
      * \fn void deleteValue(Demande demande)
-     * \brief Fonction qui supprime une ligne de la table Demande de la base de donnée
+     * \brief Fonction qui supprime une ligne de la table Demande de la base de données
      * \param [in] demande Demande que l'on souhaite supprimer (Type Demande)
      */
     //Supprime une demande de la table Demande

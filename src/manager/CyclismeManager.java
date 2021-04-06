@@ -22,13 +22,13 @@ public class CyclismeManager {
 
     /**
      * \fn void ajouterCyclisme(String id_seance_cyclisme, String niveau_activite_physique, float poids, String objectif_seance, int depense_energetique, int besoin_proteine, Individu individu)
-     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_cyclisme dans la base de donnée grâce aux données entrées en paramètres.
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_cyclisme dans la base de données grâce aux données entrées en paramètres.
      * \param [in] id_seance_cyclisme Clé primaire de la table Seance_cyclisme (Type String)
      * \param [in] niveau_activite_physique Niveau d'activité physique durant la séance (type String)
      * \param [in] poids Poids actuel de l'individu (Type Float)
      * \param [in] objectif_seance Objectif de la séance de l'individu (type String)
-     * \param [in] depense_energetique Dépense énergétique faite par l'individu durant sa séance (type Integer)
-     * \param [in] besoin_proteine Besoin en protéïne de l'individu après sa séance (type Integer)
+     * \param [in] depense_energetique Dépenses énergétiques faite par l'individu durant sa séance (type Integer)
+     * \param [in] besoin_proteine Besoins en protéïnes de l'individu après sa séance (type Integer)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      *
      */
@@ -77,9 +77,9 @@ public class CyclismeManager {
 
     /**
      * \fn long nbSeanceCyclisme(Individu individu)
-     * \brief Fonction qui retourne le nombre de séance de Cyclisme que individu passé en paramètre a fait.
+     * \brief Fonction qui retourne le nombre de séances de Cyclisme que l'individu passé en paramètre a fait.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne un Long avec le nombre de séance de Cyclisme que l'utilisateur a effectué.
+     * \return Retourne un Long avec le nombre de séances de Cyclisme que l'utilisateur a effectué.
      */
     public static long nbSeanceCyclisme(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -96,7 +96,8 @@ public class CyclismeManager {
 
     /**
      * \fn String idSeance(Individu individu)
-     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Cyclisme que l'utilisateur a effectué incrémenter de 1.
+     * \brief Fonction qui retourne un nouvel identifiant de séance grâce au nombre de séance de Cyclisme
+     * que l'utilisateur a effectué incrémenter de 1.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \return Retourne un String avec un nouvel identifiant de séance de Cyclisme pour l'individu passé en paramètre
      */
@@ -116,7 +117,7 @@ public class CyclismeManager {
 
     /**
      * \fn int depenseNRJ(Individu individu, String niveau)
-     * \brief Fonction qui calcule les dépenses énergétique de l'individu en fonction des données de l'utilisateur et de son niveau d'activité durant la séance
+     * \brief Fonction qui calcule les dépenses énergétiques de l'individu en fonction des données de l'utilisateur et de son niveau d'activité durant la séance
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \param [in] niveau Niveau d'activité physique durant la séance (Type String)
      * \return Retourne un Integer avec la dépense énergétique qui a été calculé.
@@ -154,9 +155,10 @@ public class CyclismeManager {
 
     /**
      * \fn ArrayList<Integer> energie(Individu individu)
-     * \brief Fonction qui retourne les dépenses énergétique de l'individu passé en paramètre pour chaque séance de la table Seance_cyclisme depuis la base de données.
+     * \brief Fonction qui retourne les dépenses énergétiques de l'individu passé en paramètre pour chaque séance de la table
+     * Seance_cyclisme depuis la base de données.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne une ArrayList de Integer avec les dépenses énergétique de l'individu passé en paramètre à chaque séance.
+     * \return Retourne une ArrayList de Integer avec les dépenses énergétiques de l'individu passées en paramètres à chaque séance.
      */
     public static ArrayList<Integer> energie(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -170,7 +172,6 @@ public class CyclismeManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_cyclisme sc = (Seance_cyclisme) iterator.next();
-            //System.out.println(sc.toString());
             nrj.add(sc.getDepense_energetique());
         }
         readTransaction.commit();
@@ -179,9 +180,9 @@ public class CyclismeManager {
 
     /**
      * \fn ArrayList<Integer> proteine(Individu individu)
-     * \brief Fonction qui retourne les besoins en protéïne de l'individu passé en paramètre pour chaque séance de la table Seance_cyclisme depuis la base de données.
+     * \brief Fonction qui retourne les besoins en protéïnes de l'individu passé en paramètre pour chaque séance de la table Seance_cyclisme depuis la base de données.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne une ArrayList de Integer avec les besoins en protéïne de l'individu passé en paramètre à chaque séance.
+     * \return Retourne une ArrayList de Integer avec les besoins en protéïnes de l'individu passé en paramètre à chaque séance.
      */
     public static ArrayList<Integer> proteine(Individu individu) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -195,7 +196,6 @@ public class CyclismeManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_cyclisme sc = (Seance_cyclisme) iterator.next();
-            //System.out.println(sc.toString());
             proteine.add(sc.getBesoin_proteine());
         }
         readTransaction.commit();
@@ -221,7 +221,6 @@ public class CyclismeManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_cyclisme sc = (Seance_cyclisme) iterator.next();
-            //System.out.println(sc.toString());
             individus.add(sc.getIndividu());
         }
 
@@ -262,7 +261,6 @@ public class CyclismeManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_cyclisme seanceCyclisme = (Seance_cyclisme) iterator.next();
-            //System.out.println(sc.toString());
             listCyclisme.add(seanceCyclisme);
         }
         readTransaction.commit();

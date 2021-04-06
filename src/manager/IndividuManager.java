@@ -28,7 +28,6 @@ public class IndividuManager {
     /**
      * \fn void ajouterIndividu(String id_individu, String nom, String prenom, String mdp, char sexe, int age, float poids, float taille, int elo)
      * \brief Fonction qui ajoute une nouvelle ligne à la table Individu dans la base de donnée grâce aux données entrées en paramètres.
-     *
      * \param [in] id_individu Clé primaire de la table Individu (Type String)
      * \param [in] nom Nom de l'individu (Type String)
      * \param [in] prenom Prenom de l'individu (Type String)
@@ -56,12 +55,11 @@ public class IndividuManager {
         i.setElo(elo);
         session.save(i);
         session.getTransaction().commit();
-       // session.close();
     }
 
     /**
      * \fn void supprimerIndividu(String id_individu)
-     * \brief Fonction qui supprime une ligne de la table Individu de la base de donnée grâce à l'identifiant de l'individu passé en paramètre
+     * \brief Fonction qui supprime une ligne de la table Individu de la base de donnée grâce à l'identifiant de l'individu passé en paramètre. Cette fonction supprime donc un individu
      * \param [in] id_individu Identifiant de l'individu que l'on souhaite supprimer (Type String)
      */
     public void supprimerIndividu(String id_individu) {
@@ -78,7 +76,7 @@ public class IndividuManager {
      * \brief Fonction qui parcours la table Individu et qui retourne toutes les données de cette table sous forme d'ArrayList de Individu
      * \return ArrayList de Individu correspondant à toutes les données compris dans la table Individu dans la base de données
      */
-    //Retourne dans une arraylist la table complete Demande
+    //Retourne dans une arraylist la table complete Individu
     public static ArrayList<Individu> listIndividu() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         ArrayList<Individu> listIndividu = new ArrayList<Individu>();
@@ -91,7 +89,6 @@ public class IndividuManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Individu individu = (Individu) iterator.next();
-            //System.out.println(sc.toString());
             listIndividu.add(individu);
         }
         readTransaction.commit();

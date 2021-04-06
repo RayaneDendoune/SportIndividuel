@@ -27,20 +27,20 @@ public class RobustesseManager {
         char[] charArray = phrase.toCharArray();
         for(int i=0; i< charArray.length; i++) {
             if (!((charArray[i] >= '0' && charArray[i] <= '9') || charArray[i] == '.')) {
-                //System.out.println("votre entrée comporte des caracteres non compatibles");
+                // Entrée comportant des caracteres non compatibles
                 return 1;
             }
             else {
                 if(charArray[i] >= '0' && charArray[i] <= '9'){}
                 else if(charArray[0] == '.' || charArray[charArray.length-1]=='.') {
-                    //System.out.println("Il y a un point à la premiere ou la derniere position");
+                    //Il y a un point à la premiere ou la derniere position
                     return 2;
                 }
                 else if(charArray[i] == '.' && !existPoint) {
                     existPoint = true;
                 }
                 else {
-                    //System.out.println("Il y a déjà eu un point avant à la position" + i);
+                    //Il y a déjà eu un point avant
                     return 3;
                 }
             }
@@ -58,7 +58,7 @@ public class RobustesseManager {
         char[] charArray = phrase.toCharArray();
         for(int i=0; i< charArray.length; i++) {
             if (!(charArray[i] >= '0' && charArray[i] <= '9')) {
-                //System.out.println("votre entrée comporte des caracteres non compatibles");
+                //Entrée comportant des caracteres non compatibles
                 return 1;
             }
         }
@@ -75,7 +75,7 @@ public class RobustesseManager {
         char[] charArray = phrase.toCharArray();
         for(int i=0; i< charArray.length; i++) {
             if (!((charArray[i] >= 'A' && charArray[i] <= 'Z') || (charArray[i] >= 'a' && charArray[i] <= 'z'))) {
-                //System.out.println("votre entrée comporte des caracteres non compatibles");
+                //Entrée comportant des caracteres non compatibles
                 return 5;
             }
         }
@@ -84,7 +84,7 @@ public class RobustesseManager {
 
     /**
      * \fn String noErreur(int erreur)
-     * \brief Fonction qui le message d'erreur selon le numéro de l'erreur passé en paramètre
+     * \brief Fonction qui retourne le message d'erreur selon le numéro de l'erreur passé en paramètre
      * \param [in] erreur Numéro de l'erreur (Type Integer)
      * \return Retourne un String qui correspond au message d'erreur selon le numéro de l'erreur passé en paramètre
      */
@@ -124,8 +124,8 @@ public class RobustesseManager {
 
     /**
      * \fn boolean modificationRobustesse(int selection)
-     * \brief Fonction qui retourne si il a une erreur dans les champs d'écriture selon le sport choisi
-     * \param [in] selection Numéro du sport choisis (Type Integer)
+     * \brief Fonction qui retourne s'il y'a a une erreur dans les champs d'écritures selon le sport choisi
+     * \param [in] selection Numéro du sport choisi (Type Integer)
      * \return Retourne false si il n'y a pas de probleme, True sinon
      */
     public static boolean modificationRobustesse(int selection) {
@@ -164,7 +164,7 @@ public class RobustesseManager {
     /**
      * \fn void modificationProbleme(int selection)
      * \brief Fonction qui ouvre une fenêtre d'erreur si l'utilisateur a fait une faute dans les champs selon le sport choisi passé en paramètre
-     * \param [in] selection Numéro du sport choisis (Type Integer)
+     * \param [in] selection Numéro du sport choisi (Type Integer)
      */
     public static void modificationProbleme(int selection) {
         if(selection == 1) {
@@ -205,7 +205,7 @@ public class RobustesseManager {
      * \fn void erreur(int erreur, JLabel label)
      * \brief Fonction qui ouvre une fenêtre d'erreur selon le numéro d'erreur passé en paramètre
      * \param [in] erreur Numéro de l'erreur (Type Integer)
-     * \param [in] label Champs dans lequel l'utilisateur s'est tromper (Type JLabel)
+     * \param [in] label Champs dans lequel l'utilisateur s'est trompé (Type JLabel)
      *
      */
     public static void erreur(int erreur, JLabel label) {

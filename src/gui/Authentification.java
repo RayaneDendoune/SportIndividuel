@@ -34,7 +34,7 @@ public class Authentification extends JFrame implements ActionListener{
 	private static final long serialVersionUID = -541698616292452515L;
 	
 	private JPanel pan  = new JPanel();
-	private JLabel titre = new JLabel("Bienvenue sur ...");
+	private JLabel titre = new JLabel("Bienvenue sur ERA-SPORT");
 	private JLabel connect = new JLabel("Veuillez vous connecter");
 	private JLabel id = new JLabel("Identifiant ");
 	private JLabel mdp = new JLabel("Mot de passe ");
@@ -59,9 +59,9 @@ public class Authentification extends JFrame implements ActionListener{
 	 * \brief Fonction qui permet la construction de la fenêtre d'Authentification
 	 */
 	public void build() {
-		this.setTitle("Authentification"); //Cr�ation de la fenetre
+		this.setTitle("Authentification"); //Creation de la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
-		this.setSize(350, 350); //Taille de la fen�tre
+		this.setSize(350, 350); //Taille de la fenetre
 		setResizable(false); //Taille non changeable
 		setLocationRelativeTo(null);
 		

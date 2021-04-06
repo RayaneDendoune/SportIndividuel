@@ -27,7 +27,7 @@ public class AuthentificationManager {
 
     /**
      * \fn boolean existIndividu(Session session, String id_individu)
-     * \brief Fonction qui retourne si l'individu passé en paramètre existe ou pas dans la table Individu de notre base de données.
+     * \brief Fonction qui retourne si l'individu passé en paramètre existe ou s'il n'existe pas dans la table Individu de notre base de données.
      *
      * \param [in] session Session pour se connecté à la base de données (Type Session)
      * \param [in] id_individu Identifiant de l'individu qui veut se connecter (Type String)
@@ -44,13 +44,8 @@ public class AuthentificationManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Individu individu = (Individu) iterator.next();
-            //System.out.println(individu.toString());
             present=true;
         }
-
-        /*if(!present) {
-            System.out.println("L'individu n'existe pas");
-        }*/
         readTransaction.commit();
 
         return present;
@@ -67,7 +62,6 @@ public class AuthentificationManager {
     public static String existPassword(String id_individu) {
         Session session = HibernateUtil.getSession();
         if(existIndividu(session, id_individu)) {
-            //System.out.println("L'individu existe");
             Boolean present = false;
             Transaction readTransaction = session.beginTransaction();
 
@@ -78,7 +72,6 @@ public class AuthentificationManager {
             Iterator iterator = result.iterator();
             while (iterator.hasNext()) {
                 Individu individu = (Individu) iterator.next();
-                //System.out.println("Le mot de passe est " + individu.getMdp());
                 present = true;
                 personne = individu;
                 prenom = individu.getPrenom();
@@ -87,7 +80,7 @@ public class AuthentificationManager {
             }
 
             if (!present) {
-                //System.out.println("Le mot de passe n'existe pas");
+                //Le mot de passe n'existe pas
                 return "";
             }
 
@@ -95,7 +88,7 @@ public class AuthentificationManager {
             session.close();
         }
         else {
-            //System.out.println("L'individu n'existe pas");
+            //L'individu n'existe pas
             return "";
         }
         return "";

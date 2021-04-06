@@ -39,7 +39,7 @@ public class Formulaire extends JFrame implements ActionListener {
 
 	private int eloC;
 
-	private JLabel titre = new JLabel("Bienvenue à ...");
+	private JLabel titre = new JLabel("Bienvenue à ERA-SPORT");
 	private JLabel sousTitre = new JLabel("Veuillez remplir ce formulaire");
 	
 	private JLabel nom = new JLabel("Nom ");

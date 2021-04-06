@@ -21,9 +21,9 @@ public class ReseauManager {
 
     /**
      * \fn ArrayList<Individu> sportJouer(Individu individu)
-     * \brief Fonction qui regarde quels sport l'individu effectue puis retourne une liste des individus qui pratiquent le même sport que l'individu passé en paramètre
+     * \brief Fonction qui regarde quels sports l'individu effectue puis retourne une liste des individus qui pratiquent le même sport que l'individu passé en paramètre
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne une ArrayList d'Individu qui pratique les même sports que l'individu passé en paramètre
+     * \return Retourne une ArrayList d'Individu qui pratique les mêmes sports que l'individu passé en paramètre
      */
     public static ArrayList<Individu> sportJouer(Individu individu) {
         int courseOcc, natationOcc, tennisOcc, cyclismeOcc, echecOcc;

@@ -14,7 +14,8 @@ public class FormulaireManager {
 
     /**
      * \fn int choixElo(String elo, String frequence_jeu)
-     * \brief Fonction qui retourne filtre si l'individu connais son Elo ou pas, et s'il ne le connais pas, un elo lui sera attribué selon sa frequence de jeu
+     * \brief Fonction qui retourne filtre si l'individu connais son Elo ou pas, et s'il ne le connais pas,
+     * un elo lui sera attribué selon sa frequence de jeu
      * \param [in] elo Elo que l'utilisateur aura écrit (Type String)
      * \param [in] frequence_jeu Frequence de jeu que l'utilisateur aura sélectionner (Type String)
      * \return Retourne un Integer avec l'elo de l'individu selon ce qu'il a entré comme paramètre.

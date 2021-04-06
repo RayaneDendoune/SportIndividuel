@@ -63,7 +63,6 @@ public class AmisManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Amis amis = (Amis) iterator.next();
-            //System.out.println(sc.toString());
             listAmis.add(amis);
         }
         readTransaction.commit();
@@ -72,7 +71,9 @@ public class AmisManager {
 
     /**
      * \fn void ajout(String id_amis, String id_individu)
-     * \brief Fonction qui vérifie le numéro d'amis de la dernière ligne de la table Amis afin de l'incrémenter et ainsi d'avoir un nouveau numéro d'amis qui est la clé primaire de la table Amis. De plus, la fonction ajouterAmis est appelé afin d'ajouter la nouvelle ligne à la table Amis.
+     * \brief Fonction qui vérifie le numéro d'amis de la dernière ligne de la table Amis afin de l'incrémenter
+     * et ainsi d'avoir un nouveau numéro d'amis qui est la clé primaire de la table Amis. De plus, la fonction ajouterAmis
+     * est appelé afin d'ajouter la nouvelle ligne à la table Amis.
      *
      * \param [in] id_amis Identifiant de l'ami (Type String)
      * \param [in] id_individu Identifiant de l'individu qui est actuellement connecté (Type String)

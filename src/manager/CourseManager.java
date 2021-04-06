@@ -27,7 +27,8 @@ public class CourseManager {
 
     /**
      * \fn void ajouterCourse(String id_seance_course, float distance, Time temps, float vitesse_moy, int nb_pas, Date date, Individu individu)
-     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_course dans la base de donnée grâce aux données entrées en paramètres.
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_course dans la base de données grâce aux données
+     * entrées en paramètres.
      * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
      * \param [in] distance Distance parcourue durant la séance (Type Float)
      * \param [in] temps Temps total de la séance effectué (Type Time)
@@ -79,10 +80,10 @@ public class CourseManager {
 
     /**
      * \fn String existSeanceCourse(Session session, String id_seance_course)
-     * \brief Fonction qui retourne si un individu à déjà pratiquer ce sport
+     * \brief Fonction qui retourne si un individu à déjà pratiqué ce sport
      * \param [in] session Session pour se connecté à la base de données (Type Session)
      * \param [in] id_seance_course Clé primaire de la table Seance_course (Type String)
-     * \return Retourne un message d'erreur si l'individu n'a jamais pratiquer ce sport
+     * \return Retourne un message d'erreur si l'individu n'a jamais pratiqué ce sport
      */
     public static String existSeanceCourse(Session session, String id_seance_course) {
         Boolean present = false;
@@ -109,9 +110,9 @@ public class CourseManager {
 
     /**
      * \fn long nbSeanceCourse(Individu individu)
-     * \brief Fonction qui retourne le nombre de séance de Course que individu passé en paramètre a fait.
+     * \brief Fonction qui retourne le nombre de séances de Course que l'individu passé en paramètre a fait.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne un Long avec le nombre de séance de Course que l'utilisateur a effectué.
+     * \return Retourne un Long avec le nombre de séances de Course que l'utilisateur a effectué.
      */
     public static long nbSeanceCourse(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -128,7 +129,7 @@ public class CourseManager {
 
     /**
      * \fn String idSeance(Individu individu)
-     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Course que l'utilisateur a effectué incrémenter de 1.
+     * \brief Fonction qui retourne un nouvel identifiant de séance grâce au nombre de séance de Course que l'utilisateur a effectué incrémenter de 1.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \return Retourne un String avec un nouvel identifiant de séance de Course pour l'individu passé en paramètre
      */
@@ -148,7 +149,7 @@ public class CourseManager {
 
     /**
      * \fn float vitesseMoyenne(float distanceKM, int min)
-     * \brief Fonction qui calcule la vitesse moyenne en fonction de la distance en km et le temps en minute passé en paramètre
+     * \brief Fonction qui calcule la vitesse moyenne en fonction de la distance en km et le temps en minute passés en paramètres
      * \param [in] distanceKM Distance effectué par l'individu durant sa séance (Type Float)
      * \param [in] min Temps en minute effectué par l'individu durant sa séance (Type Integer)
      * \return Retourne un Float avec la vitesse moyenne qui a été calculée.
@@ -190,7 +191,6 @@ public class CourseManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_course sc = (Seance_course) iterator.next();
-            //System.out.println(sc.toString());
             vitesse.add(sc.getVitesse_moy());
         }
         readTransaction.commit();
@@ -215,7 +215,6 @@ public class CourseManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_course sc = (Seance_course) iterator.next();
-            //System.out.println(sc.toString());
             nbPas.add(sc.getNb_pas());
         }
         readTransaction.commit();
@@ -241,7 +240,6 @@ public class CourseManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_course sc = (Seance_course) iterator.next();
-            //System.out.println(sc.toString());
             individus.add(sc.getIndividu());
         }
 
@@ -271,7 +269,6 @@ public class CourseManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_course sc = (Seance_course) iterator.next();
-            //System.out.println(sc.toString());
             listCourse.add(sc);
         }
         readTransaction.commit();

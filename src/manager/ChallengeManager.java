@@ -19,11 +19,11 @@ public class ChallengeManager {
 
     /**
      * \fn ArrayList<String> sportEnCommun(Individu i1, Individu i2)
-     * \brief Fonction qui renvoie les sport en commun entre deux individus.
+     * \brief Fonction qui renvoie les sports en communs entre deux individus.
      *
      * \param [in] i1 Individu qui est actuellement connecté (Type Individu)
      * \param [in] i2 Individu avec lequel on peut comparer (Type Individu)
-     * \return ArrayList de String avec les sport en commun entre les deux individu passé en paramètres
+     * \return ArrayList de String avec les sports en communs entre les deux individus passés en paramètres
      *
      */
     public static ArrayList<String> sportEnCommun(Individu i1, Individu i2) {

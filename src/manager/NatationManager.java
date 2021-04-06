@@ -26,12 +26,12 @@ public class NatationManager {
 
     /**
      * \fn void ajouterNatation(String id_seance_natation, int nb_longueur, Time temps_total, String type_nage, int calorie_perdu, Time temps_moy_longueur, Date date, Individu individu)
-     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_natation dans la base de donnée grâce aux données entrées en paramètres.
+     * \brief Fonction qui ajoute une nouvelle ligne à la table Seance_natation dans la base de données grâce aux données entrées en paramètres.
      * \param [in] id_seance_natation Clé primaire de la table Seance_natation (Type String)
      * \param [in] nb_longueur Nombre de longueur effectué durant la séance (Type Integer)
      * \param [in] temps_total Temps total passé durant la séance (Type Time)
      * \param [in] type_nage Type de nage effectué par l'individu durant sa séance (Type String)
-     * \param [in] calorie_perdu Nombre de calorie perdu par l'individu pendant sa séance (Type Integer)
+     * \param [in] calorie_perdu Nombre de calorie perdues par l'individu pendant sa séance (Type Integer)
      * \param [in] temps_moy_longueur Temps moyen par longueur fait par l'individu durant sa séance (Type Time)
      * \param [in] date Date où la séance à été effectuée (Type Date)
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
@@ -88,7 +88,7 @@ public class NatationManager {
 
     /**
      * \fn long nbSeanceNatation(Individu individu)
-     * \brief Fonction qui retourne le nombre de séance de Natation que individu passé en paramètre a fait.
+     * \brief Fonction qui retourne le nombre de séances de Natation que l'individu passé en paramètre a fait.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
      * \return Retourne un Long avec le nombre de séance de Natation que l'utilisateur a effectué.
      */
@@ -107,9 +107,9 @@ public class NatationManager {
 
     /**
      * \fn String idSeance(Individu individu)
-     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séance de Natation que l'utilisateur a effectué incrémenter de 1.
+     * \brief Fonction qui retourne un nouveau identifiant de séance grâce au nombre de séances de Natation que l'utilisateur a effectué incrémenter de 1.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne un String avec un nouvel identifiant de séance de Natation pour l'individu passé en paramètre
+     * \return Retourne un String avec un nouvel identifiant de séance de Natation pour l'individu passé en paramètres
      */
     public static String idSeance(Individu individu) {
         int nbOcc = ((int)nbSeanceNatation(individu)) + 1;
@@ -127,7 +127,7 @@ public class NatationManager {
 
     /**
      * \fn float tempsMoyLongueur(int nbLongueur, int min)
-     * \brief Fonction qui calcule le temps moyen par longueur en fonction du nombre de longueur et du temps en minute passé en paramètre
+     * \brief Fonction qui calcule le temps moyen par longueur en fonction du nombre de longueurs et du temps en minute passé en paramètres
      * \param [in] nbLongueur Nombre de longueur effectué durant la séance (Type Integer)
      * \param [in] min Temps en minute effectué par l'individu durant sa séance (Type Integer)
      * \return Retourne un Float avec la vitesse moyenne qui a été calculée.
@@ -141,11 +141,11 @@ public class NatationManager {
 
     /**
      * \fn float calories(Individu individu, String typeNage, int temps)
-     * \brief Fonction qui calcule le nombre de calories brulés lors de la séance grâce au type de nage et le temps mis durant la séance passés en paramètres
+     * \brief Fonction qui calcule le nombre de calories brulées lors de la séance grâce au type de nage et le temps mis durant la séance passés en paramètres
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \param [in] type_nage Type de nage effectué par l'individu durant sa séance (Type String)
+     * \param [in] type_nage Type de nage effectuée par l'individu durant sa séance (Type String)
      * \param [in] temps Temps total passé durant la séance (Type Time)
-     * \return Retourne un Float avec le nombre de calories brulés qui a été calculé.
+     * \return Retourne un Float avec le nombre de calories brulées qui a été calculé.
      */
     public static float calories(Individu individu, String typeNage, int temps) {
         int met = 0;
@@ -167,9 +167,9 @@ public class NatationManager {
 
     /**
      * \fn ArrayList<Integer> nbCaloriesPerdues(Individu individu)
-     * \brief Fonction qui retourne le nombre de calories perdus par l'individu passé en paramètre pour chaque séance de la table Seance_natation depuis la base de données.
+     * \brief Fonction qui retourne le nombre de calories perdues par l'individu passé en paramètres pour chaque séance de la table Seance_natation depuis la base de données.
      * \param [in] individu Individu qui est actuellement connecté (Type Individu)
-     * \return Retourne une ArrayList de Integer avec le nombre de calories perdus de l'individu à chaque séance.
+     * \return Retourne une ArrayList de Integer avec le nombre de calories perdues de l'individu à chaque séance.
      */
     public static ArrayList<Integer> nbCaloriesPerdues(Individu individu){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -227,7 +227,6 @@ public class NatationManager {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction readTransaction = session.beginTransaction();
 
-        //Query readQuery = session.createQuery("from Seance_natation");
         Query readQuery = session.createQuery("from Seance_natation sn where sn.individu not in (SELECT sn.individu from Seance_natation sn where sn.individu=:individu)");
         readQuery.setString("individu", individu.getId_individu());
 
@@ -235,7 +234,6 @@ public class NatationManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_natation sn = (Seance_natation) iterator.next();
-            //System.out.println(sc.toString());
             individus.add(sn.getIndividu());
         }
 
@@ -265,7 +263,6 @@ public class NatationManager {
         Iterator iterator = result.iterator();
         while (iterator.hasNext()) {
             Seance_natation sn = (Seance_natation) iterator.next();
-            //System.out.println(sc.toString());
             listNatation.add(sn);
         }
         readTransaction.commit();
