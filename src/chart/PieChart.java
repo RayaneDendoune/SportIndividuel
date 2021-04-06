@@ -46,7 +46,7 @@ public class PieChart extends JFrame {
      * \brief Fonction qui retourne les données pour le graphique en fonction des données de l'ArrayList de Character passé en paramètre
      *
      * \param [in] issue ArrayList de Character (Type ArrayList<Character>)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un PieDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeurs grâce a une arraylist de Character
     private PieDataset createIssueDataset(ArrayList<Character> issue) {
@@ -75,7 +75,7 @@ public class PieChart extends JFrame {
      *
      * \param [in] dataset Données pour le graphique (Type PieDataset)
      * \param [in] title Titre du graphique (Type String)
-     * \return Le graphique grâce aux données passé en paramètre
+     * \return Retourne un JFreeChart qui est le graphique obtenu grâce aux données passé en paramètre
      */
     //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(PieDataset dataset, String title) {
@@ -88,7 +88,7 @@ public class PieChart extends JFrame {
      *
      * \param [in] issue ArrayList de Character (Type ArrayList<Character>)
      * \param [in] title Titre du graphique (Type String)
-     * \return Le graphique dans un JPanel
+     * \return Retourne le graphique dans un JPanel
      */
     //Retourne le graphique dans un JPanel
     public JPanel createDemoPanel(ArrayList<Character> issue, String title) {
@@ -96,22 +96,4 @@ public class PieChart extends JFrame {
         return new ChartPanel(chart);
     }
 
-    public static void main(String[] args) {
-        ArrayList<Character> issue = new ArrayList<Character>();
-        issue.add('V');
-        issue.add('D');
-        issue.add('V');
-        issue.add('D');
-        issue.add('V');
-        issue.add('V');
-        issue.add('V');
-        issue.add('D');
-        issue.add('V');
-        issue.add('D');
-
-        /*PieChart demo = new PieChart("Test", issue, "Nb victoire");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);*/
-    }
 }

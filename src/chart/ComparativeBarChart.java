@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * \file ComparativeBarChart.java
- * \brief Classe construisant les diagrammes en bars à deux entrée grâce à JFreeChart
+ * \brief Classe construisant les diagrammes en bars à deux entrées grâce à JFreeChart
  * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
  * \version 1.0
  * \date 29/03/2021
@@ -29,7 +29,7 @@ public class ComparativeBarChart  extends JFrame {
 
     /**
      * \fn ComparativeBarChart(ArrayList<Integer> user, ArrayList<Integer> friend, String titleFrame, String titleGraph, String serie1, String serie2, String xLabel, String yLabel)
-     * \brief Constructeur grâce auquel un diagramme de type bar à deux entrée est construit grâce aux données des deux ArrayList d'Integer passé en paramètre
+     * \brief Constructeur grâce auquel un diagramme de type bar à deux entrées est construit grâce aux données des deux ArrayList d'Integer passés en paramètres
      *
      * \param user Données de l'utilisateur (Type ArrayList<Integer>)
      * \param friend Données de l'amis pour comparaison (Type ArrayList<Integer>)
@@ -53,13 +53,13 @@ public class ComparativeBarChart  extends JFrame {
 
     /**
      * \fn CategoryDataset createBarDataset(ArrayList<Integer> user, ArrayList<Integer> friend, String serie1, String serie2)
-     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList passé en paramètre
+     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList passés en paramètres
      *
      * \param [in] user Données de l'utilisateur (Type ArrayList<Integer>)
      * \param [in] friend Données de l'amis pour comparaison (Type ArrayList<Integer>)
      * \param [in] serie1 Nom de la bar de l'utilisateur (Type String)
      * \param [in] serie2 Nom de la bar de l'ami (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un CategoryDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a deux arraylists de integer
     private CategoryDataset createBarDataset(ArrayList<Integer> user, ArrayList<Integer> friend, String serie1, String serie2) {
@@ -82,13 +82,13 @@ public class ComparativeBarChart  extends JFrame {
 
     /**
      * \fn JFreeChart createChart(CategoryDataset dataset, String title, String xLabel, String yLabel)
-     * \brief Fonction qui retourne le graphique en fonctions des données qui lui sont passé en paramètres
+     * \brief Fonction qui retourne le graphique en fonctions des données qui lui sont passés en paramètres
      *
      * \param [in] dataset Données pour le graphique (Type CategoryDataset)
      * \param [in] title Titre du graphique (Type String)
      * \param [in] xLabel Nom de l'axe des abscisses (Type String)
      * \param [in] yLabel Nom de l'axe des ordonnées (Type String)
-     * \return Le graphique grâce aux données passé en paramètre
+     * \return Retourne un JFreeChart qui est le graphique obtenu grâce aux données passé en paramètre
      */
     //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(CategoryDataset dataset, String title, String xLabel, String yLabel) {

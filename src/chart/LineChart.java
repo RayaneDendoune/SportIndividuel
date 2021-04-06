@@ -78,7 +78,7 @@ public class LineChart extends JFrame {
 
     /**
      * \fn LineChart(String titleFrame, String titleGraph, String key, String xAxis, String yAxis, ArrayList<Integer> array)
-     * \brief Constructeur grâce auquel un diagramme de type courbe est construit grâce aux données de l'ArrayList de Time passé en paramètre
+     * \brief Constructeur grâce auquel un diagramme de type courbe est construit grâce aux données de l'ArrayList de Integer passé en paramètre
      *
      * \param titleFrame Titre de la fenêtre (Type String)
      * \param titleGraph Titre du graphique (Type String)
@@ -103,7 +103,7 @@ public class LineChart extends JFrame {
      *
      * \param [in] array ArrayList d'Integer (Type ArrayList<Integer>)
      * \param [in] key Nom de la courbe (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a une arraylist de integer
     private XYDataset createLineIntegerDataset(ArrayList<Integer> array, String key) {
@@ -124,7 +124,7 @@ public class LineChart extends JFrame {
      *
      * \param [in] floats ArrayList de Float (Type ArrayList<Float>)
      * \param [in] key Nom de la courbe (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a une arraylist de float
     private XYDataset createLineFloatDataset(ArrayList<Float> floats, String key) {
@@ -144,7 +144,7 @@ public class LineChart extends JFrame {
      *
      * \param [in] temps ArrayList de Time (Type ArrayList<Time>)
      * \param [in] key Nom de la courbe (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a une arraylist de time
     private XYDataset createLineTimeDataset(ArrayList<Time> temps, String key) {
@@ -169,7 +169,7 @@ public class LineChart extends JFrame {
      * \param [in] title Titre du graphique (Type String)
      * \param [in] xAxis Nom de l'axe des abscisses (Type String)
      * \param [in] yAxis Nom de l'axe des ordonnées (Type String)
-     * \return Le graphique grâce aux données passé en paramètre
+     * \return Retourne un JFreeChart qui est le graphique obtenu grâce aux données passé en paramètre
      */
     //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis) {

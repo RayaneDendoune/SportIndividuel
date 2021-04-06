@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * \file ComparativeLineChart.java
- * \brief Classe construisant les diagrammes en courbes à deux entrée grâce à JFreeChart
+ * \brief Classe construisant les diagrammes en courbes à deux entrées grâce à JFreeChart
  * \author OBEYESEKARA Avishka, CERINI Enzo, DENDOUNE Rayane
  * \version 1.0
  * \date 29/03/2021
@@ -30,7 +30,7 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn ComparativeLineChart(ArrayList<Float> user, ArrayList<Float> friend, String titleFrame, String titleGraph, String key1, String key2, String xAxis, String yAxis)
-     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrée est construit grâce aux données de deux ArrayList de Float passé en paramètre
+     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrées est construit grâce aux données de deux ArrayList de Float passés en paramètres
      *
      * \param user Données de l'utilisateur (Type ArrayList<Float>)
      * \param friend Données de l'amis pour comparaison (Type ArrayList<Float>)
@@ -55,7 +55,7 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn ComparativeLineChart(String titleFrame, String titleGraph, String key1, String key2, String xAxis, String yAxis, ArrayList<Integer> user, ArrayList<Integer> friend)
-     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrée est construit grâce aux données de deux ArrayList de Integer passé en paramètre
+     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrées est construit grâce aux données de deux ArrayList de Integer passés en paramètres
      *
      * \param titleFrame Titre de la fenêtre (Type String)
      * \param titleGraph Titre du graphique (Type String)
@@ -78,7 +78,7 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn ComparativeLineChart(ArrayList<Time> user, String titleFrame, String titleGraph, String key1, String key2, String xAxis, String yAxis, ArrayList<Time> friend)
-     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrée est construit grâce aux données de deux ArrayList de Time passé en paramètre
+     * \brief Constructeur grâce auquel un diagramme de type courbe à deux entrées est construit grâce aux données de deux ArrayList de Time passés en paramètres
      *
      * \param user Données de l'utilisateur (Type ArrayList<Time>)
      * \param titleFrame Titre de la fenêtre (Type String)
@@ -102,13 +102,13 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn XYDataset createLineFloatDataset(ArrayList<Float> user, ArrayList<Float> friend, String key1, String key2)
-     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList de Float passé en paramètre
+     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList de Float passés en paramètres
      *
      * \param [in] user Données de l'utilisateur (Type ArrayList<Float>)
      * \param [in] friend Données de l'amis pour comparaison (Type ArrayList<Float>)
      * \param [in] key1 Nom de la courbe de l'utilisateur (Type String)
      * \param [in] key2 Nom de la courbe de l'ami (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a deux arraylist de float
     private XYDataset createLineFloatDataset(ArrayList<Float> user, ArrayList<Float> friend, String key1, String key2) {
@@ -138,7 +138,7 @@ public class ComparativeLineChart extends JFrame {
      * \param [in] key2 Nom de la courbe de l'ami (Type String)
      * \param [in] user Données de l'utilisateur (Type ArrayList<Integer>)
      * \param [in] friend Données de l'amis pour comparaison (Type ArrayList<Integer>)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a deux arraylist de integer
     private XYDataset createLineIntegerDataset(String key1, String key2, ArrayList<Integer> user, ArrayList<Integer> friend) {
@@ -163,13 +163,13 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn XYDataset createLineTimeDataset(ArrayList<Time> user, String key1, String key2, ArrayList<Time> friend)
-     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList de Time passé en paramètre
+     * \brief Fonction qui retourne les données pour le graphique en fonction des données des deux ArrayList de Time passés en paramètres
      *
      * \param [in] user Données de l'utilisateur (Type ArrayList<Time>)
      * \param [in] key1 Nom de la courbe de l'utilisateur (Type String)
      * \param [in] key2 Nom de la courbe de l'ami (Type String)
      * \param [in] friend Données de l'amis pour comparaison (Type ArrayList<Time>)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un XYDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a deux arraylist de time
     private XYDataset createLineTimeDataset(ArrayList<Time> user, String key1, String key2, ArrayList<Time> friend) {
@@ -199,13 +199,13 @@ public class ComparativeLineChart extends JFrame {
 
     /**
      * \fn JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis)
-     * \brief Fonction qui retourne le graphique en fonctions des données qui lui sont passé en paramètres
+     * \brief Fonction qui retourne le graphique en fonctions des données qui lui sont passés en paramètress
      *
      * \param [in] dataset Données pour le graphique (Type XYDataset)
      * \param [in] title Titre du graphique (Type String)
      * \param [in] xAxis Nom de l'axe des abscisses (Type String)
      * \param [in] yAxis Nom de l'axe des ordonnées (Type String)
-     * \return Le graphique grâce aux données passé en paramètre
+     * \return Retourne un JFreeChart qui est le graphique obtenu grâce aux données passé en paramètre
      */
     //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(XYDataset dataset, String title, String xAxis, String yAxis) {

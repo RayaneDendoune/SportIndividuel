@@ -59,7 +59,7 @@ public class BarChart extends JFrame {
      *
      * \param [in] integers ArrayList d'Integer (Type ArrayList<Integer>)
      * \param [in] serie Nom de la bar (Type String)
-     * \return Les données qui ont été configurés pour le graphique
+     * \return Retourne un CategoryDataset qui sont les données qui ont été configurés pour le graphique
      */
     //Renvoyer les valeur grâce a une arraylist de integer
     private CategoryDataset createBarDataset(ArrayList<Integer> integers, String serie) {
@@ -83,7 +83,7 @@ public class BarChart extends JFrame {
      * \param [in] title Titre du graphique (Type String)
      * \param [in] xLabel Nom de l'axe des abscisses (Type String)
      * \param [in] yLabel Nom de l'axe des ordonnées (Type String)
-     * \return Le graphique grâce aux données passé en paramètre
+     * \return Retourne un JFreeChart qui est le graphique obtenu grâce aux données passé en paramètre
      */
     //Retourne le graphique avec les valeurs correspondante
     private JFreeChart createChart(CategoryDataset dataset, String title, String xLabel, String yLabel) {
@@ -94,19 +94,6 @@ public class BarChart extends JFrame {
 
     }
 
-    /*public static void main(String[] args) {
-
-        ArrayList<Integer> al = new ArrayList<Integer>();
-        al.add(3578);
-        al.add(5436);
-        al.add(4374);
-        al.add(8970);
-
-        /*BarChart demo = new BarChart("Nombre de pas moyen", al, "Nombre de pas", "Numéro de la séance", "Nb pas");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
-    }*/
 }
 
 
